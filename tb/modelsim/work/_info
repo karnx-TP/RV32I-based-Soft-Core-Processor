@@ -1,0 +1,84 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/FPGA/RISC-V/tb/modelsim
+vinst_dec
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1767072958
+!i10b 1
+!s100 A5zC_nP71`H5:bP1gAIja2
+I65PKQ5B4MTkVHf]]C<51B3
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 inst_dec_sv_unit
+S1
+R0
+w1767072685
+8../../rtl/RV32I_core/inst_dec.sv
+F../../rtl/RV32I_core/inst_dec.sv
+L0 1
+Z4 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z5 !s108 1767072958.000000
+!s107 ../../rtl/RV32I_core/inst_dec.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/inst_dec.sv|
+!i113 1
+Z6 !s102 -cover bcse
+Z7 o-cover bcse -work work
+Z8 tCvgOpt 0
+vpc_inst_dec_tb
+R1
+R2
+!i10b 1
+!s100 07`Um1d_80m2=HiWn9[2I3
+Igj[la<045l32JUQ?`bORf0
+R3
+!s105 pc_inst_dec_tb_sv_unit
+S1
+R0
+w1767072954
+8../pc_inst_dec_tb.sv
+F../pc_inst_dec_tb.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+!s107 ../pc_inst_dec_tb.sv|
+!s90 -reportprogress|300|-work|work|../pc_inst_dec_tb.sv|
+!i113 1
+o-work work
+R8
+vpc_reg
+R1
+R2
+!i10b 1
+!s100 d4G>KY]?aohOFS<bgk=cK0
+I_zBz60Q7nni:7:boT?KZ`2
+R3
+!s105 pc_reg_sv_unit
+S1
+R0
+w1767018533
+8../../rtl/RV32I_core/pc_reg.sv
+F../../rtl/RV32I_core/pc_reg.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+!s107 ../../rtl/RV32I_core/pc_reg.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/pc_reg.sv|
+!i113 1
+R6
+R7
+R8

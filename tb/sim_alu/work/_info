@@ -1,0 +1,60 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/FPGA/RISC-V/tb/sim_alu
+vALU32bits
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+!s110 1767074313
+!i10b 1
+!s100 GCS=CSzBDh_]WY3KEdzEd1
+IN73K6:d]YA0AzRf]hFGDS0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 alu_sv_unit
+S1
+R0
+w1767073647
+8../../rtl/RV32I_core/alu.sv
+F../../rtl/RV32I_core/alu.sv
+L0 1
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1767074313.000000
+!s107 ../../rtl/RV32I_core/alu.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/alu.sv|
+!i113 1
+!s102 -cover bcse
+o-cover bcse -work work
+Z4 tCvgOpt 0
+n@a@l@u32bits
+valu_tb
+R1
+!s110 1767074314
+!i10b 1
+!s100 864kdIhD4@J8N0k3HQBmW2
+Ik[fgLP<kGZ=@;B^Mh2lDJ0
+R2
+!s105 alu_tb_sv_unit
+S1
+R0
+w1767074255
+8../alu_tb.sv
+F../alu_tb.sv
+L0 3
+R3
+r1
+!s85 0
+31
+!s108 1767074314.000000
+!s107 ../alu_tb.sv|
+!s90 -reportprogress|300|-work|work|../alu_tb.sv|
+!i113 1
+o-work work
+R4
