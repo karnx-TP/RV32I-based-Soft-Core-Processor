@@ -1,5 +1,5 @@
-module ram_ByteController #(
-    parameter DEPTH = 1024,
+module ram_Controller #(
+    parameter DEPTH = 4096,
 	parameter XLEN = 32
 ) (
     clk,
@@ -16,8 +16,7 @@ module ram_ByteController #(
     
 );
 
-localparam ADDRWIDTH = $clog2(1024);
-
+localparam ADDRWIDTH = $clog2(DEPTH);
 //Port
     input logic						clk;
 	input logic[ADDRWIDTH-1:0]		addr;
@@ -31,30 +30,43 @@ localparam ADDRWIDTH = $clog2(1024);
     input logic						unsignedEn;
 
 //Signal
-	reg[0:DEPTH][7:0]		mem;
+	//RAM I/F
+	logic[3:0]					wRamByte_we;
+    logic[XLEN-1:0]				RamDataOut;
+	logic						rByteEn;
+	logic						rHalfEn;
+	logic						rUnsignedEn;
 
-//Read
-	assign dataOut = (byteEn) ? {{(XLEN-8){(!unsignedEn)&mem[addr][7]}},mem[addr]} :
-					 (halfEn) ? {{(XLEN/2){(!unsignedEn)&mem[addr+1][7]}},mem[addr+1],mem[addr]} :
-					 {mem[addr+3],mem[addr+2],mem[addr+1],mem[addr]};
+//RAM
+	bram_sp_byte #(
+		.DEPTH(DEPTH),
+		.XLEN(XLEN)
+	) BRAM (
+		.clk(clk),
+		.enA(1'b1),
+		.wrEn(wrEn),
+		.addr(addr),
+		.dataIn(wrData),
+		.byte_we(wRamByte_we),
+		.dataOut(RamDataOut)
+	);
+
+//reg for ByteEn
+	always @(posedge clk) begin
+		rByteEn <= byteEn;
+		rHalfEn <= halfEn;
+		rUnsignedEn <= unsignedEn;
+	end
+
+//DataOut
+	assign dataOut = (rByteEn) ? {{(XLEN-8){(!rUnsignedEn)&RamDataOut[7]}},RamDataOut[7:0]} :
+					 (rHalfEn) ? {{(XLEN/2){(!rUnsignedEn)&RamDataOut[15]}},RamDataOut[15:0]} :
+					 RamDataOut;
 					 
-//Write
-    always @(posedge clk) begin
-        if(wrEn) begin
-            if(byteEn) begin
-                mem[addr] <= wrData[7:0];
-            end else if (halfEn) begin
-                mem[addr] <= wrData[7:0];
-                mem[addr+1] <= wrData[15:8];
-            end else begin
-                mem[addr] <= wrData[7:0];
-                mem[addr+1] <= wrData[15:8];
-                mem[addr+2] <= wrData[23:16];
-                mem[addr+3] <= wrData[31:24];
-            end
-            
-        end
-    end
+//Byte Enable
+	assign wRamByte_we = byteEn ? 4'b0001 :
+						halfEn ? 4'b0011 :
+						4'b1111;
 
     
 endmodule

@@ -73,6 +73,7 @@ module Program_Mem
 
         //JAL
         ram[31*4 + 3] = 8'h00;   ram[31*4 + 2] = 8'ha0; ram[31*4 + 1] = 8'h08;  ram[31*4 + 0] = 8'hEF;   //JAL x17,10
+        ram[32*4 + 3] = 8'hFF;   ram[32*4 + 2] = 8'hFF; ram[32*4 + 1] = 8'hFB;  ram[32*4 + 0] = 8'hB7;   //LUI x23,-1 (Should be skipped)
 
         //JALR
         ram[36*4 + 3] = 8'h02;   ram[36*4 + 2] = 8'h08; ram[36*4 + 1] = 8'h89;  ram[36*4 + 0] = 8'h67;   //JALR x18,32(x17)

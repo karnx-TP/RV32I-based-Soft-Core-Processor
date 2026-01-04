@@ -17,6 +17,7 @@ vlog -cover bcse -work work ../../rtl/RV32I_core/rv32i_core.sv
 #--     Compile Package        --#
 #--------------------------------#
 vlog -cover bcse -work work ../Program_Mem.sv
+vlog -cover bcse -work work ../../rtl/RV32I_core/bram_sp_byte.sv
 
 #--------------------------------#
 #--   	Compile Test Bench     --#

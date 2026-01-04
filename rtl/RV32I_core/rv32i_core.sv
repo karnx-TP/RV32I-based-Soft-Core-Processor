@@ -55,6 +55,11 @@ module rv32i_core (
     logic           wPcCondEn;
     logic[31:0]     wPcNextCond;
     logic[31:0]     wPcReturn;
+    logic           wJmp_occur;
+    //Hazard Handle
+    logic           wHazardRs1;
+    logic           wHazardRs2;
+    logic[4:0]      rReg_d;
     //ALU
     logic[31:0]     wAluA;
     logic[31:0]     wAluB;
@@ -62,11 +67,14 @@ module rv32i_core (
     logic[6:0]      wFunct7_aluIn;
     logic           wAluSextEn;
     //Reg
+    logic[31:0]     rWrData;
     logic           wRegWrEn;
+    logic           rRegWrEn;
     logic[31:0]     wRegWrData;
 	logic[31:0]     wRs1Data;
     logic[31:0]     wRs2Data;
     //Ram
+    logic           rOp_memLd;
 	logic[31:0]		wRamAddr;
 	logic[31:0]		wRamWrData;
 	logic			wRamWrEn;
@@ -88,7 +96,11 @@ module rv32i_core (
 
     );
     inst_dec dec (       
+        .clk(clk),
+        .rstB(rstB),
+
         .instruction_in(inst_in),
+        .jmp(wJmp_occur),
 
         .Op_code(Op_code),
         .r_type(r_type),
@@ -142,7 +154,7 @@ module rv32i_core (
 
         .wrEn(wRegWrEn),
         .wrData(wRegWrData),
-        .wrAddr(reg_d),
+        .wrAddr(rReg_d),
 
         .rdR1Addr(reg_s1),
         .rdR2Addr(reg_s2),
@@ -150,7 +162,7 @@ module rv32i_core (
         .r1out(wRs1Data),
         .r2out(wRs2Data)
     );
-    ram_ByteController #(
+    ram_Controller #(
         .DEPTH(1024),
         .XLEN(32)
     ) ram (
@@ -167,6 +179,8 @@ module rv32i_core (
         .unsignedEn(wRamUnsignedEn)
     );
     branch_unit brancher (
+        .clk(clk),
+	    .rstB(rstB),
         .b_type(b_type),
         .op_jal(op_jal),
         .op_jalr(op_jalr),
@@ -182,13 +196,18 @@ module rv32i_core (
         .link_reg_in(wRs1Data),
 
         .pc_return(wPcReturn),
-        .pc_jmpto(wPcNextCond)
+        .pc_jmpto(wPcNextCond),
+        .jmp_occur(wJmp_occur)
     );
 
 //Comb Logic
     //PC
     assign pc = wPc_int;
     assign wPcCondEn = op_jal | op_jalr | b_type;
+
+    //Hazard Handle
+    assign wHazardRs1 = (rReg_d == reg_s1);
+    assign wHazardRs2 = (rReg_d == reg_s2);
 
     //ALU
     assign wFunct3_aluIn = b_type ? 3'b000 : //Use SUB in ALU for Branch
@@ -201,7 +220,7 @@ module rv32i_core (
     always_comb begin : MuxForAlu
 		//A
         if(r_type | b_type | op_consShf | op_intRegImm) begin
-			wAluA = wRs1Data;
+			wAluA = wHazardRs1 ? rWrData : wRs1Data;
         end else if (op_auipc) begin
             wAluA = wPc_int;
         end else begin
@@ -210,7 +229,7 @@ module rv32i_core (
 
 		//B
 		if(r_type | b_type) begin
-			wAluB = wRs2Data;
+			wAluB = wHazardRs2 ? rWrData : wRs2Data;
 		end else if(op_consShf | op_intRegImm) begin
 			wAluB = {{20{imm12_i_s[11]}},imm12_i_s}; //Sign-Extended
         end else if (op_auipc) begin
@@ -222,19 +241,13 @@ module rv32i_core (
 
     //Reg
 	always_comb begin : u_wrReg
-		if(op_intRegImm | op_intRegReg | op_consShf | op_auipc) begin //ALU
-			wRegWrData = wAluOut;
-		end else if(op_lui) begin //Load upper imm
-			wRegWrData = imm32_u;
-        end else if (op_memLd) begin
+		if (rOp_memLd) begin
             wRegWrData = wRamDataOut;
-        end else if (op_jal | op_jalr) begin
-            wRegWrData = wPcReturn;
-        end else begin	
-			wRegWrData = 0;
-		end
+        end else begin
+            wRegWrData = rWrData;
+        end 
 	end
-	assign wRegWrEn = (rstB) & (op_jalr | op_memLd | op_intRegImm | op_intRegReg | op_consShf | op_lui | op_jal | op_auipc);
+	assign wRegWrEn = rRegWrEn;
 
     //Mem RAM
     assign wRamAddr = (op_memLd | op_memSt) ? wRs1Data + imm12_i_s : {32{1'b0}};
@@ -244,5 +257,36 @@ module rv32i_core (
     assign wRamHalfEn = (funct3[1:0] == 2'b01);
     assign wRamWordEn = (funct3[1:0] == 2'b10);
     assign wRamUnsignedEn = funct3[2];
+
+//Sequencial
+    //Hazard Handle
+    always @(posedge clk) begin
+        rReg_d <= reg_d;
+    end
+
+    //Reg
+    always @(posedge clk) begin
+        if(op_intRegImm | op_intRegReg | op_consShf | op_auipc) begin //ALU
+			rWrData <= wAluOut;
+		end else if(op_lui) begin //Load upper imm
+			rWrData <= imm32_u;
+        end else if (op_jal | op_jalr) begin
+            rWrData <= wPcReturn;
+        end else begin	
+			rWrData <= 0;
+		end
+    end
+
+    always @(posedge clk) begin
+        if(!rstB)begin
+            rRegWrEn <= 1'b0;
+        end else begin
+            rRegWrEn <= (rstB) & (op_jalr | op_memLd | op_intRegImm | op_intRegReg | op_consShf | op_lui | op_jal | op_auipc); 
+        end
+    end
+
+    always @(posedge clk) begin
+        rOp_memLd <= op_memLd;
+    end
 
 endmodule

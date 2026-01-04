@@ -1,6 +1,9 @@
 module inst_dec (
+    clk,
+    rstB,
     
     instruction_in,
+    jmp,
 
     Op_code,
     r_type,
@@ -38,7 +41,11 @@ module inst_dec (
 );
 
 //Module Port Assignment
+    input   logic       clk;
+    input   logic       rstB;
+
     input   logic[31:0]      instruction_in;
+    input   logic       jmp;
 
     output logic[6:0]   Op_code;
     output logic        r_type;
@@ -73,10 +80,11 @@ module inst_dec (
     output logic        op_ecb;
 
 //Signal Assignment
+    reg[31:0]       rInstrustion;
     
 
 //Combinational Circuit
-    assign Op_code      = instruction_in[6:0]; 
+    assign Op_code      = rInstrustion[6:0]; 
 
 	assign op_lui       = (Op_code == 7'b0110111) ? 1'b1 : 1'b0;
     assign op_auipc     = (Op_code == 7'b0010111) ? 1'b1 : 1'b0;
@@ -99,17 +107,28 @@ module inst_dec (
     assign j_type       = op_jal;
     assign u_type       = op_lui | op_auipc;
 
-    assign funct3       = instruction_in[14:12];
-    assign funct7       = instruction_in[31:25];
-    assign reg_d        = instruction_in[11:7];
-    assign reg_s1       = instruction_in[19:15];
-    assign reg_s2       = instruction_in[24:20];
+    assign funct3       = rInstrustion[14:12];
+    assign funct7       = rInstrustion[31:25];
+    assign reg_d        = rInstrustion[11:7];
+    assign reg_s1       = rInstrustion[19:15];
+    assign reg_s2       = rInstrustion[24:20];
 
-    assign imm12_i_s    = (i_type) ? instruction_in[31:20] :
-                          (s_type) ? {instruction_in[31:25],instruction_in[11:7]} :
+    assign imm12_i_s    = (i_type) ? rInstrustion[31:20] :
+                          (s_type) ? {rInstrustion[31:25],rInstrustion[11:7]} :
                           12'h000;
-    assign imm13_b      = {instruction_in[31],instruction_in[7],instruction_in[30:25],instruction_in[11:8],1'b0}; //B
-    assign imm32_u      = {instruction_in[31:12],12'h000}; //U
-    assign imm21_j      = {instruction_in[31],instruction_in[19:12],instruction_in[20],instruction_in[30:21],1'b0}; //J          
-    
+    assign imm13_b      = {rInstrustion[31],rInstrustion[7],rInstrustion[30:25],rInstrustion[11:8],1'b0}; //B
+    assign imm32_u      = {rInstrustion[31:12],12'h000}; //U
+    assign imm21_j      = {rInstrustion[31],rInstrustion[19:12],rInstrustion[20],rInstrustion[30:21],1'b0}; //J          
+
+//Sequencial
+    always @(posedge clk) begin
+        if(!rstB) begin
+            rInstrustion <= 0;
+        end else if(jmp) begin
+            rInstrustion <= 0; //(NOP Insertion while jmp)
+        end else begin
+            rInstrustion <= instruction_in;
+        end
+    end
+
 endmodule

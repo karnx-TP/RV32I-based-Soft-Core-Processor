@@ -37,7 +37,7 @@ Program_Mem mem (
     begin
         clkEn = 0;
         rstB = 0;
-        #(2 * CLK_PERIOD);
+        #(CLK_PERIOD + 0.5*CLK_PERIOD);
         rstB = 1;
         clkEn = 1;
         #(2 * CLK_PERIOD);
@@ -46,14 +46,14 @@ Program_Mem mem (
 
     initial begin
         init();
-        #(50*CLK_PERIOD);
+        #(80*CLK_PERIOD);
 
         $stop;
     end
 
 //Monitor
 initial begin
-    $monitor ("[monitor] time=%0t pc=%0d Instr=0x%08h", $time, (dut.wPc_int)/4,instruction_in);
+    $monitor ("[monitor] time=%0t pc_current=%0d pc_this=%0d Instr=0x%08h", $time, (dut.wPc_int)/4,(dut.wPc_int)/4 - 1,dut.dec.rInstrustion);
 end
     
 
