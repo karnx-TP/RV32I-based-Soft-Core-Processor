@@ -13,6 +13,12 @@ vlog -cover bcse -work work ../../rtl/RV32I_core/ram_wController.sv
 vlog -cover bcse -work work ../../rtl/RV32I_core/branch_unit.sv
 vlog -cover bcse -work work ../../rtl/RV32I_core/rv32i_core.sv
 
+vlog -cover bcse -work work ../../rtl/uart/uart_tx.sv
+vlog -cover bcse -work work ../../rtl/uart/uart_rx.sv
+vlog -cover bcse -work work ../../rtl/uart/fifo8bits.sv
+vlog -cover bcse -work work ../../rtl/uart/uart.sv
+
+
 #--------------------------------#
 #--     Compile Package        --#
 #--------------------------------#

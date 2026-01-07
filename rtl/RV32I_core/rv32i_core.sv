@@ -4,7 +4,10 @@ module rv32i_core (
     clkEn,
 
     pc,
-    inst_in
+    inst_in,
+
+	rx,
+	tx
 );
 //Port
     input logic     clk;
@@ -12,6 +15,12 @@ module rv32i_core (
     input logic     clkEn;
     output logic[31:0]  pc;
     input logic[31:0]   inst_in;
+	input logic		rx;
+	output logic	tx;
+
+//BUS ID
+	localparam RAM = 0;
+	localparam UART = 1;
 
 //Wire
     wire[6:0]   Op_code;
@@ -78,11 +87,19 @@ module rv32i_core (
 	logic[31:0]		wRamAddr;
 	logic[31:0]		wRamWrData;
 	logic			wRamWrEn;
+    logic			wRamRdEn;
 	logic[31:0]		wRamDataOut;
 	logic		    wRamByteEn;
     logic			wRamHalfEn;
     logic			wRamWordEn;
     logic			wRamUnsignedEn;
+	//UART
+	logic[31:0]		wUartDataOut;
+
+    //DataBus - Peripheral
+    logic[0:1][31:0]    wDataBus;
+    logic[0:1]    		wDataBusEn;
+	logic				wPeriRdEn;
 
 //Module Declaration
     pc_reg rpc(
@@ -162,22 +179,6 @@ module rv32i_core (
         .r1out(wRs1Data),
         .r2out(wRs2Data)
     );
-    ram_Controller #(
-        .DEPTH(1024),
-        .XLEN(32)
-    ) ram (
-        .clk(clk),
-
-        .addr(wRamAddr[9:0]),
-        .wrData(wRamWrData),
-        .wrEn(wRamWrEn),
-        .dataOut(wRamDataOut),
-
-        .byteEn(wRamByteEn),
-        .halfEn(wRamHalfEn),
-        .wordEn(wRamWordEn),
-        .unsignedEn(wRamUnsignedEn)
-    );
     branch_unit brancher (
         .clk(clk),
 	    .rstB(rstB),
@@ -199,6 +200,48 @@ module rv32i_core (
         .pc_jmpto(wPcNextCond),
         .jmp_occur(wJmp_occur)
     );
+	ram_Controller #(
+        .DEPTH(1024),
+        .XLEN(32)
+    ) ram (
+        .clk(clk),
+
+        .addr(wRamAddr[9:0]),
+        .wrData(wRamWrData),
+        .wrEn(wRamWrEn),
+        .rdEn(wRamRdEn),
+        .dataOut(wRamDataOut),
+        .outEn(wDataBusEn[RAM]),
+
+        .byteEn(wRamByteEn),
+        .halfEn(wRamHalfEn),
+        .wordEn(wRamWordEn),
+        .unsignedEn(wRamUnsignedEn)
+    );
+	uart #(
+    	.BAUD_CYCLE(868),
+    	.LSB_FIRST(1'b1),	
+		.UDR_ADDR(11'h502),
+		.UCR_ADDR(11'h503)
+	) uart_module (
+		.rx(rx),
+		.tx(tx),
+		
+		.clk(clk),
+		.rstB(rstB),
+
+		.addr(wRamAddr[11:0]),
+        .wrData(wRamWrData),
+        .wrEn(wRamWrEn),
+        .rdEn(wPeriRdEn),
+        .dataOut(wUartDataOut),
+        .outEn(wDataBusEn[UART])
+	);
+
+//DataBus
+	assign wDataBus = 	(wDataBusEn[RAM]) ? wRamDataOut :
+						(wDataBusEn[UART]) ? wUartDataOut :
+						0;
 
 //Comb Logic
     //PC
@@ -242,7 +285,7 @@ module rv32i_core (
     //Reg
 	always_comb begin : u_wrReg
 		if (rOp_memLd) begin
-            wRegWrData = wRamDataOut;
+            wRegWrData = wDataBus;
         end else begin
             wRegWrData = rWrData;
         end 
@@ -252,7 +295,9 @@ module rv32i_core (
     //Mem RAM
     assign wRamAddr = (op_memLd | op_memSt) ? wRs1Data + imm12_i_s : {32{1'b0}};
     assign wRamWrEn = (rstB) & (op_memSt);
-    assign wRamWrData = wRs2Data;
+    assign wRamWrData = wHazardRs2 ? rWrData : wRs2Data;
+	assign wRamRdEn = op_memLd & (wRamAddr[31:10] == 0);
+	assign wPeriRdEn = op_memLd & (|wRamAddr[31:10]);
     assign wRamByteEn = (funct3[1:0] == 2'b00);
     assign wRamHalfEn = (funct3[1:0] == 2'b01);
     assign wRamWordEn = (funct3[1:0] == 2'b10);

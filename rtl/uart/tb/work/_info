@@ -1,0 +1,110 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/tb
+vsync_fifo
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1767712380
+!i10b 1
+!s100 M71eR=T8>8JbDEW=M?JzG0
+Ib[m^NB@=EC6;?5L`BHJ`X1
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 fifo8bits_sv_unit
+S1
+R0
+w1767711652
+8../fifo8bits.sv
+F../fifo8bits.sv
+L0 2
+Z4 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z5 !s108 1767712380.000000
+!s107 ../fifo8bits.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../fifo8bits.sv|
+!i113 1
+Z6 !s102 -cover bcse
+Z7 o-cover bcse -work work
+Z8 tCvgOpt 0
+vuart_rx
+R1
+R2
+!i10b 1
+!s100 B5J>E[4@fzM[CV`l3c0G91
+IMOB4;e;HT4Wfo@BW]_dDd2
+R3
+!s105 uart_rx_sv_unit
+S1
+R0
+w1767711630
+8../uart_rx.sv
+F../uart_rx.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+!s107 ../uart_rx.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../uart_rx.sv|
+!i113 1
+R6
+R7
+R8
+vuart_tb
+R1
+R2
+!i10b 1
+!s100 fz]=Sn[0AoJ:gONfT6^:o3
+I?KJFHgIJnFP@fif6;h2TA1
+R3
+!s105 uart_tb_sv_unit
+S1
+R0
+w1767711678
+8uart_tb.sv
+Fuart_tb.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+!s107 uart_tb.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|uart_tb.sv|
+!i113 1
+R6
+R7
+R8
+vuart_tx_ff
+R1
+R2
+!i10b 1
+!s100 9hQbj^QzoT>2CC`4D0XfG3
+IPME<7>U@QOW1XCAiOMc_g3
+R3
+!s105 uart_tx_sv_unit
+S1
+R0
+w1767712374
+8../uart_tx.sv
+F../uart_tx.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+!s107 ../uart_tx.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../uart_tx.sv|
+!i113 1
+R6
+R7
+R8

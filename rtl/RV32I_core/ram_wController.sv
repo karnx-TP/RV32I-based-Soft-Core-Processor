@@ -7,7 +7,9 @@ module ram_Controller #(
     addr,
     wrData,
     wrEn,
+	rdEn,
     dataOut,
+	outEn,
 
     byteEn,
     halfEn,
@@ -22,7 +24,9 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 	input logic[ADDRWIDTH-1:0]		addr;
 	input logic[XLEN-1:0]			wrData;
 	input logic						wrEn;
+	input logic						rdEn;
 	output logic[XLEN-1:0]			dataOut;
+	output logic					outEn;
 
 	input logic						byteEn;
     input logic						halfEn;
@@ -67,6 +71,16 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 	assign wRamByte_we = byteEn ? 4'b0001 :
 						halfEn ? 4'b0011 :
 						4'b1111;
+
+//OutEn
+	always @(posedge clk ) begin
+		if(rdEn)begin
+			outEn <= 1'b1;
+		end else begin
+			outEn <= 1'b0;
+		end
+		
+	end
 
     
 endmodule
