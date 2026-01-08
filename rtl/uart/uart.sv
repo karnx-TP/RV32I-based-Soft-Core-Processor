@@ -1,8 +1,8 @@
 module uart #(
     parameter BAUD_CYCLE = 868,
     parameter LSB_FIRST = 1'b1,	
-	parameter UDR_ADDR = 11'h502,
-	parameter UCR_ADDR = 11'h503
+	parameter UDR_ADDR = 11'h402,
+	parameter UCR_ADDR = 11'h403
 )(
     rx,
     tx,

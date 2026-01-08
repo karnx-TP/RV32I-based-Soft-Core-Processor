@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/bram_sp_byte.tcl"
+  variable script "C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/rv32i_core.tcl"
   variable category "vivado_synth"
 }
 
@@ -71,7 +71,20 @@ set_property ip_output_repo c:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Proces
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib -sv C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/bram_sp_byte.sv
+read_verilog -library xil_defaultlib -sv {
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/alu.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/bram_sp_byte.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/branch_unit.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/fifo8bits.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/inst_dec.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv
+}
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -87,7 +100,7 @@ read_checkpoint -auto_incremental -incremental C:/FPGA/RV32I-Processor/RV32I-bas
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top bram_sp_byte -part xc7z010clg400-1
+synth_design -top rv32i_core -part xc7z010clg400-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -97,10 +110,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef bram_sp_byte.dcp
+write_checkpoint -force -noxdef rv32i_core.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-generate_parallel_reports -reports { "report_utilization -file bram_sp_byte_utilization_synth.rpt -pb bram_sp_byte_utilization_synth.pb"  } 
+generate_parallel_reports -reports { "report_utilization -file rv32i_core_utilization_synth.rpt -pb rv32i_core_utilization_synth.pb"  } 
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

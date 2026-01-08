@@ -1,21 +1,26 @@
 module Program_Mem
-
+	#(parameter MEM_SIZE = 32767)
     (clk, we, addr, din, dout);
+
+	localparam ADDRW = $clog2(MEM_SIZE);
 
     input clk;
 	input we;
-	input [13:0] addr;
+	input [ADDRW-1:0] addr;
 	input [31:0] din;
 	output [31:0] dout;
 
-	reg [0:32767][7:0] ram ;
+	reg [0:MEM_SIZE][7:0] ram ;
 	logic [31:0] d_out;
 
     assign dout = d_out;
-    assign d_out[7:0] = ram[addr];
-    assign d_out[15:8] = ram[addr+1];
-    assign d_out[23:16] = ram[addr+2];
-    assign d_out[31:24] = ram[addr+3];
+
+    always @(posedge clk ) begin
+        d_out[7:0] = ram[addr];
+        d_out[15:8] = ram[addr+1];
+        d_out[23:16] = ram[addr+2];
+        d_out[31:24] = ram[addr+3];
+    end
 
 	initial begin
         // Progmem default = FF
@@ -103,9 +108,9 @@ module Program_Mem
 
         //UART
         ram[61*4 + 3] = 8'h0D;   ram[61*4 + 2] = 8'h90; ram[61*4 + 1] = 8'h0A;  ram[61*4 + 0] = 8'h13;   //ADDI x20,x0,0xD9 
-        ram[62*4 + 3] = 8'h51;   ram[62*4 + 2] = 8'h40; ram[62*4 + 1] = 8'h01;  ram[62*4 + 0] = 8'h23;   //SB x20,0x502(x0)
-        ram[63*4 + 3] = 8'h50;   ram[63*4 + 2] = 8'h30; ram[63*4 + 1] = 8'h2a;  ram[63*4 + 0] = 8'h83;   //LW x21,0x503(x0)
-        ram[64*4 + 3] = 8'h50;   ram[64*4 + 2] = 8'h20; ram[64*4 + 1] = 8'h2a;  ram[64*4 + 0] = 8'h83;   //LW x21,0x502(x0)
+        ram[62*4 + 3] = 8'h41;   ram[62*4 + 2] = 8'h40; ram[62*4 + 1] = 8'h01;  ram[62*4 + 0] = 8'h23;   //SB x20,0x402(x0)
+        ram[63*4 + 3] = 8'h40;   ram[63*4 + 2] = 8'h30; ram[63*4 + 1] = 8'h2a;  ram[63*4 + 0] = 8'h83;   //LW x21,0x403(x0)
+        ram[64*4 + 3] = 8'h40;   ram[64*4 + 2] = 8'h20; ram[64*4 + 1] = 8'h2a;  ram[64*4 + 0] = 8'h83;   //LW x21,0x402(x0)
                  
 	end
 

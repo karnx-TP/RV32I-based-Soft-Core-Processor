@@ -57,7 +57,7 @@ module branch_unit (
 	assign wGt = !sub_sign & wNEq;
 	
 	assign wJmp = op_jal | op_jalr | (b_type & wCond);
-	assign jmp_occur = wJmp;
+	assign jmp_occur = wJmp | rJumping;
 
 	always_comb begin : uCond
 		case (funct3)
@@ -73,11 +73,11 @@ module branch_unit (
 
 	always_comb begin : uJmp
 		if(op_jal) begin
-			pc_jmpto = pc_current - 4 + {{10{imm21_j[20]}},imm21_j,1'b0};
+			pc_jmpto = pc_current - 8 + {{10{imm21_j[20]}},imm21_j,1'b0};
 		end else if(op_jalr) begin
 			pc_jmpto = (link_reg_in + {{20{imm12_i_s[11]}},imm12_i_s}) & {{31{1'b1}},1'b0}; 
 		end else if (b_type & wCond) begin
-			pc_jmpto = pc_current - 4 + {{10{imm13_b[12]}},imm13_b,1'b0};
+			pc_jmpto = pc_current - 8 + {{10{imm13_b[12]}},imm13_b,1'b0};
 		end else begin
 			pc_jmpto = pc_current + 4;
 		end
@@ -85,7 +85,7 @@ module branch_unit (
 
 	always_comb begin : uRET
 		if(op_jal | op_jalr) begin
-			pc_return = pc_current;
+			pc_return = pc_current - 4;
 		end else begin
 			pc_return = 0;
 		end
