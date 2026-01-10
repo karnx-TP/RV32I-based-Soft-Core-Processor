@@ -27,15 +27,17 @@ module programmer #(
     input   logic       rxFfEmpty;
     output  logic       rxRdEn;
     input   logic[7:0]  rxData;
+	output logic		wMemFull;
 
 //Signal
     logic           rRxRdEn;
-	logic			wMemFull;
+	logic[31:0]		rMemAddr;
+	
 	
 
 //Combinational
 	assign wMemFull = (rMemAddr == MEM_SIZE);
-    assign rxRdEn = progEn & rxFfEmpty;
+    assign rxRdEn = progEn & !rxFfEmpty;
 	assign memWrEn = rRxRdEn & !wMemFull;
 	assign memAddr = rMemAddr;
 	assign memData = {8{progEn}} & rxData; 
@@ -46,7 +48,7 @@ module programmer #(
 	end
 
 	always @(posedge clk ) begin
-		if(!progEn)begin
+		if(!progEn | !rstB)begin
 			rMemAddr <= 0;
 		end else if(rRxRdEn)begin
 			rMemAddr <= rMemAddr + 1;

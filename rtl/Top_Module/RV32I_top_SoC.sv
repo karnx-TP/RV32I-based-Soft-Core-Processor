@@ -1,7 +1,7 @@
 module rv32i_top_Soc(
     clk,
     rstB,
-    clkEn,
+	progEn,
 
     rx,
     tx
@@ -15,7 +15,7 @@ module rv32i_top_Soc(
 //Port
     input logic     clk;
     input logic     rstB;
-    input logic     clkEn;
+	input logic		progEn;
     input logic     rx;
     output logic    tx;
 
@@ -24,15 +24,28 @@ module rv32i_top_Soc(
 	localparam UART = 1;
 
 //Wire
+	logic					rCoreClkEn;
     logic[XLEN-1:0]         wCorePc;
     logic[XLEN-1:0]         wCoreInst;
 	logic[XLEN-1:0]         wCoreAddr;
     logic[XLEN-1:0]         wCoreDataOut;
-    logic	            wCoreWrEn;
-	logic	            wCoreRdEn;
-	logic[3:0]         wCoreRamMode;
+    logic	            	wCoreWrEn;
+	logic	            	wCoreRdEn;
+	logic[3:0]         		wCoreRamMode;
     logic[XLEN-1:0]	        wCoreDataIn;
-	logic		        wCoreDataInEn;
+	logic		        	wCoreDataInEn;
+	//Uart
+	logic[RAM_ADDRW:0]      wUartAddr;
+	logic					wUartRdEn;
+	logic[7:0]				wUartData;
+	logic					wUartRxFfEmpty;
+	//Prog
+	logic					wProgWrEn;
+	logic[7:0]				wProgWrData;
+	logic[31:0]				wProgAddr;
+	logic					wProgRdEn;
+	logic					wProgMemFull;
+	logic[INSTRW-1:0]		wProgRamAddr;
 
 //DataBus - Peripheral
     logic[0:1][XLEN-1:0]    wDataBus;
@@ -50,11 +63,20 @@ module rv32i_top_Soc(
 	assign wRamRdEn = wCoreRdEn & (wCoreAddr[XLEN-1:RAM_ADDRW] == 0);
 	assign wPeriRdEn = wCoreRdEn & (|wCoreAddr[XLEN-1:RAM_ADDRW]);
 
+//Core
+	always @(posedge clk ) begin
+		if(!rstB)begin
+			rCoreClkEn = 1'b0;
+		end else begin
+			rCoreClkEn = !progEn;
+		end
+	end
+
 //Module Port Map
     rv32i_core core (
         .clk(clk),
         .rstB(rstB),
-        .clkEn(clkEn),
+        .clkEn(rCoreClkEn),
 
         .pc(wCorePc),
         .inst_in(wCoreInst),
@@ -67,11 +89,7 @@ module rv32i_top_Soc(
         .dataBusIn(wCoreDataIn),
         .dataBusInEn(wCoreDataInEn)
     );
-	Program_Mem #(
-		.MEM_SIZE(MEM_SIZE)
-	) mem (
-    .clk(clk), .we(1'b0), .addr(wCorePc[INSTRW-1:0]), .din({32{1'b0}}), .dout(wCoreInst)
-	);
+	
 	ram_Controller #(
         .DEPTH(RAM_DEPTH_WORD),
         .XLEN(XLEN)
@@ -90,6 +108,7 @@ module rv32i_top_Soc(
         .wordEn(wCoreRamMode[1]),
         .unsignedEn(wCoreRamMode[0])
     );
+	
 	uart #(
     	.BAUD_CYCLE(868),
     	.LSB_FIRST(1'b1),	
@@ -102,12 +121,47 @@ module rv32i_top_Soc(
 		.clk(clk),
 		.rstB(rstB),
 
-		.addr(wCoreAddr[RAM_ADDRW:0]),
+		.addr(wUartAddr),
         .wrData(wCoreDataOut),
         .wrEn(wCoreWrEn),
-        .rdEn(wPeriRdEn),
+        .rdEn(wUartRdEn),
         .dataOut(wDataBus[UART]),
-        .outEn(wDataBusEn[UART])
+        .outEn(wDataBusEn[UART]),
+		.rxFfEmpty(wUartRxFfEmpty)
 	);
+	assign wUartAddr = progEn ? {11'h402} :
+						wCoreAddr[RAM_ADDRW:0];
+	assign wUartRdEn =  progEn ? wProgRdEn :
+						wPeriRdEn;
+
+	programmer #(
+		.MEM_SIZE(MEM_SIZE)
+	) programmer_module (
+		.clk(clk),
+		.rstB(rstB),
+		.progEn(progEn),
+
+		.memWrEn(wProgWrEn), 
+		.memAddr(wProgAddr),
+		.memData(wProgWrData),
+
+		.rxFfEmpty(wUartRxFfEmpty), 
+		.rxRdEn(wProgRdEn),
+		.rxData(wDataBus[UART][7:0]),
+		.wMemFull(wProgMemFull)
+	);
+
+	prog_ram_w8r32	 #(
+		.MEM_SIZE(MEM_SIZE)
+	) prog_ram (
+		.clk(clk), 
+		.we(wProgWrEn), 
+		.addr(wProgRamAddr), 
+		.din(wProgWrData), 
+		.dout(wCoreInst)
+	);
+	assign wProgRamAddr = 	progEn ? wProgAddr[INSTRW-1:0] :
+							wCorePc[INSTRW-1:0];
+
 
 endmodule

@@ -1,6 +1,7 @@
 module inst_dec (
     clk,
     rstB,
+	clkEn,
     
     instruction_in,
     jmp,
@@ -43,6 +44,7 @@ module inst_dec (
 //Module Port Assignment
     input   logic       clk;
     input   logic       rstB;
+	input 	logic		clkEn;
 
     input   logic[31:0]      instruction_in;
     input   logic       jmp;
@@ -126,7 +128,7 @@ module inst_dec (
             rInstrustion <= 0;
         end else if(jmp) begin
             rInstrustion <= 0; //(NOP Insertion while jmp)
-        end else begin
+        end else if(clkEn)begin
             rInstrustion <= instruction_in;
         end
     end

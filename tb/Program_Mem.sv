@@ -35,7 +35,7 @@ module Program_Mem
         ram[2*4 + 3] = 8'h00;   ram[2*4 + 2] = 8'h0F; ram[2*4 + 1] = 8'hF1;  ram[2*4 + 0] = 8'h37;    //LUI r2,FF          
         ram[3*4 + 3] = 8'h0A;   ram[3*4 + 2] = 8'hB1; ram[3*4 + 1] = 8'h01;  ram[3*4 + 0] = 8'h13;   //ADDI r2,r2,0xAB
            
-        ram[4*4 + 3] = 8'h80;   ram[4*4 + 2] = 8'h00; ram[4*4 + 1] = 8'h01;  ram[4*4 + 0] = 8'hB7;   //LUI x3,-1   
+        ram[4*4 + 3] = 8'h80;   ram[4*4 + 2] = 8'h00; ram[4*4 + 1] = 8'h01;  ram[4*4 + 0] = 8'hB7;   //LUI x3,x80000   
         
         ram[5*4 + 3] = 8'h02;   ram[5*4 + 2] = 8'h81; ram[5*4 + 1] = 8'hA2;  ram[5*4 + 0] = 8'h13;   //SLTI x4,x3,40
         ram[6*4 + 3] = 8'h02;   ram[6*4 + 2] = 8'h81; ram[6*4 + 1] = 8'hB2;  ram[6*4 + 0] = 8'h13;   //SLTIU x4,x3,40

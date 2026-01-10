@@ -18,13 +18,15 @@ vlog -cover bcse -work work ../../rtl/uart/uart_rx.sv
 vlog -cover bcse -work work ../../rtl/uart/fifo8bits.sv
 vlog -cover bcse -work work ../../rtl/uart/uart.sv
 
+vlog -cover bcse -work work ../../rtl/Programmer/prog.sv
+
 vlog -cover bcse -work work ../../rtl/Top_Module/RV32I_top_SoC.sv
 
 
 #--------------------------------#
 #--     Compile Package        --#
 #--------------------------------#
-vlog -cover bcse -work work ../Program_Mem.sv
+vlog -cover bcse -work work ../../rtl/Programmer/prog_ram_w8r32.sv
 vlog -cover bcse -work work ../../rtl/RV32I_core/bram_sp_byte.sv
 
 #--------------------------------#

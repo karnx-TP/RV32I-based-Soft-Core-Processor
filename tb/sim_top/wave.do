@@ -2,7 +2,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/clk
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rstB
-add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/clkEn
+add wave -noupdate -expand -group Core /top_tb/dut/progEn
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/pc
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/inst_in
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/dec/rInstrustion
@@ -108,12 +108,35 @@ add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_modul
 add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wUartDataout
 add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/rUCR
 add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/rAddr
-add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/ffrx/buffer
 add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/fftx/buffer
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/ffrx/buffer
+add wave -noupdate -expand -group Prog /top_tb/dut/programmer_module/clk
+add wave -noupdate -expand -group Prog /top_tb/dut/programmer_module/rstB
+add wave -noupdate -expand -group Prog /top_tb/dut/programmer_module/progEn
+add wave -noupdate -expand -group Prog /top_tb/dut/programmer_module/memWrEn
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/memAddr
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/memData
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxFfEmpty
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxRdEn
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxData
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/wMemFull
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rRxRdEn
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rMemAddr
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[0]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[1]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[2]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[3]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[4]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[5]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[6]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[7]}
+add wave -noupdate -radix hexadecimal /top_tb/rammem
+add wave -noupdate -radix hexadecimal /top_tb/data
+add wave -noupdate -radix hexadecimal /top_tb/data_ss
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {35400 ps} 0}
+WaveRestoreCursors {{Cursor 1} {22221567700 ps} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 233
+configure wave -namecolwidth 274
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
@@ -127,4 +150,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {27600 ps} {40400 ps}
+WaveRestoreZoom {22220286400 ps} {22221873600 ps}

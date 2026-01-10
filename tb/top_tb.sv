@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module top_tb ();
 
 
@@ -6,7 +7,7 @@ parameter CLK_PERIOD = 10;
 //Wire
     logic            clk;
     logic            rstB;
-    logic           clkEn;
+    logic           progEn;
     logic           rx;
     logic           tx;
 
@@ -14,7 +15,7 @@ parameter CLK_PERIOD = 10;
 rv32i_top_Soc dut(
     .clk(clk),
     .rstB(rstB),
-    .clkEn(clkEn),
+    .progEn(progEn),
 
     .rx(rx),
     .tx(tx)
@@ -23,6 +24,8 @@ rv32i_top_Soc dut(
 //Test Signal
 logic[7:0]  data;
 logic[9:0]  data_ss;
+integer file,code;
+logic [7:0] rammem [0:32767];
     
 //Task
     always 
@@ -35,26 +38,40 @@ logic[9:0]  data_ss;
 
     task init;
     begin
-        clkEn = 0;
+        progEn = 1;
         rstB = 0;
         rx = 1'b1;
         #(CLK_PERIOD + 0.5*CLK_PERIOD);
         rstB = 1;
-        clkEn = 1;
         #(2 * CLK_PERIOD);
     end
     endtask
 
+	initial begin
+		file = $fopen("../../software/tiny-risc-v-main/program.bin" , "rb");
+		if (file == 0) begin
+                $display("Could not open file");
+            end
+		code = $fread(rammem,file);  
+        $displayh(rammem);        
+        $fclose(file);
+	end
+
     initial begin
         init();
-        data = 8'h51;
-		data_ss = {1'b1,data,1'b0};
-		for(int i=0;i<10;i++)
-		begin
-			rx = data_ss[i];
-			#(868*CLK_PERIOD);
+		for (int i = 0;i<256; i++) begin
+			data = rammem[i];
+			data_ss = {1'b1,data,1'b0};
+			for(int j=0;j<10;j++)
+			begin
+				rx = data_ss[j];
+				#(868*CLK_PERIOD);
+			end
 		end
-        #((7000)*CLK_PERIOD);
+
+		progEn = 1'b0;
+
+        #((100)*CLK_PERIOD);
 
         $stop;
     end

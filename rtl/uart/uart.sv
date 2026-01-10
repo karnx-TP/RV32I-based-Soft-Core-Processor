@@ -15,19 +15,23 @@ module uart #(
     wrEn,
 	rdEn,
     dataOut,
-	outEn
+	outEn,
+
+	//Programmer Support
+	rxFfEmpty
 );
 //Port
 	input logic			rx;
 	output logic		tx;
 	input logic			clk;
 	input logic			rstB;
-	input logic[11:0]	addr;
+	input logic[10:0]	addr;
 	input logic[31:0]	wrData;
 	input logic			wrEn;
 	input logic			rdEn;
 	output logic[31:0]	dataOut;
 	output logic		outEn;
+	output logic		rxFfEmpty;
 
 //Module wire
 	logic		wRxFfDataEn;
@@ -130,6 +134,7 @@ module uart #(
 			default: wUartDataout = 0;
 		endcase
 	end
+	assign rxFfEmpty = wRxFfEmpty;
 
 	//Write For TX
 	assign wFftxWrEn = (addr == UDR_ADDR) ? wrEn :

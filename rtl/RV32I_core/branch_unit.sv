@@ -50,6 +50,9 @@ module branch_unit (
 	logic	wNEq;
 	logic	wLt;
 	logic	wGt;
+	//PC reg of currently exe instr
+	logic[31:0]	rPc_current_reg1;
+	logic[31:0]	rPc_current_reg2;
 
 //Comb Logic
 	assign wNEq = |{sub_sign,sub_result};
@@ -73,11 +76,11 @@ module branch_unit (
 
 	always_comb begin : uJmp
 		if(op_jal) begin
-			pc_jmpto = pc_current - 8 + {{10{imm21_j[20]}},imm21_j,1'b0};
+			pc_jmpto = rPc_current_reg2 + {{10{imm21_j[20]}},imm21_j,1'b0};
 		end else if(op_jalr) begin
 			pc_jmpto = (link_reg_in + {{20{imm12_i_s[11]}},imm12_i_s}) & {{31{1'b1}},1'b0}; 
 		end else if (b_type & wCond) begin
-			pc_jmpto = pc_current - 8 + {{10{imm13_b[12]}},imm13_b,1'b0};
+			pc_jmpto = rPc_current_reg2 + {{10{imm13_b[12]}},imm13_b,1'b0};
 		end else begin
 			pc_jmpto = pc_current + 4;
 		end
@@ -85,13 +88,18 @@ module branch_unit (
 
 	always_comb begin : uRET
 		if(op_jal | op_jalr) begin
-			pc_return = pc_current - 4;
+			pc_return = rPc_current_reg1;
 		end else begin
 			pc_return = 0;
 		end
 	end
 
 //Sequencial
+	always @(posedge clk ) begin
+		rPc_current_reg1 <= pc_current;
+		rPc_current_reg2 <= rPc_current_reg1;
+	end
+
 	always @(posedge clk) begin
 		if(!rstB) begin
 			rJumping <= 1'b0;

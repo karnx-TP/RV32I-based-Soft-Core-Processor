@@ -115,6 +115,7 @@ module rv32i_core (
     inst_dec dec (       
         .clk(clk),
         .rstB(rstB),
+		.clkEn(clkEn),
 
         .instruction_in(inst_in),
         .jmp(wJmp_occur),
