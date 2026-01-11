@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/rv32i_core.tcl"
+  variable script "C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/rv32i_top_Soc.tcl"
   variable category "vivado_synth"
 }
 
@@ -56,7 +56,10 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param checkpoint.writeSynthRtdsInDcp 1
 set_param general.usePosixSpawnForFork 1
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z010clg400-1
 
@@ -78,12 +81,15 @@ read_verilog -library xil_defaultlib -sv {
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/fifo8bits.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/inst_dec.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv
-  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Top_Module/RV32I_top_SoC.sv
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -100,7 +106,7 @@ read_checkpoint -auto_incremental -incremental C:/FPGA/RV32I-Processor/RV32I-bas
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top rv32i_core -part xc7z010clg400-1
+synth_design -top rv32i_top_Soc -part xc7z010clg400-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -110,10 +116,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef rv32i_core.dcp
+write_checkpoint -force -noxdef rv32i_top_Soc.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-generate_parallel_reports -reports { "report_utilization -file rv32i_core_utilization_synth.rpt -pb rv32i_core_utilization_synth.pb"  } 
+generate_parallel_reports -reports { "report_utilization -file rv32i_top_Soc_utilization_synth.rpt -pb rv32i_top_Soc_utilization_synth.pb"  } 
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

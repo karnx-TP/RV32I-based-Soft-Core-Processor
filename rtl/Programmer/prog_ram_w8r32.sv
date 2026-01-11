@@ -1,33 +1,31 @@
 module prog_ram_w8r32
-	#(parameter MEM_SIZE = 32767)
+	#(parameter MEM_SIZE = 1024)
     (clk, we, addr, din, dout);
 
 	localparam ADDRW = $clog2(MEM_SIZE);
+	localparam WORD_DEPTH = MEM_SIZE/4;
 
     input clk;
 	input we;
 	input [ADDRW-1:0] addr;
 	input [7:0] din;
-	output [31:0] dout;
+	output reg[31:0] dout;
 
-	reg [0:MEM_SIZE][7:0] ram ;
+	(* ram_style = "block" *) reg [31:0] ram [0:WORD_DEPTH-1];
 	logic [31:0] d_out;
 
-    assign dout = d_out;
-
     always @(posedge clk ) begin
-        d_out[7:0] = ram[addr];
-        d_out[15:8] = ram[addr+1];
-        d_out[23:16] = ram[addr+2];
-        d_out[31:24] = ram[addr+3];
-    end
-
-	always @(negedge clk)
-	begin
 		if (we) begin
-			ram[addr] = din;
+			case (addr[1:0])
+				2'b00 : ram[addr[ADDRW-1:2]][7:0] <= din;
+				2'b01 : ram[addr[ADDRW-1:2]][15:8] <= din;
+				2'b10 : ram[addr[ADDRW-1:2]][23:16] <= din;
+				2'b11 : ram[addr[ADDRW-1:2]][31:24] <= din;  
+			endcase
 		end 
-	end
+
+        dout <= ram[addr[ADDRW-1:2]];
+    end
 
 	
 endmodule

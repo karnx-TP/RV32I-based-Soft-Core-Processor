@@ -20,6 +20,8 @@ vlog -cover bcse -work work ../../rtl/uart/uart.sv
 
 vlog -cover bcse -work work ../../rtl/Programmer/prog.sv
 
+vlog -cover bcse -work work ../../rtl/IO_Port/port.sv
+
 vlog -cover bcse -work work ../../rtl/Top_Module/RV32I_top_SoC.sv
 
 

@@ -145,7 +145,7 @@ module uart #(
 //Sequencial 
 	//Read Rx,Reg
 	always @(posedge clk ) begin
-		if(rdEn)begin
+		if(rdEn && ((addr == UDR_ADDR) || (addr == UCR_ADDR)))begin
 			outEn <= 1'b1;
 		end else begin
 			outEn <= 1'b0;

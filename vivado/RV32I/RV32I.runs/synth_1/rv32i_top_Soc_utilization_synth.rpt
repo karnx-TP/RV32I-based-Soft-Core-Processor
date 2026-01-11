@@ -1,10 +1,10 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Thu Jan  8 09:55:01 2026
+| Date         : Sat Jan 10 23:35:42 2026
 | Host         : LAPTOP-GM1L3F93 running 64-bit major release  (build 9200)
-| Command      : report_utilization -file rv32i_core_utilization_synth.rpt -pb rv32i_core_utilization_synth.pb
-| Design       : rv32i_core
+| Command      : report_utilization -file rv32i_top_Soc_utilization_synth.rpt -pb rv32i_top_Soc_utilization_synth.pb
+| Design       : rv32i_top_Soc
 | Device       : xc7z010clg400-1
 | Speed File   : -1
 | Design State : Synthesized
@@ -31,14 +31,14 @@ Table of Contents
 +-------------------------+------+-------+------------+-----------+-------+
 |        Site Type        | Used | Fixed | Prohibited | Available | Util% |
 +-------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*             | 1583 |     0 |          0 |     17600 |  8.99 |
-|   LUT as Logic          | 1583 |     0 |          0 |     17600 |  8.99 |
+| Slice LUTs*             | 1789 |     0 |          0 |     17600 | 10.16 |
+|   LUT as Logic          | 1789 |     0 |          0 |     17600 | 10.16 |
 |   LUT as Memory         |    0 |     0 |          0 |      6000 |  0.00 |
-| Slice Registers         | 1223 |     0 |          0 |     35200 |  3.47 |
-|   Register as Flip Flop | 1223 |     0 |          0 |     35200 |  3.47 |
+| Slice Registers         | 1280 |     0 |          0 |     35200 |  3.64 |
+|   Register as Flip Flop | 1280 |     0 |          0 |     35200 |  3.64 |
 |   Register as Latch     |    0 |     0 |          0 |     35200 |  0.00 |
-| F7 Muxes                |  256 |     0 |          0 |      8800 |  2.91 |
-| F8 Muxes                |   64 |     0 |          0 |      4400 |  1.45 |
+| F7 Muxes                |  258 |     0 |          0 |      8800 |  2.93 |
+| F8 Muxes                |  110 |     0 |          0 |      4400 |  2.50 |
 | Unique Control Sets     |   47 |       |          0 |      4400 |  1.07 |
 +-------------------------+------+-------+------------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
@@ -61,8 +61,8 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
-| 10    |          Yes |         Set |            - |
-| 1213  |          Yes |       Reset |            - |
+| 12    |          Yes |         Set |            - |
+| 1268  |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -72,8 +72,9 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +-------------------+------+-------+------------+-----------+-------+
 |     Site Type     | Used | Fixed | Prohibited | Available | Util% |
 +-------------------+------+-------+------------+-----------+-------+
-| Block RAM Tile    |  1.5 |     0 |          0 |        60 |  2.50 |
-|   RAMB36/FIFO*    |    0 |     0 |          0 |        60 |  0.00 |
+| Block RAM Tile    |  9.5 |     0 |          0 |        60 | 15.83 |
+|   RAMB36/FIFO*    |    8 |     0 |          0 |        60 | 13.33 |
+|     RAMB36E1 only |    8 |       |            |           |       |
 |   RAMB18          |    3 |     0 |          0 |       120 |  2.50 |
 |     RAMB18E1 only |    3 |       |            |           |       |
 +-------------------+------+-------+------------+-----------+-------+
@@ -96,7 +97,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +-----------------------------+------+-------+------------+-----------+-------+
 |          Site Type          | Used | Fixed | Prohibited | Available | Util% |
 +-----------------------------+------+-------+------------+-----------+-------+
-| Bonded IOB                  |   69 |     0 |          0 |       100 | 69.00 |
+| Bonded IOB                  |    5 |     0 |          0 |       100 |  5.00 |
 | Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
 | Bonded IOPADs               |    0 |     0 |          0 |       130 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |          0 |         2 |  0.00 |
@@ -152,20 +153,21 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| FDRE     | 1213 |        Flop & Latch |
-| LUT6     |  942 |                 LUT |
-| MUXF7    |  256 |               MuxFx |
-| LUT5     |  237 |                 LUT |
-| LUT4     |  230 |                 LUT |
-| LUT2     |  181 |                 LUT |
-| LUT3     |  112 |                 LUT |
+| FDRE     | 1268 |        Flop & Latch |
+| LUT6     | 1064 |                 LUT |
+| LUT5     |  306 |                 LUT |
+| MUXF7    |  258 |               MuxFx |
+| LUT4     |  252 |                 LUT |
+| LUT2     |  218 |                 LUT |
+| MUXF8    |  110 |               MuxFx |
+| LUT3     |   96 |                 LUT |
 | CARRY4   |   76 |          CarryLogic |
-| MUXF8    |   64 |               MuxFx |
-| LUT1     |   40 |                 LUT |
-| IBUF     |   36 |                  IO |
-| OBUF     |   33 |                  IO |
-| FDSE     |   10 |        Flop & Latch |
+| LUT1     |   52 |                 LUT |
+| FDSE     |   12 |        Flop & Latch |
+| RAMB36E1 |    8 |        Block Memory |
+| IBUF     |    4 |                  IO |
 | RAMB18E1 |    3 |        Block Memory |
+| OBUF     |    1 |                  IO |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 

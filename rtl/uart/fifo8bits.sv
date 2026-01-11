@@ -31,7 +31,7 @@ integer i;
 
 //Process Block
 always @(posedge clk ) begin
-    if(FfRdEn) begin
+    if(FfRdEn && !FfEmpty) begin
         data_out <= buffer[RdAddr];
     end else begin
         data_out <= 8'hFF;

@@ -3,11 +3,11 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Thu Jan  8 09:54:20 2026
-# Process ID         : 23812
+# Start of session at: Sat Jan 10 23:35:07 2026
+# Process ID         : 15572
 # Current directory  : C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1
-# Command line       : vivado.exe -log rv32i_core.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source rv32i_core.tcl
-# Log file           : C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/rv32i_core.vds
+# Command line       : vivado.exe -log rv32i_top_Soc.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source rv32i_top_Soc.tcl
+# Log file           : C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/rv32i_top_Soc.vds
 # Journal file       : C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1\vivado.jou
 # Running On         : LAPTOP-GM1L3F93
 # Platform           : Windows Server 2016 or Windows 10
@@ -19,23 +19,25 @@
 # Host memory        : 33414 MB
 # Swap memory        : 2147 MB
 # Total Virtual      : 35562 MB
-# Available Virtual  : 15518 MB
+# Available Virtual  : 10335 MB
 #-----------------------------------------------------------
-source rv32i_core.tcl -notrace
-create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 606.918 ; gain = 222.508
+source rv32i_top_Soc.tcl -notrace
 Command: read_checkpoint -auto_incremental -incremental C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.srcs/utils_1/imports/synth_1/rv32i_core.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.srcs/utils_1/imports/synth_1/rv32i_core.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
-Command: synth_design -top rv32i_core -part xc7z010clg400-1
+Command: synth_design -top rv32i_top_Soc -part xc7z010clg400-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 3960
+INFO: [Synth 8-7075] Helper process launched with PID 13372
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1149.527 ; gain = 531.746
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1151.953 ; gain = 532.379
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'rv32i_top_Soc' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Top_Module/RV32I_top_SoC.sv:1]
 INFO: [Synth 8-6157] synthesizing module 'rv32i_core' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv:1]
 INFO: [Synth 8-6157] synthesizing module 'pc_reg' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv:1]
 INFO: [Synth 8-6155] done synthesizing module 'pc_reg' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv:1]
@@ -47,6 +49,7 @@ INFO: [Synth 8-6157] synthesizing module 'reg_file' [C:/FPGA/RV32I-Processor/RV3
 INFO: [Synth 8-6155] done synthesizing module 'reg_file' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv:1]
 INFO: [Synth 8-6157] synthesizing module 'branch_unit' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/branch_unit.sv:1]
 INFO: [Synth 8-6155] done synthesizing module 'branch_unit' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/branch_unit.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'rv32i_core' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv:1]
 INFO: [Synth 8-6157] synthesizing module 'ram_Controller' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv:1]
 	Parameter DEPTH bound to: 1024 - type: integer 
 	Parameter XLEN bound to: 32 - type: integer 
@@ -58,8 +61,8 @@ INFO: [Synth 8-6155] done synthesizing module 'ram_Controller' (0#1) [C:/FPGA/RV
 INFO: [Synth 8-6157] synthesizing module 'uart' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv:1]
 	Parameter BAUD_CYCLE bound to: 868 - type: integer 
 	Parameter LSB_FIRST bound to: 1'b1 
-	Parameter UDR_ADDR bound to: 11'b10100000010 
-	Parameter UCR_ADDR bound to: 11'b10100000011 
+	Parameter UDR_ADDR bound to: 11'b10000000010 
+	Parameter UCR_ADDR bound to: 11'b10000000011 
 INFO: [Synth 8-6157] synthesizing module 'uart_rx' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv:1]
 	Parameter BAUD_CYCLE bound to: 868 - type: integer 
 	Parameter LSB_FIRST bound to: 1'b1 
@@ -73,7 +76,13 @@ INFO: [Synth 8-6157] synthesizing module 'uart_tx_ff' [C:/FPGA/RV32I-Processor/R
 	Parameter LSB_FIRST bound to: 1'b1 
 INFO: [Synth 8-6155] done synthesizing module 'uart_tx_ff' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:1]
 INFO: [Synth 8-6155] done synthesizing module 'uart' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'rv32i_core' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'programmer' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv:1]
+	Parameter MEM_SIZE bound to: 32767 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'programmer' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'prog_ram_w8r32' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv:1]
+	Parameter MEM_SIZE bound to: 32767 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'prog_ram_w8r32' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'rv32i_top_Soc' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Top_Module/RV32I_top_SoC.sv:1]
 WARNING: [Synth 8-7129] Port wrData[31] in module uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port wrData[30] in module uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port wrData[29] in module uart is either unconnected or has no load
@@ -101,8 +110,6 @@ WARNING: [Synth 8-7129] Port wrData[8] in module uart is either unconnected or h
 WARNING: [Synth 8-7129] Port addr[1] in module bram_sp_byte is either unconnected or has no load
 WARNING: [Synth 8-7129] Port addr[0] in module bram_sp_byte is either unconnected or has no load
 WARNING: [Synth 8-7129] Port wordEn in module ram_Controller is either unconnected or has no load
-WARNING: [Synth 8-7129] Port clk in module branch_unit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rstB in module branch_unit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port i_type in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[6] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[4] in module ALU32bits is either unconnected or has no load
@@ -110,11 +117,12 @@ WARNING: [Synth 8-7129] Port funct7[3] in module ALU32bits is either unconnected
 WARNING: [Synth 8-7129] Port funct7[2] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[1] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[0] in module ALU32bits is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataBusInEn in module rv32i_core is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1277.258 ; gain = 659.477
+Finished Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1280.250 ; gain = 660.676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1277.258 ; gain = 659.477
+Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 1280.250 ; gain = 660.676
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
@@ -122,17 +130,7 @@ Start Loading Part and Timing Information
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7z010clg400-1
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1277.258 ; gain = 659.477
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Start Preparing Guide Design
----------------------------------------------------------------------------------
-CRITICAL WARNING: [Synth 8-6895] The reference checkpoint C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.srcs/utils_1/imports/synth_1/rv32i_core.dcp is not suitable for use with incremental synthesis for this design. Please regenerate the checkpoint for this design with -incremental_synth switch in the same Vivado session that synth_design has been run. Synthesis will continue with the default flow
----------------------------------------------------------------------------------
-Finished Doing Graph Differ : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1277.258 ; gain = 659.477
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Finished Preparing Guide Design : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1277.258 ; gain = 659.477
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1280.250 ; gain = 660.676
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'rState_current_reg' in module 'uart_rx'
 INFO: [Synth 8-802] inferred FSM for state register 'rState_current_reg' in module 'uart_tx_ff'
@@ -152,19 +150,11 @@ INFO: [Synth 8-3354] encoded FSM with state register 'rState_current_reg' using 
                     TRAN |                              100 |                               10
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'rState_current_reg' using encoding 'one-hot' in module 'uart_tx_ff'
+WARNING: [Synth 8-6841] Block RAM (ram_reg) originally specified as a Byte Wide Write Enable RAM cannot take advantage of ByteWide feature and is implemented with single write enable per RAM due to following reason.
+(address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired.)
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1277.590 ; gain = 659.809
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1280.250 ; gain = 660.676
 ---------------------------------------------------------------------------------
-
-
-Incremental Synthesis Report Summary:
-
-1. Incremental synthesis run: no
-
-   Reason for not running incremental synthesis : 
-
-
-INFO: [Synth 8-7130] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 No constraint files found.
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -173,37 +163,41 @@ Detailed RTL Component Info :
 +---Adders : 
 	   2 Input   33 Bit       Adders := 1     
 	   3 Input   33 Bit       Adders := 1     
-	   2 Input   32 Bit       Adders := 6     
+	   2 Input   32 Bit       Adders := 5     
 	   2 Input   10 Bit       Adders := 2     
 	   2 Input    9 Bit       Adders := 2     
 	   2 Input    8 Bit       Adders := 6     
 +---XORs : 
 	   2 Input     32 Bit         XORs := 1     
 +---Registers : 
-	               32 Bit    Registers := 36    
-	               12 Bit    Registers := 1     
+	               32 Bit    Registers := 39    
+	               11 Bit    Registers := 1     
 	               10 Bit    Registers := 6     
 	                8 Bit    Registers := 6     
 	                5 Bit    Registers := 1     
 	                2 Bit    Registers := 1     
-	                1 Bit    Registers := 10    
+	                1 Bit    Registers := 13    
 +---RAMs : 
+	             255K Bit	(8191 X 32 bit)          RAMs := 1     
 	               8K Bit	(256 X 32 bit)          RAMs := 1     
 	               2K Bit	(256 X 8 bit)          RAMs := 2     
 +---Muxes : 
-	   2 Input   32 Bit        Muxes := 26    
+	   2 Input   32 Bit        Muxes := 27    
+	   4 Input   32 Bit        Muxes := 1     
 	   2 Input   24 Bit        Muxes := 1     
+	   2 Input   15 Bit        Muxes := 1     
 	   2 Input   12 Bit        Muxes := 2     
+	   2 Input   11 Bit        Muxes := 1     
 	   2 Input   10 Bit        Muxes := 4     
 	   2 Input    8 Bit        Muxes := 4     
 	   2 Input    7 Bit        Muxes := 2     
 	   2 Input    4 Bit        Muxes := 1     
 	   3 Input    4 Bit        Muxes := 1     
-	   3 Input    3 Bit        Muxes := 2     
 	   2 Input    3 Bit        Muxes := 7     
+	   3 Input    3 Bit        Muxes := 2     
 	   2 Input    2 Bit        Muxes := 5     
 	   3 Input    2 Bit        Muxes := 4     
-	   2 Input    1 Bit        Muxes := 36    
+	   2 Input    1 Bit        Muxes := 37    
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -220,35 +214,6 @@ No constraint files found.
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-7129] Port wrData[31] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[30] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[29] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[28] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[27] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[26] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[25] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[24] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[23] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[22] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[21] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[20] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[19] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[18] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[17] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[16] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[15] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[14] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[13] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[12] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[11] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[10] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[9] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wrData[8] in module uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addr[1] in module ram_Controller is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addr[0] in module ram_Controller is either unconnected or has no load
-WARNING: [Synth 8-7129] Port wordEn in module ram_Controller is either unconnected or has no load
-WARNING: [Synth 8-7129] Port clk in module branch_unit is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rstB in module branch_unit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port i_type in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[6] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[4] in module ALU32bits is either unconnected or has no load
@@ -256,21 +221,25 @@ WARNING: [Synth 8-7129] Port funct7[3] in module ALU32bits is either unconnected
 WARNING: [Synth 8-7129] Port funct7[2] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[1] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[0] in module ALU32bits is either unconnected or has no load
+WARNING: [Synth 8-7129] Port dataBusInEn in module rv32i_core is either unconnected or has no load
+WARNING: [Synth 8-6841] Block RAM (prog_ram/ram_reg) originally specified as a Byte Wide Write Enable RAM cannot take advantage of ByteWide feature and is implemented with single write enable per RAM due to following reason.
+(address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired.)
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1557.930 ; gain = 940.148
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1656.582 ; gain = 1037.008
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Block RAM: Preliminary Mapping Report (see note below)
-+------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name | RTL Object              | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|ram         | BRAM/genblk1[1].ram_reg | 256 x 32(READ_FIRST)   | W |   | 256 x 32(WRITE_FIRST)  |   | R | Port A and B     | 1      | 0      | 
-|uart_module | ffrx/buffer_reg         | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
-|uart_module | fftx/buffer_reg         | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
-+------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++--------------+-----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name   | RTL Object                  | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++--------------+-----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|rv32i_top_Soc | ram/BRAM/genblk1[1].ram_reg | 256 x 32(READ_FIRST)   | W |   | 256 x 32(WRITE_FIRST)  |   | R | Port A and B     | 1      | 0      | 
+|rv32i_top_Soc | uart_module/ffrx/buffer_reg | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
+|rv32i_top_Soc | uart_module/fftx/buffer_reg | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
+|rv32i_top_Soc | prog_ram/ram_reg            | 7 K x 32(READ_FIRST)   | W |   | 7 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 8      | 
++--------------+-----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
 ---------------------------------------------------------------------------------
@@ -281,20 +250,21 @@ No constraint files found.
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1557.930 ; gain = 940.148
+Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 1656.582 ; gain = 1037.008
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Block RAM: Final Mapping Report
-+------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name | RTL Object              | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|ram         | BRAM/genblk1[1].ram_reg | 256 x 32(READ_FIRST)   | W |   | 256 x 32(WRITE_FIRST)  |   | R | Port A and B     | 1      | 0      | 
-|uart_module | ffrx/buffer_reg         | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
-|uart_module | fftx/buffer_reg         | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
-+------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++--------------+-----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name   | RTL Object                  | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++--------------+-----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|rv32i_top_Soc | ram/BRAM/genblk1[1].ram_reg | 256 x 32(READ_FIRST)   | W |   | 256 x 32(WRITE_FIRST)  |   | R | Port A and B     | 1      | 0      | 
+|rv32i_top_Soc | uart_module/ffrx/buffer_reg | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
+|rv32i_top_Soc | uart_module/fftx/buffer_reg | 256 x 8(READ_FIRST)    | W |   | 256 x 8(WRITE_FIRST)   |   | R | Port A and B     | 1      | 0      | 
+|rv32i_top_Soc | prog_ram/ram_reg            | 7 K x 32(READ_FIRST)   | W |   | 7 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 8      | 
++--------------+-----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -306,7 +276,7 @@ INFO: [Synth 8-7052] The timing for the instance ram/BRAM/genblk1[1].ram_reg (im
 INFO: [Synth 8-7052] The timing for the instance uart_module/ffrx/buffer_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance uart_module/fftx/buffer_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1557.930 ; gain = 940.148
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1656.793 ; gain = 1037.219
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -324,37 +294,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1734.934 ; gain = 1117.152
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1745.957 ; gain = 1126.383
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1734.934 ; gain = 1117.152
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1745.957 ; gain = 1126.383
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1734.934 ; gain = 1117.152
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1745.957 ; gain = 1126.383
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1734.934 ; gain = 1117.152
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1745.957 ; gain = 1126.383
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1735.953 ; gain = 1118.172
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1746.977 ; gain = 1127.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1735.953 ; gain = 1118.172
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1746.977 ; gain = 1127.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -372,60 +342,64 @@ Report Cell Usage:
 +------+---------+------+
 |1     |BUFG     |     1|
 |2     |CARRY4   |    76|
-|3     |LUT1     |    40|
-|4     |LUT2     |   181|
-|5     |LUT3     |   112|
-|6     |LUT4     |   230|
-|7     |LUT5     |   237|
-|8     |LUT6     |   942|
-|9     |MUXF7    |   256|
-|10    |MUXF8    |    64|
+|3     |LUT1     |    52|
+|4     |LUT2     |   218|
+|5     |LUT3     |    96|
+|6     |LUT4     |   252|
+|7     |LUT5     |   306|
+|8     |LUT6     |  1064|
+|9     |MUXF7    |   258|
+|10    |MUXF8    |   110|
 |11    |RAMB18E1 |     3|
-|12    |FDRE     |  1213|
-|13    |FDSE     |    10|
-|14    |IBUF     |    36|
-|15    |OBUF     |    33|
+|12    |RAMB36E1 |     8|
+|13    |FDRE     |  1268|
+|14    |FDSE     |    12|
+|15    |IBUF     |     4|
+|16    |OBUF     |     1|
 +------+---------+------+
 
 Report Instance Areas: 
-+------+--------------+---------------+------+
-|      |Instance      |Module         |Cells |
-+------+--------------+---------------+------+
-|1     |top           |               |  3434|
-|2     |  dec         |inst_dec       |   881|
-|3     |  ram         |ram_Controller |    49|
-|4     |    BRAM      |bram_sp_byte   |    44|
-|5     |  reg_module  |reg_file       |  2009|
-|6     |  rpc         |pc_reg         |   130|
-|7     |  uart_module |uart           |   255|
-|8     |    ffrx      |sync_fifo      |    61|
-|9     |    fftx      |sync_fifo_0    |    45|
-|10    |    rx_module |uart_rx        |    64|
-|11    |    tx_module |uart_tx_ff     |    67|
-+------+--------------+---------------+------+
++------+--------------------+---------------+------+
+|      |Instance            |Module         |Cells |
++------+--------------------+---------------+------+
+|1     |top                 |               |  3729|
+|2     |  core              |rv32i_core     |  2410|
+|3     |    alu             |ALU32bits      |    19|
+|4     |    brancher        |branch_unit    |   117|
+|5     |    reg_module      |reg_file       |  2145|
+|6     |    rpc             |pc_reg         |    90|
+|7     |  prog_ram          |prog_ram_w8r32 |   934|
+|8     |  programmer_module |programmer     |    66|
+|9     |  ram               |ram_Controller |    55|
+|10    |    BRAM            |bram_sp_byte   |    50|
+|11    |  uart_module       |uart           |   255|
+|12    |    ffrx            |sync_fifo      |    62|
+|13    |    fftx            |sync_fifo_0    |    46|
+|14    |    rx_module       |uart_rx        |    64|
+|15    |    tx_module       |uart_tx_ff     |    67|
++------+--------------------+---------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1735.953 ; gain = 1118.172
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1746.977 ; gain = 1127.402
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 1 critical warnings and 72 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1735.953 ; gain = 1118.172
-Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 1735.953 ; gain = 1118.172
+Synthesis finished with 0 errors, 0 critical warnings and 45 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1746.977 ; gain = 1127.402
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1746.977 ; gain = 1127.402
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.028 . Memory (MB): peak = 1748.961 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 399 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.026 . Memory (MB): peak = 1761.031 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 455 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1864.484 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1877.352 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: dfabd400
+Synth Design complete | Checksum: 52e0bf06
 INFO: [Common 17-83] Releasing license: Synthesis
-46 Infos, 72 Warnings, 1 Critical Warnings and 0 Errors encountered.
+53 Infos, 45 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1864.484 ; gain = 1251.508
-INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1864.484 ; gain = 0.000
-INFO: [Common 17-1381] The checkpoint 'C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/rv32i_core.dcp' has been generated.
-INFO: [Vivado 12-24828] Executing command : report_utilization -file rv32i_core_utilization_synth.rpt -pb rv32i_core_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Jan  8 09:55:01 2026...
+synth_design: Time (s): cpu = 00:00:27 ; elapsed = 00:00:29 . Memory (MB): peak = 1877.352 ; gain = 1263.625
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1877.352 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/rv32i_top_Soc.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file rv32i_top_Soc_utilization_synth.rpt -pb rv32i_top_Soc_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Jan 10 23:35:42 2026...

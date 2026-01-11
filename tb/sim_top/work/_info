@@ -10,11 +10,11 @@ cModel Technology
 Z0 dC:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/tb/sim_top
 vALU32bits
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1768057563
+!s110 1768125297
 !i10b 1
 !s100 ZY2RAD77mj@ZaURP_<?N70
 I=aRFWd30W;Dc=YYY94Kf[0
-Z3 VDg1SIo80bB@j0V0VzS_@n1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
 !s105 alu_sv_unit
 S1
 R0
@@ -22,25 +22,25 @@ w1767433883
 8../../rtl/RV32I_core/alu.sv
 F../../rtl/RV32I_core/alu.sv
 L0 1
-Z4 OV;L;10.5b;63
+Z3 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z5 !s108 1768057563.000000
+!s108 1768125297.000000
 !s107 ../../rtl/RV32I_core/alu.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/alu.sv|
 !i113 1
-Z6 !s102 -cover bcse
-Z7 o-cover bcse -work work
-Z8 tCvgOpt 0
+Z4 !s102 -cover bcse
+Z5 o-cover bcse -work work
+Z6 tCvgOpt 0
 n@a@l@u32bits
 vbram_sp_byte
 R1
-Z9 !s110 1768057566
+Z7 !s110 1768125300
 !i10b 1
 !s100 3IMQ0UF;5j^CHAalVY9c]1
 IcnJ7hoLOlOCeZ70mKCTT91
-R3
+R2
 !s105 bram_sp_byte_sv_unit
 S1
 R0
@@ -48,24 +48,24 @@ w1767519658
 8../../rtl/RV32I_core/bram_sp_byte.sv
 F../../rtl/RV32I_core/bram_sp_byte.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-Z10 !s108 1768057566.000000
+Z8 !s108 1768125300.000000
 !s107 ../../rtl/RV32I_core/bram_sp_byte.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/bram_sp_byte.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 vbranch_unit
 R1
-Z11 !s110 1768057564
+Z9 !s110 1768125298
 !i10b 1
 !s100 50hi0FBdT=g:_:[RIATXS3
 I7kfnAcNZVi]Bf59MJS^0B1
-R3
+R2
 !s105 branch_unit_sv_unit
 S1
 R0
@@ -73,24 +73,24 @@ w1768057557
 8../../rtl/RV32I_core/branch_unit.sv
 F../../rtl/RV32I_core/branch_unit.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-Z12 !s108 1768057564.000000
+Z10 !s108 1768125298.000000
 !s107 ../../rtl/RV32I_core/branch_unit.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/branch_unit.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 vinst_dec
 R1
-R2
+R9
 !i10b 1
 !s100 D4HSWae2LSGhAOUg]m37c3
 IaNCNfKh@YV`AjzYhR@d0?3
-R3
+R2
 !s105 inst_dec_sv_unit
 S1
 R0
@@ -98,24 +98,49 @@ w1767930322
 8../../rtl/RV32I_core/inst_dec.sv
 F../../rtl/RV32I_core/inst_dec.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-R5
+R10
 !s107 ../../rtl/RV32I_core/inst_dec.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/inst_dec.sv|
 !i113 1
+R4
+R5
 R6
+vio_port
+R1
 R7
+!i10b 1
+!s100 hJIC?Oge12R]CH4feHd=?0
+IcaS2>LAAS;gaQUdK2RjbW3
+R2
+!s105 port_sv_unit
+S1
+R0
+w1768123026
+8../../rtl/IO_Port/port.sv
+F../../rtl/IO_Port/port.sv
+L0 1
+R3
+r1
+!s85 0
+31
 R8
+!s107 ../../rtl/IO_Port/port.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/IO_Port/port.sv|
+!i113 1
+R4
+R5
+R6
 vpc_reg
 R1
-R11
+R9
 !i10b 1
 !s100 1Z9RCXnEPI`zU41VflcE:0
 IOh=DeT[<BX<^_dKC:Pd=_0
-R3
+R2
 !s105 pc_reg_sv_unit
 S1
 R0
@@ -123,49 +148,49 @@ w1767427715
 8../../rtl/RV32I_core/pc_reg.sv
 F../../rtl/RV32I_core/pc_reg.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-R12
+R10
 !s107 ../../rtl/RV32I_core/pc_reg.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/pc_reg.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 vprog_ram_w8r32
 R1
-Z13 !s110 1768057565
+R7
 !i10b 1
-!s100 iPbRWhU=BW^znC0z0L=z93
-IfaR9_j9@o2hF0UhHn605B1
-R3
+!s100 lgP8`6jS_V5=NcS=8<L`b3
+IBo=Gza0W^gjl9`iS]Y4=R1
+R2
 !s105 prog_ram_w8r32_sv_unit
 S1
 R0
-w1767929573
+w1768062461
 8../../rtl/Programmer/prog_ram_w8r32.sv
 F../../rtl/Programmer/prog_ram_w8r32.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-Z14 !s108 1768057565.000000
+R8
 !s107 ../../rtl/Programmer/prog_ram_w8r32.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/Programmer/prog_ram_w8r32.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 vProgram_Mem
 R1
 !s110 1767877677
 !i10b 1
 !s100 Zb4Y`_3z2lPJg94hUWeOl0
 I7[1hOiV8EDX]FcYNn9UU13
-R3
+R2
 !s105 Program_Mem_sv_unit
 S1
 R0
@@ -173,7 +198,7 @@ w1767877030
 8../Program_Mem.sv
 F../Program_Mem.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
@@ -181,17 +206,17 @@ r1
 !s107 ../Program_Mem.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../Program_Mem.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 n@program_@mem
 vprogrammer
 R1
-R13
+Z11 !s110 1768125299
 !i10b 1
 !s100 8LdKPLz3i9=<ma8gADz:Y3
 ITc1KDMnYLG^nIGhfRhPN43
-R3
+R2
 !s105 prog_sv_unit
 S1
 R0
@@ -199,24 +224,24 @@ w1767929973
 8../../rtl/Programmer/prog.sv
 F../../rtl/Programmer/prog.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-R14
+Z12 !s108 1768125299.000000
 !s107 ../../rtl/Programmer/prog.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/Programmer/prog.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 vram_Controller
 R1
-R11
+R9
 !i10b 1
 !s100 m?HM^fkmC@R20Bg<;ogZm2
 INdGkjKd`a::9HEF5;<9Yn0
-R3
+R2
 !s105 ram_wController_sv_unit
 S1
 R0
@@ -224,25 +249,25 @@ w1767873157
 8../../rtl/RV32I_core/ram_wController.sv
 F../../rtl/RV32I_core/ram_wController.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-R12
+R10
 !s107 ../../rtl/RV32I_core/ram_wController.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/ram_wController.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 nram_@controller
 vreg_file
 R1
-R11
+R9
 !i10b 1
 !s100 3d<bn9A1SQXRe_3<zMNfK2
 I5o>Ii:cV[zVamlBbZGNQ61
-R3
+R2
 !s105 reg_file_sv_unit
 S1
 R0
@@ -250,24 +275,24 @@ w1767083749
 8../../rtl/RV32I_core/reg_file.sv
 F../../rtl/RV32I_core/reg_file.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-R12
+R10
 !s107 ../../rtl/RV32I_core/reg_file.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/reg_file.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 vrv32i_core
 R1
-R11
+R9
 !i10b 1
 !s100 4GQ4j<[W5abJo^;1]J02e0
 Ia44C1;nEa<7LaF_cFSPV50
-R3
+R2
 !s105 rv32i_core_sv_unit
 S1
 R0
@@ -275,124 +300,124 @@ w1767930270
 8../../rtl/RV32I_core/rv32i_core.sv
 F../../rtl/RV32I_core/rv32i_core.sv
 L0 1
-R4
-r1
-!s85 0
-31
-R12
-!s107 ../../rtl/RV32I_core/rv32i_core.sv|
-!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/rv32i_core.sv|
-!i113 1
-R6
-R7
-R8
-vrv32i_top_Soc
-R1
-R13
-!i10b 1
-!s100 oP[50z3V@8S4^eo4z>19a2
-IKh7Qgol;fGKLKVg8T5UWg0
 R3
-!s105 RV32I_top_SoC_sv_unit
-S1
-R0
-w1767930629
-8../../rtl/Top_Module/RV32I_top_SoC.sv
-F../../rtl/Top_Module/RV32I_top_SoC.sv
-L0 1
-R4
-r1
-!s85 0
-31
-R14
-!s107 ../../rtl/Top_Module/RV32I_top_SoC.sv|
-!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/Top_Module/RV32I_top_SoC.sv|
-!i113 1
-R6
-R7
-R8
-nrv32i_top_@soc
-vsync_fifo
-R1
-R13
-!i10b 1
-!s100 M71eR=T8>8JbDEW=M?JzG0
-I@M:IGi2hS]@8:HfH@hIF22
-R3
-!s105 fifo8bits_sv_unit
-S1
-R0
-w1767711652
-8../../rtl/uart/fifo8bits.sv
-F../../rtl/uart/fifo8bits.sv
-L0 2
-R4
-r1
-!s85 0
-31
-R14
-!s107 ../../rtl/uart/fifo8bits.sv|
-!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/fifo8bits.sv|
-!i113 1
-R6
-R7
-R8
-vtop_tb
-R1
-R9
-!i10b 1
-!s100 m<lXI`<8TeV5Tf23iG9h21
-IVAhJhChETiV=HHhiil?<W2
-R3
-!s105 top_tb_sv_unit
-S1
-R0
-w1767948654
-8../top_tb.sv
-F../top_tb.sv
-L0 2
-R4
 r1
 !s85 0
 31
 R10
+!s107 ../../rtl/RV32I_core/rv32i_core.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/rv32i_core.sv|
+!i113 1
+R4
+R5
+R6
+vrv32i_top_Soc
+R1
+R7
+!i10b 1
+!s100 L7faSV_FobJW]aYENTYoI2
+IFNf[>:0I`l?DYLVYM@W_53
+R2
+!s105 RV32I_top_SoC_sv_unit
+S1
+R0
+w1768123033
+8../../rtl/Top_Module/RV32I_top_SoC.sv
+F../../rtl/Top_Module/RV32I_top_SoC.sv
+L0 1
+R3
+r1
+!s85 0
+31
+R8
+!s107 ../../rtl/Top_Module/RV32I_top_SoC.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/Top_Module/RV32I_top_SoC.sv|
+!i113 1
+R4
+R5
+R6
+nrv32i_top_@soc
+vsync_fifo
+R1
+R11
+!i10b 1
+!s100 ?2ji7]fzQ:XUfdNdEcfRB0
+II:Vd26Sb0][R_OG9gF4CC1
+R2
+!s105 fifo8bits_sv_unit
+S1
+R0
+w1768123936
+8../../rtl/uart/fifo8bits.sv
+F../../rtl/uart/fifo8bits.sv
+L0 2
+R3
+r1
+!s85 0
+31
+R12
+!s107 ../../rtl/uart/fifo8bits.sv|
+!s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/fifo8bits.sv|
+!i113 1
+R4
+R5
+R6
+vtop_tb
+R1
+R7
+!i10b 1
+!s100 i`6z1ojbkTK;:?TCVIG6[3
+IJ?AHQUMhT23>>MZAOXGhS2
+R2
+!s105 top_tb_sv_unit
+S1
+R0
+w1768125224
+8../top_tb.sv
+F../top_tb.sv
+L0 2
+R3
+r1
+!s85 0
+31
+R8
 !s107 ../top_tb.sv|
 !s90 -reportprogress|300|-work|work|../top_tb.sv|
 !i113 1
 o-work work
-R8
+R6
 vuart
 R1
-R13
+R11
 !i10b 1
-!s100 WWXen4HMF0fV^4NB>dR1J2
-I[13UdA9UHMOJn9<P@``Q93
-R3
+!s100 GzeWD[RRZ[T77USRz^Fzh2
+IK9dUD[_d`3ncZF@Z?fMgD3
+R2
 !s105 uart_sv_unit
 S1
 R0
-w1767930142
+w1768124968
 8../../rtl/uart/uart.sv
 F../../rtl/uart/uart.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-R14
+R12
 !s107 ../../rtl/uart/uart.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/uart.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 vuart_rx
 R1
-R13
+R11
 !i10b 1
 !s100 B5J>E[4@fzM[CV`l3c0G91
 IgHeD<AJ;a_hg6n[`:3<[F2
-R3
+R2
 !s105 uart_rx_sv_unit
 S1
 R0
@@ -400,24 +425,24 @@ w1767711630
 8../../rtl/uart/uart_rx.sv
 F../../rtl/uart/uart_rx.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
-R14
+R12
 !s107 ../../rtl/uart/uart_rx.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/uart_rx.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8
 vuart_tx_ff
 R1
 R11
 !i10b 1
 !s100 9hQbj^QzoT>2CC`4D0XfG3
 I[ULfe=>kdi:acN[g<[b533
-R3
+R2
 !s105 uart_tx_sv_unit
 S1
 R0
@@ -425,7 +450,7 @@ w1767712418
 8../../rtl/uart/uart_tx.sv
 F../../rtl/uart/uart_tx.sv
 L0 1
-R4
+R3
 r1
 !s85 0
 31
@@ -433,6 +458,6 @@ R12
 !s107 ../../rtl/uart/uart_tx.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/uart_tx.sv|
 !i113 1
+R4
+R5
 R6
-R7
-R8

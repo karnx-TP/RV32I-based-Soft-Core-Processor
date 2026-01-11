@@ -10,8 +10,11 @@ Complete
       - Have Byte/Halfword/Word write function
   3. UART Module
       - Simple UART peripherals with generic for BAUDRATE
-      - 2 FF Buffer in both rx side and tx side
+      - 2 FIFO Buffer in both rx side and tx side
       - Can access using Load/Store Instruction at address 0x402 and 0x403
+  4. Programmer Module & Instruction RAM
+	  - Instruction memory : synthesized into Block Ram for FPGA
+	  - Programmer Module : Use for writing instruction memory through UART interface (*TX*,*RX* port) while *progEn* port is being pulled to low
 
 Currently Progress
-- Programmer module which will be used to program the SoC through UART
+- I/O Port

@@ -4,7 +4,9 @@ module rv32i_top_Soc(
 	progEn,
 
     rx,
-    tx
+    tx,
+
+	pin
 );
 //Parameter
 	localparam MEM_SIZE = 32767; //Byte
@@ -12,16 +14,22 @@ module rv32i_top_Soc(
 	localparam RAM_DEPTH_WORD = 1024; //Word
 	localparam RAM_ADDRW = $clog2(RAM_DEPTH_WORD);
 	localparam XLEN = 32; //1 word = 32bit
+//GenVar
+	genvar i;
+
 //Port
-    input logic     clk;
-    input logic     rstB;
-	input logic		progEn;
-    input logic     rx;
-    output logic    tx;
+    input logic    	 	clk;
+    input logic     	rstB;
+	input logic			progEn;
+    input logic     	rx;
+    output logic    	tx;
+	inout logic[7:0]	pin;
 
 //BUS ID
+	localparam PERI_SIZE = 3;
 	localparam RAM = 0;
 	localparam UART = 1;
+	localparam PORT = 2;
 
 //Wire
 	logic					rCoreClkEn;
@@ -46,16 +54,21 @@ module rv32i_top_Soc(
 	logic					wProgRdEn;
 	logic					wProgMemFull;
 	logic[INSTRW-1:0]		wProgRamAddr;
+	//IO Port
+	logic[7:0]				wPort_ddr;
+	logic[7:0]				wPort_pvl;
+	logic[7:0]				wPort_pin;
 
 //DataBus - Peripheral
-    logic[0:1][XLEN-1:0]    wDataBus;
-    logic[0:1]    		wDataBusEn;
-	logic				wRamRdEn;
-	logic				wPeriRdEn;
+    logic[0:PERI_SIZE-1][XLEN-1:0]    	wDataBus;
+    logic[0:PERI_SIZE-1]    			wDataBusEn;
+	logic								wRamRdEn;
+	logic								wPeriRdEn;
 
 //DataBus
 	assign wCoreDataIn = 	(wDataBusEn[RAM]) ? wDataBus[RAM] :
 							(wDataBusEn[UART]) ? wDataBus[UART] :
+							(wDataBusEn[PORT]) ? wDataBus[PORT] :
 							0;
 	assign wCoreDataInEn = |wDataBusEn;
 
@@ -162,6 +175,33 @@ module rv32i_top_Soc(
 	);
 	assign wProgRamAddr = 	progEn ? wProgAddr[INSTRW-1:0] :
 							wCorePc[INSTRW-1:0];
+
+	io_port #(
+		.DDR_ADDR(11'h404),
+		.PVL_ADDR(11'h405),
+		.PIN_ADDR(11'h406),
+		.PORT_SIZE(8)
+	) io_port_module (
+		.clk(clk),
+		.rstB(rstB),
+
+		.addr(wCoreAddr[RAM_ADDRW:0]),
+		.wrData(wCoreDataOut),
+		.wrEn(wCoreWrEn),
+		.rdEn(wPeriRdEn),
+		.dataOut(wDataBus[PORT]),
+		.outEn(wDataBusEn[PORT]),
+
+		.ddr(wPort_ddr),
+		.pvl(wPort_pvl),
+		.pin(wPort_pin)
+	);
+	assign wPort_pin = pin;
+	generate
+		for (i = 0;i<8;i=i+1) begin : GEN_PIN
+			assign pin[i] = wPort_ddr[i] ? wPort_pvl[i] : 1'bz;
+		end
+	endgenerate
 
 
 endmodule
