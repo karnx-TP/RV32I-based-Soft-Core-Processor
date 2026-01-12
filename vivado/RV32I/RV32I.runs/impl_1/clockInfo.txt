@@ -1,0 +1,10 @@
+-------------------------------------
+| Tool Version : Vivado v.2025.2
+| Date         : Mon Jan 12 18:46:11 2026
+| Host         : LAPTOP-GM1L3F93
+| Design       : checkpoint_rv32i_top_Soc
+| Device       : xc7z010-clg400-1--
+-------------------------------------
+
+For more information on clockInfo.txt clock routing debug file see https://support.xilinx.com/s/article/000035660?language=en_US
+

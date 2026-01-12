@@ -56,10 +56,10 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
+set_param tcl.collectionResultDisplayLimit 0
 set_param general.usePosixSpawnForFork 1
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
+set_param chipscope.maxJobs 4
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z010clg400-1
 
@@ -81,11 +81,13 @@ read_verilog -library xil_defaultlib -sv {
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/fifo8bits.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/inst_dec.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/IO_Port/port.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/addition_module/single_tx.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv
@@ -100,6 +102,9 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.srcs/constrs_1/new/conxdc.xdc
+set_property used_in_implementation false [get_files C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.srcs/constrs_1/new/conxdc.xdc]
+
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.srcs/utils_1/imports/synth_1/rv32i_core.dcp

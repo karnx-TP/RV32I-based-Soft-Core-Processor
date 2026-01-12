@@ -1,12 +1,14 @@
 module rv32i_top_Soc(
     clk,
     rstB,
-	progEn,
+	progEnB,
 
     rx,
     tx,
+	pin,
 
-	pin
+	statusLED,
+	rx_echo
 );
 //Parameter
 	localparam MEM_SIZE = 32767; //Byte
@@ -20,10 +22,12 @@ module rv32i_top_Soc(
 //Port
     input logic    	 	clk;
     input logic     	rstB;
-	input logic			progEn;
+	input logic			progEnB;
     input logic     	rx;
     output logic    	tx;
 	inout logic[7:0]	pin;
+	output logic		statusLED;
+	output logic		rx_echo;
 
 //BUS ID
 	localparam PERI_SIZE = 3;
@@ -48,6 +52,7 @@ module rv32i_top_Soc(
 	logic[7:0]				wUartData;
 	logic					wUartRxFfEmpty;
 	//Prog
+	logic					progEn;
 	logic					wProgWrEn;
 	logic[7:0]				wProgWrData;
 	logic[31:0]				wProgAddr;
@@ -57,7 +62,11 @@ module rv32i_top_Soc(
 	//IO Port
 	logic[7:0]				wPort_ddr;
 	logic[7:0]				wPort_pvl;
-	logic[7:0]				wPort_pin;
+	wire[7:0]				wPort_pin;
+
+//Output
+	assign progEn = !progEnB;
+	assign statusLED = progEn;
 
 //DataBus - Peripheral
     logic[0:PERI_SIZE-1][XLEN-1:0]    	wDataBus;
@@ -196,12 +205,29 @@ module rv32i_top_Soc(
 		.pvl(wPort_pvl),
 		.pin(wPort_pin)
 	);
-	assign wPort_pin = pin;
 	generate
 		for (i = 0;i<8;i=i+1) begin : GEN_PIN
-			assign pin[i] = wPort_ddr[i] ? wPort_pvl[i] : 1'bz;
+			// assign pin[i] = wPort_ddr[i] ? wPort_pvl[i] : 1'bz;
+			// assign wPort_pin[i] = pin[i];
+			IOBUF iobuf_inst (
+			.I (wPort_pvl[i]),
+			.O (wPort_pin[i]),
+			.T (~wPort_ddr[i]),
+			.IO(pin[i])
+			);
 		end
 	endgenerate
+
+	single_tx rx_echo_module (
+		.clk(clk),
+		.rstB(rstB),
+
+		.wrEn(wProgWrEn),
+		.wrData(wProgWrData),
+
+		.tx(rx_echo)
+	);
+	
 
 
 endmodule
