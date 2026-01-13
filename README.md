@@ -1,10 +1,11 @@
 # RV32I-based-Soft-Core-Processor
 RV32I-based-Soft-Core-Processor System-On-Chip Project
 
-Design Complete
-  1. 5-Stage Pipeline RV32I Base CPU Core (Currently without system Instruction FENCE/ECALL/EBREAK)
+Completed Design
+--
+  1. 4-stage Pipeline RV32I Base CPU Core (Currently without system Instruction FENCE/ECALL/EBREAK)
       - Including Instruction Decoder, ALU, 32 GP-Registers,Branch Unit
-	  - Pipeline stages : IF->ID->EXE->MEM->WB
+	  - Pipeline stages : IF->ID->EXE/MEM->WB
 	  - Including Hazard Handling Logic (Bypass, Bubbling)
   2. RAM with Controller
       - Can be synthesized into BRAM type for FPGA
@@ -26,21 +27,30 @@ Design Complete
 	  - Module implemented for **debugging system** to see is the SoC recieve program uploading transmission
 	  - Simple TX module sampling data that are writing to instruction ram, then send it through echo pin
 
-On-board Test
-> **Version1** : Tested on AX7010 FPGA Board (Zynq 7000 series)
+Currently Progress (Plan) 
+--
+- Add another peripherals
+- Implement AXI to Support AXI, AXI4-Lite, AXI-Stream protocol for further improvement like AI Accelerator
+
+Implementation History on FPGA
+--
+> **Version1 : 3-Stage Pipeline (IF->ID/EXE/MEM->WB)** : Tested on AX7010 FPGA Board (Zynq 7000 series)
 - Resources Used (including some chipscope) : 2948 LUTs, 3292 FFs, 11.5 BRAMs
 - Power Used : 0.125 W
 - Timing
 	- Current Operating Frequency = 50 MHz
 	- WNS = 0.425ns(setup), 0.011ns(hold), 8.75ns(pulse width)
 - Functional
- 	- Writing software using assembly language them complie to binary 
+	- Writing software using assembly language them complie to binary 
    - Can be uploaded complied code uart interface (can see echo through echo pin)
    - Correct sent data through uart peripherals by software(load/store instruction)
    - Correct i/o port value display using l/s intruction (see at led dispaly)
 
+> **Version2 : 4-Stage Pipeline (current)** : Tested on AX7010 FPGA Board (Zynq 7000 series)
+- Resources Used (No chipscope) : 1719 LUTs, 1428 FFs, 11.5 BRAMs
+- Power Used : 0.125 W
+- Timing
+	- Current Operating Frequency = 50 MHz
+	- WNS = 2.725ns(setup), 0.051ns(hold), 9.5ns(pulse width)
+- Functional : Work correctly same as version 1
 
-Currently Progress
-(Plan)
-- Add another peripherals
-- Implement AXI to Support AXI, AXI4-Lite, AXI-Stream protocol for further improvement like AI Accelerator

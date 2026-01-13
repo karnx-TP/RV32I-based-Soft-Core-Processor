@@ -65,7 +65,9 @@ module rv32i_top_Soc(
 	wire[7:0]				wPort_pin;
 
 //Output
-	assign progEn = !progEnB;
+	always @(posedge clk) begin
+		progEn <= !progEnB;
+	end
 	assign statusLED = progEn;
 
 //DataBus - Peripheral
