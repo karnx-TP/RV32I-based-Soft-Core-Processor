@@ -11,16 +11,18 @@ parameter CLK_PERIOD = 10;
     logic           rx;
     logic           tx;
 	wire[7:0]		pin;
+	logic			echo;
 
 
 rv32i_top_Soc dut(
     .clk(clk),
     .rstB(rstB),
-    .progEn(progEn),
+    .progEnB(!progEn),
 
     .rx(rx),
     .tx(tx),
-	.pin(pin)
+	.pin(pin),
+	.rx_echo(echo)
 );
 
 genvar i;
@@ -89,7 +91,7 @@ assign pin[0] = Pn[0];
 
     initial begin
         init();
-		for (int i = 0;i<292; i++) begin
+		for (int i = 0;i<348; i++) begin
 			data = rammem[i];
 			data_ss = {1'b1,data,1'b0};
 			for(int j=0;j<10;j++)
@@ -113,6 +115,15 @@ assign pin[0] = Pn[0];
 			end
 			#(CLK_PERIOD);
 		end
+
+		//Dump Register
+		$display("Register Dump:");
+		for (int i = 0; i < 32; i++) begin
+			$display("x%0d = %0h", i, dut.core.reg_module.gprf[i]);
+		end
+
+		# (10*CLK_PERIOD);
+
 		$display("Testbench End");
         $stop;
     end

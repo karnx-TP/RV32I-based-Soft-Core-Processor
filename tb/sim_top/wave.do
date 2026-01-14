@@ -2,6 +2,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/clk
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rstB
+add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wJmp_occur
 add wave -noupdate -expand -group Core /top_tb/dut/progEn
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/pc
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/inst_in
@@ -151,8 +152,16 @@ add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/
 add wave -noupdate -expand -group PORT -expand /top_tb/dut/pin
 add wave -noupdate -radix hexadecimal /top_tb/dut/wDataBus
 add wave -noupdate -radix hexadecimal /top_tb/dut/wDataBusEn
+add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/clk
+add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/rstB
+add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/clkEn
+add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/condEn
+add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/next_pc_cond
+add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/pc_out
+add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/rPC_current
+add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/wPC_next
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {25346425800 ps} 0}
+WaveRestoreCursors {{Cursor 1} {30206467700 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 274
 configure wave -valuecolwidth 100
@@ -168,4 +177,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {25346327400 ps} {25346525800 ps}
+WaveRestoreZoom {30206350800 ps} {30206549200 ps}
