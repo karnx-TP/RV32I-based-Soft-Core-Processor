@@ -11,12 +11,13 @@ The design has been synthesized and validated on real FPGA hardware.
 ## Completed Design
 
 ### 1. RV32I CPU Core
-- 4-stage pipelined RV32I processor  
-  **Pipeline:** IF → ID → EXE/MEM → WB
+- 5-stage pipelined RV32I processor  
+  **Pipeline:** IF → ID → EXE->MEM → WB
 - Instruction Decoder, ALU, Branch Unit, and 32 General-Purpose Registers
 - Hazard handling logic:
   - Data bypassing
   - Pipeline bubbling
+  - Stalling
 - System instructions **FENCE / ECALL / EBREAK** are currently not implemented
 
 ---
@@ -98,23 +99,23 @@ The design has been synthesized and validated on real FPGA hardware.
 
 ---
 
-### Version 2 — 4-Stage Pipeline (Current)
+### Version 2 — 5-Stage Pipeline (Current)
 **Target Board:** AX7010 (Zynq-7000 series)
 
 #### Resource Utilization
-- LUTs: 1719  
-- FFs: 1428  
-- BRAMs: 11.5  
+- LUTs: 1885  
+- FFs: 1530 
+- BRAMs: 10
 - (No Chipscope)
 
 #### Power
-- 0.125 W
+- 0.120 W
 
 #### Timing
 - Operating frequency: 50 MHz
 - WNS:
-  - Setup: 2.725 ns
-  - Hold: 0.051 ns
+  - Setup: 2.262 ns
+  - Hold: 0.050 ns
   - Pulse width: 9.5 ns
 
 #### Functionality

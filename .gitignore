@@ -1,5 +1,4 @@
 /tb/sim_core/work/*
-software/tiny-risc-v-main/assembly_code.asm
 software/tiny-risc-v-main/errors.py
 software/tiny-risc-v-main/i_binaries_gen.py
 software/tiny-risc-v-main/LICENSE
