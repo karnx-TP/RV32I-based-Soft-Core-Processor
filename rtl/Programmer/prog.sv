@@ -12,6 +12,7 @@ module programmer #(
     rxFfEmpty,
     rxRdEn,
     rxData,
+	uartOutEn,
 	wMemFull
 );
 
@@ -27,6 +28,7 @@ module programmer #(
     input   logic       rxFfEmpty;
     output  logic       rxRdEn;
     input   logic[7:0]  rxData;
+	input	logic		uartOutEn;
 	output logic		wMemFull;
 
 //Signal
@@ -37,8 +39,8 @@ module programmer #(
 
 //Combinational
 	assign wMemFull = (rMemAddr == MEM_SIZE);
-    assign rxRdEn = progEn & !rxFfEmpty;
-	assign memWrEn = rRxRdEn & !wMemFull;
+    assign rxRdEn = progEn & !rxFfEmpty & !rRxRdEn; //No Burst Read
+	assign memWrEn = uartOutEn & !wMemFull;
 	assign memAddr = rMemAddr;
 	assign memData = {8{progEn}} & rxData; 
 
@@ -50,7 +52,7 @@ module programmer #(
 	always @(posedge clk ) begin
 		if(!progEn | !rstB)begin
 			rMemAddr <= 0;
-		end else if(rRxRdEn)begin
+		end else if(uartOutEn & !wMemFull)begin
 			rMemAddr <= rMemAddr + 1;
 		end
 	end

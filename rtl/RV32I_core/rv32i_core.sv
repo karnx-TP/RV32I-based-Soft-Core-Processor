@@ -77,9 +77,15 @@ module rv32i_core (
     logic[31:0]     wPcReturn;
     logic           wJmp_occur;
     //Hazard Handle
-    logic           wHazardRs1;
+    logic           wHazardRs1; //pc = i-1
     logic           wHazardRs2;
+	logic           wHazard_2_Rs1; //pc = i-2
+    logic           wHazard_2_Rs2;
     logic[4:0]      rReg_d;
+	logic[4:0]      rReg_d2;
+	logic			wHazardStall;
+	logic			rHazardStallRs1;
+	logic			rHazardStallRs2;
     //ALU
     logic[31:0]     wAluA;
     logic[31:0]     wAluB;
@@ -88,13 +94,16 @@ module rv32i_core (
     logic           wAluSextEn;
     //Reg
     logic[31:0]     rWrData;
+	logic[31:0]     rWrDataWB;
     logic           wRegWrEn;
     logic           rRegWrEn;
+	logic           rRegWrEn2;
     logic[31:0]     wRegWrData;
 	logic[31:0]     wRs1Data;
     logic[31:0]     wRs2Data;
     //Ram
     logic           rOp_memLd;
+	logic			rOp_memLd2;
 	logic		    wRamByteEn;
     logic			wRamHalfEn;
     logic			wRamWordEn;
@@ -106,6 +115,7 @@ module rv32i_core (
         .clk(clk),
         .rstB(rstB),
         .clkEn(clkEn),
+		.stall(wHazardStall),
         
         .condEn(wPcCondEn),
         .next_pc_cond(wPcNextCond),
@@ -119,6 +129,7 @@ module rv32i_core (
 
         .instruction_in(inst_in),
         .jmp(wJmp_occur),
+		.stall(wHazardStall),
 
         .Op_code(Op_code),
         .r_type(r_type),
@@ -172,7 +183,7 @@ module rv32i_core (
 
         .wrEn(wRegWrEn),
         .wrData(wRegWrData),
-        .wrAddr(rReg_d),
+        .wrAddr(rReg_d2),
 
         .rdR1Addr(reg_s1),
         .rdR2Addr(reg_s2),
@@ -183,6 +194,7 @@ module rv32i_core (
     branch_unit brancher (
         .clk(clk),
 	    .rstB(rstB),
+		.stall(wHazardStall),
         .b_type(b_type),
         .op_jal(op_jal),
         .op_jalr(op_jalr),
@@ -207,12 +219,21 @@ module rv32i_core (
     assign wPcCondEn = op_jal | op_jalr | b_type;
 
 //Hazard Handle
-    assign wHazardRs1 = (rReg_d == reg_s1);
-    assign wHazardRs2 = (rReg_d == reg_s2);
+    assign wHazardRs1 = rRegWrEn && (rReg_d == reg_s1) && (rReg_d != 0);
+    assign wHazardRs2 = rRegWrEn && (rReg_d == reg_s2) && (rReg_d != 0);
+	assign wHazard_2_Rs1 = rRegWrEn2 && (rReg_d2 == reg_s1) && (rReg_d != 0);
+    assign wHazard_2_Rs2 = rRegWrEn2 && (rReg_d2 == reg_s2) && (rReg_d != 0);
+	assign wHazardStall = clkEn && (wHazardRs1 || wHazardRs2) && rOp_memLd && 
+						  !(rHazardStallRs1 || rHazardStallRs2);
+	always @(posedge clk ) begin
+		if(!rstB)begin
+			rHazardStallRs1 <= 1'b0;
+			rHazardStallRs2 <= 1'b0;
+		end
+		rHazardStallRs1 <= wHazardStall & wHazardRs1;
+		rHazardStallRs2 <= wHazardStall & wHazardRs2;
+	end
 
-    always @(posedge clk) begin
-        rReg_d <= reg_d;
-    end
 
 //ALU
     assign wFunct3_aluIn = b_type ? 3'b000 : //Use SUB in ALU for Branch
@@ -225,7 +246,9 @@ module rv32i_core (
     always_comb begin : MuxForAlu
 		//A
         if(r_type | b_type | op_consShf | op_intRegImm) begin
-			wAluA = wHazardRs1 ? rWrData : wRs1Data;
+			wAluA = wHazardRs1 ? rWrData : 
+					(wHazard_2_Rs1 || rHazardStallRs1) ? wRegWrData :
+					wRs1Data;
         end else if (op_auipc) begin
             wAluA = wPc_int;
         end else begin
@@ -234,7 +257,9 @@ module rv32i_core (
 
 		//B
 		if(r_type | b_type) begin
-			wAluB = wHazardRs2 ? rWrData : wRs2Data;
+			wAluB = wHazardRs2 ? rWrData : 
+					(wHazard_2_Rs2 || rHazardStallRs2) ? wRegWrData :
+					wRs2Data;
 		end else if(op_consShf | op_intRegImm) begin
 			wAluB = {{20{imm12_i_s[11]}},imm12_i_s}; //Sign-Extended
         end else if (op_auipc) begin
@@ -245,15 +270,23 @@ module rv32i_core (
     end
 
 //Reg file
+	always @(posedge clk) begin
+        rReg_d <= reg_d;
+		rReg_d2 <= rReg_d;
+    end
+
 	always_comb begin : u_wrReg
-		if (rOp_memLd) begin
+		if (rOp_memLd2) begin
             wRegWrData = dataBusIn;
         end else begin
-            wRegWrData = rWrData;
+            wRegWrData = rWrDataWB;
         end 
 	end
-	assign wRegWrEn = rRegWrEn;
+	assign wRegWrEn = rRegWrEn2;
 
+	always @(posedge clk ) begin
+		rWrDataWB <= rWrData; //rWrData = MEM
+	end
     always @(posedge clk) begin
         if(op_intRegImm | op_intRegReg | op_consShf | op_auipc) begin //ALU
 			rWrData <= wAluOut;
@@ -265,6 +298,9 @@ module rv32i_core (
 			rWrData <= 0;
 		end
     end
+	always @(posedge clk ) begin
+		rRegWrEn2 <= rRegWrEn;
+	end
     always @(posedge clk) begin
         if(!rstB)begin
             rRegWrEn <= 1'b0;
@@ -277,7 +313,9 @@ module rv32i_core (
     assign addr = (op_memLd | op_memSt) ? wRs1Data + imm12_i_s : {32{1'b0}};
     assign wrEn = (rstB) & (op_memSt);
 	assign rdEn = (rstB) & (op_memLd);
-    assign dataBusOut = wHazardRs2 ? rWrData : wRs2Data;
+    assign dataBusOut = wHazardRs2 ? rWrData : 
+						(wHazard_2_Rs2 || rHazardStallRs2) ? rWrDataWB : 
+						wRs2Data;
 	assign RamMode = {wRamByteEn,wRamHalfEn,wRamWordEn,wRamUnsignedEn};
     assign wRamByteEn = (funct3[1:0] == 2'b00);
     assign wRamHalfEn = (funct3[1:0] == 2'b01);
@@ -286,6 +324,7 @@ module rv32i_core (
 
     always @(posedge clk) begin
         rOp_memLd <= op_memLd;
+		rOp_memLd2 <= rOp_memLd;
     end
 
 endmodule

@@ -6,7 +6,7 @@ add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wJmp_
 add wave -noupdate -expand -group Core /top_tb/dut/progEn
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/pc
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/inst_in
-add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/dec/rInstrustion
+add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/dec/wInst_in
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/addr
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/dataBusOut
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wrEn
@@ -51,16 +51,22 @@ add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wPcRe
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wJmp_occur
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wHazardRs1
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wHazardRs2
+add wave -noupdate -expand -group Core /top_tb/dut/core/wHazard_2_Rs1
+add wave -noupdate -expand -group Core /top_tb/dut/core/wHazard_2_Rs2
+add wave -noupdate -expand -group Core /top_tb/dut/core/wHazardStall
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rReg_d
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wAluA
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wAluB
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wFunct3_aluIn
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wFunct7_aluIn
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wAluSextEn
+add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rReg_d2
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rWrData
-add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wRegWrEn
-add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rRegWrEn
+add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rWrDataWB
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wRegWrData
+add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rRegWrEn
+add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rRegWrEn2
+add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wRegWrEn
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wRs1Data
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wRs2Data
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/rOp_memLd
@@ -69,99 +75,100 @@ add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wRamH
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wRamWordEn
 add wave -noupdate -expand -group Core -radix hexadecimal /top_tb/dut/core/wRamUnsignedEn
 add wave -noupdate -radix hexadecimal -childformat {{{/top_tb/dut/core/reg_module/gprf[0]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[1]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[2]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[3]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[4]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[5]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[6]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[7]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[8]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[9]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[10]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[11]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[12]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[13]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[14]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[15]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[16]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[17]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[18]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[19]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[20]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[21]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[22]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[23]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[24]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[25]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[26]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[27]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[28]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[29]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[30]} -radix hexadecimal} {{/top_tb/dut/core/reg_module/gprf[31]} -radix hexadecimal}} -expand -subitemconfig {{/top_tb/dut/core/reg_module/gprf[0]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[1]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[2]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[3]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[4]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[5]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[6]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[7]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[8]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[9]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[10]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[11]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[12]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[13]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[14]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[15]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[16]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[17]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[18]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[19]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[20]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[21]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[22]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[23]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[24]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[25]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[26]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[27]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[28]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[29]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[30]} {-height 15 -radix hexadecimal} {/top_tb/dut/core/reg_module/gprf[31]} {-height 15 -radix hexadecimal}} /top_tb/dut/core/reg_module/gprf
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/wrData
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/wrEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/rdEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/dataOut
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/outEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/byteEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/halfEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/wordEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/unsignedEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/wRamByte_we
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/RamDataOut
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/rByteEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/rHalfEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/rUnsignedEn
-add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/BRAM/ram
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/rx
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/tx
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/clk
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/rstB
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/addr
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wrData
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wrEn
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/rdEn
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/dataOut
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/outEn
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wRxFfDataEn
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wRxFfDataOut
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wTxFfRdEn
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wFFTxData
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wTxFfEmpty
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wRxFfEmpty
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wRxFfFull
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wTxFfFull
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wFfrxDataOut
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wFfrxRdEn
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wFftxDataIn
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wFftxWrEn
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/wUartDataout
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/rUCR
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/rAddr
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/fftx/buffer
-add wave -noupdate -group UART -radix hexadecimal /top_tb/dut/uart_module/ffrx/buffer
-add wave -noupdate -group Prog /top_tb/dut/programmer_module/clk
-add wave -noupdate -group Prog /top_tb/dut/programmer_module/rstB
-add wave -noupdate -group Prog /top_tb/dut/programmer_module/progEn
-add wave -noupdate -group Prog /top_tb/dut/programmer_module/memWrEn
-add wave -noupdate -group Prog -radix hexadecimal /top_tb/dut/programmer_module/memAddr
-add wave -noupdate -group Prog -radix hexadecimal /top_tb/dut/programmer_module/memData
-add wave -noupdate -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxFfEmpty
-add wave -noupdate -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxRdEn
-add wave -noupdate -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxData
-add wave -noupdate -group Prog -radix hexadecimal /top_tb/dut/programmer_module/wMemFull
-add wave -noupdate -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rRxRdEn
-add wave -noupdate -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rMemAddr
-add wave -noupdate -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[0]}
-add wave -noupdate -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[1]}
-add wave -noupdate -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[2]}
-add wave -noupdate -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[3]}
-add wave -noupdate -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[4]}
-add wave -noupdate -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[5]}
-add wave -noupdate -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[6]}
-add wave -noupdate -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[7]}
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/wrData
+add wave -noupdate -expand -group RAM /top_tb/dut/ram/addr
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/wrEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/rdEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/dataOut
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/outEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/byteEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/halfEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/wordEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/unsignedEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/wRamByte_we
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/RamDataOut
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/rByteEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/rHalfEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/rUnsignedEn
+add wave -noupdate -expand -group RAM -radix hexadecimal /top_tb/dut/ram/BRAM/ram
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/rx
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/tx
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/clk
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/rstB
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/addr
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wrData
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wrEn
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wRxFfEmpty
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/rdEn
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/dataOut
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/outEn
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wRxFfDataEn
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wRxFfDataOut
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wTxFfRdEn
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wFFTxData
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wTxFfEmpty
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wRxFfFull
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wTxFfFull
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wFfrxDataOut
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wFfrxRdEn
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wFftxDataIn
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wFftxWrEn
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/wUartDataout
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/rUCR
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/rAddr
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/fftx/buffer
+add wave -noupdate -expand -group UART -radix hexadecimal /top_tb/dut/uart_module/ffrx/buffer
+add wave -noupdate -expand -group Prog /top_tb/dut/programmer_module/clk
+add wave -noupdate -expand -group Prog /top_tb/dut/programmer_module/rstB
+add wave -noupdate -expand -group Prog /top_tb/dut/programmer_module/progEn
+add wave -noupdate -expand -group Prog /top_tb/dut/programmer_module/memWrEn
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/memAddr
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/memData
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxFfEmpty
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxRdEn
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rxData
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/wMemFull
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rRxRdEn
+add wave -noupdate -expand -group Prog -radix hexadecimal /top_tb/dut/programmer_module/rMemAddr
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[0]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[1]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[2]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[3]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[4]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[5]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[6]}
+add wave -noupdate -expand -group Prog -radix hexadecimal {/top_tb/dut/prog_ram/ram[7]}
 add wave -noupdate -radix hexadecimal /top_tb/rammem
 add wave -noupdate -radix hexadecimal /top_tb/data
 add wave -noupdate -radix hexadecimal /top_tb/data_ss
-add wave -noupdate -expand -group PORT -radix hexadecimal /top_tb/dut/io_port_module/addr
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/wrData
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/wrEn
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/rdEn
-add wave -noupdate -expand -group PORT -radix hexadecimal /top_tb/dut/io_port_module/dataOut
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/outEn
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/ddr
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/pvl
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/rDDR
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/rPVL
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/rDataOut
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/pin
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/rPin_sync1
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/rPin_sync2
-add wave -noupdate -expand -group PORT -radix binary /top_tb/dut/io_port_module/rPIN
-add wave -noupdate -expand -group PORT -expand /top_tb/dut/pin
+add wave -noupdate -group PORT -radix hexadecimal /top_tb/dut/io_port_module/addr
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/wrData
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/wrEn
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/rdEn
+add wave -noupdate -group PORT -radix hexadecimal /top_tb/dut/io_port_module/dataOut
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/outEn
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/ddr
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/pvl
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/rDDR
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/rPVL
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/rDataOut
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/pin
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/rPin_sync1
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/rPin_sync2
+add wave -noupdate -group PORT -radix binary /top_tb/dut/io_port_module/rPIN
+add wave -noupdate -group PORT -expand /top_tb/dut/pin
 add wave -noupdate -radix hexadecimal /top_tb/dut/wDataBus
 add wave -noupdate -radix hexadecimal /top_tb/dut/wDataBusEn
-add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/clk
-add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/rstB
-add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/clkEn
-add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/condEn
-add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/next_pc_cond
-add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/pc_out
-add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/rPC_current
-add wave -noupdate -expand -group PC /top_tb/dut/core/rpc/wPC_next
+add wave -noupdate -group PC /top_tb/dut/core/rpc/clk
+add wave -noupdate -group PC /top_tb/dut/core/rpc/rstB
+add wave -noupdate -group PC /top_tb/dut/core/rpc/clkEn
+add wave -noupdate -group PC /top_tb/dut/core/rpc/condEn
+add wave -noupdate -group PC /top_tb/dut/core/rpc/next_pc_cond
+add wave -noupdate -group PC /top_tb/dut/core/rpc/pc_out
+add wave -noupdate -group PC /top_tb/dut/core/rpc/rPC_current
+add wave -noupdate -group PC /top_tb/dut/core/rpc/wPC_next
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {30206467700 ps} 0}
+WaveRestoreCursors {{Cursor 1} {32637835200 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 274
 configure wave -valuecolwidth 100
@@ -177,4 +184,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {30206350800 ps} {30206549200 ps}
+WaveRestoreZoom {32637790400 ps} {32637889600 ps}

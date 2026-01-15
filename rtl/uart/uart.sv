@@ -117,14 +117,16 @@ module uart #(
 	logic[31:0]		wUartDataout;
 	reg[31:0]		rUCR;
 	reg[31:0]		rAddr;
+	reg[31:0]		rAddr2;
+	reg				rRdEn;
 
 //Combinational
 	//Read Rx,Reg
 	assign dataOut = wUartDataout;
-	assign wFfrxRdEn = (addr == UDR_ADDR) ? rdEn :
+	assign wFfrxRdEn = (rAddr == UDR_ADDR) ? rRdEn :
 					   1'b0;
 	always_comb begin : RdMuxDataOut
-		case (rAddr)
+		case (rAddr2)
 			UDR_ADDR : begin
 				wUartDataout = {{24{1'b0}},wFfrxDataOut};
 			end
@@ -145,7 +147,7 @@ module uart #(
 //Sequencial 
 	//Read Rx,Reg
 	always @(posedge clk ) begin
-		if(rdEn && ((addr == UDR_ADDR) || (addr == UCR_ADDR)))begin
+		if(rRdEn && ((rAddr == UDR_ADDR) || (rAddr == UCR_ADDR)))begin
 			outEn <= 1'b1;
 		end else begin
 			outEn <= 1'b0;
@@ -157,7 +159,9 @@ module uart #(
 	end
 
 	always @(posedge clk ) begin
+		rRdEn <= rdEn;
 		rAddr <= addr;
+		rAddr2 <= rAddr;
 	end
 
 

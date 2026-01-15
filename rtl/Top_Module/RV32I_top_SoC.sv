@@ -172,6 +172,7 @@ module rv32i_top_Soc(
 		.rxFfEmpty(wUartRxFfEmpty), 
 		.rxRdEn(wProgRdEn),
 		.rxData(wDataBus[UART][7:0]),
+		.uartOutEn(wDataBusEn[UART]),
 		.wMemFull(wProgMemFull)
 	);
 

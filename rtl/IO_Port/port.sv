@@ -40,6 +40,8 @@ module io_port #(
 
 //Signal
 	logic[7:0]		rDataOut;
+	logic[10:0]		rAddr;
+	logic			rRdEn;
 
 //Synchronizer
 	(* ASYNC_REG = "TRUE" *) reg[7:0]		rPin_sync1;
@@ -55,13 +57,19 @@ module io_port #(
 	assign ddr = rDDR;
 	assign pvl = rPVL;
 
+//Sequencial
+	always @(posedge clk ) begin
+		rRdEn <= rdEn;
+		rAddr <= addr;	
+	end
+
 //Read/Write Reg
 	always @(posedge clk) begin
 		if(!rstB)begin
 			rDataOut <= 8'hff;
 			outEn <= 1'b0;
-		end else if(rdEn)begin
-			case (addr)
+		end else if(rRdEn)begin
+			case (rAddr)
 				DDR_ADDR : begin
 					rDataOut <= rDDR;
 					outEn <= 1'b1;

@@ -40,6 +40,11 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 	logic						rByteEn;
 	logic						rHalfEn;
 	logic						rUnsignedEn;
+	logic						rByteEn2;
+	logic						rHalfEn2;
+	logic						rUnsignedEn2;
+	logic						rRdEn;
+	logic						rWrEn;
 
 //RAM
 	bram_sp_byte #(
@@ -55,16 +60,25 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 		.dataOut(RamDataOut)
 	);
 
+//reg wrEn
+	always @(posedge clk ) begin
+		rWrEn <= wrEn;
+	end
+
 //reg for ByteEn
 	always @(posedge clk) begin
 		rByteEn <= byteEn;
 		rHalfEn <= halfEn;
 		rUnsignedEn <= unsignedEn;
+
+		rByteEn2 <= rByteEn;
+		rHalfEn2 <= rHalfEn;
+		rUnsignedEn2 <= rUnsignedEn;
 	end
 
 //DataOut
-	assign dataOut = (rByteEn) ? {{(XLEN-8){(!rUnsignedEn)&RamDataOut[7]}},RamDataOut[7:0]} :
-					 (rHalfEn) ? {{(XLEN/2){(!rUnsignedEn)&RamDataOut[15]}},RamDataOut[15:0]} :
+	assign dataOut = (rByteEn2) ? {{(XLEN-8){(!rUnsignedEn2)&RamDataOut[7]}},RamDataOut[7:0]} :
+					 (rHalfEn2) ? {{(XLEN/2){(!rUnsignedEn2)&RamDataOut[15]}},RamDataOut[15:0]} :
 					 RamDataOut;
 					 
 //Byte Enable
@@ -74,7 +88,8 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 
 //OutEn
 	always @(posedge clk ) begin
-		if(rdEn)begin
+		rRdEn <= rdEn;
+		if(rRdEn)begin
 			outEn <= 1'b1;
 		end else begin
 			outEn <= 1'b0;

@@ -25,6 +25,12 @@ localparam BYTE_WIDTH = 4;
 
 //Memory
     (* ram_style = "block" *)reg[XLEN-1:0]   ram [0:DEPTH-1];
+	logic[ADDRWIDTH-1:0]		rAddr;
+	
+//reg Addr
+	always @(posedge clk ) begin
+		rAddr <= addr;
+	end
 
     //Write
 	genvar i;
@@ -41,7 +47,7 @@ localparam BYTE_WIDTH = 4;
     //Read
     always @(posedge clk) begin
         if(enA)begin
-            dataOut <= ram[addr[ADDRWIDTH-1:2]];
+            dataOut <= ram[rAddr[ADDRWIDTH-1:2]];
         end
     end
     

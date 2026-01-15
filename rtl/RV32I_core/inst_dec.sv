@@ -5,6 +5,7 @@ module inst_dec (
     
     instruction_in,
     jmp,
+	stall,
 
     Op_code,
     r_type,
@@ -48,6 +49,7 @@ module inst_dec (
 
     input   logic[31:0]      instruction_in;
     input   logic       jmp;
+	input 	logic		stall;
 
     output logic[6:0]   Op_code;
     output logic        r_type;
@@ -83,6 +85,8 @@ module inst_dec (
 
 //Signal Assignment
 	logic[31:0]		wInst_in;
+	logic[31:0]		rInstrustion;
+	logic			rStall;
 	wire[6:0]       wOp_code;
 
 	wire            wop_lui;
@@ -123,6 +127,8 @@ module inst_dec (
 			wInst_in = 0;
 		end else if(jmp) begin
 			wInst_in = 0;
+		end else if (rStall)begin
+			wInst_in = rInstrustion;
 		end else if(clkEn) begin
 			wInst_in = instruction_in;
 		end else begin
@@ -168,34 +174,39 @@ module inst_dec (
 
 //Sequencial
 	always @(posedge clk ) begin
-		Op_code <= wOp_code;
-		op_lui <= wop_lui;
-		op_auipc <= wop_auipc;
-		op_jal <= wop_jal;
-		op_jalr <= wop_jalr;
-		op_branch <= wop_branch;
-		op_memLd <= wop_memLd;
-		op_intRegImm <= wop_intRegImm;
-		op_memSt <= wop_memSt;
-		op_consShf <= wop_consShf;
-		op_intRegReg <= wop_intRegReg;
-		op_efence <= wop_efence;
-		op_ecb <= wop_ecb;	
-		r_type <= wr_type;
-		i_type <= wi_type;
-		s_type <= ws_type;
-		b_type <= wb_type;
-		j_type <= wj_type;
-		u_type <= wu_type;
-		funct3 <= wfunct3;
-		funct7 <= wfunct7;
-		reg_d <= wreg_d;
-		reg_s1 <= wreg_s1;
-		reg_s2 <= wreg_s2;
-		imm13_b <= wimm13_b;
-		imm12_i_s <= wimm12_i_s;
-		imm32_u <= wimm32_u;
-		imm21_j <= wimm21_j;
+		rInstrustion <= instruction_in;
+		rStall <= stall;
+
+		if(!stall)begin
+			Op_code <= wOp_code;
+			op_lui <= wop_lui;
+			op_auipc <= wop_auipc;
+			op_jal <= wop_jal;
+			op_jalr <= wop_jalr;
+			op_branch <= wop_branch;
+			op_memLd <= wop_memLd;
+			op_intRegImm <= wop_intRegImm;
+			op_memSt <= wop_memSt;
+			op_consShf <= wop_consShf;
+			op_intRegReg <= wop_intRegReg;
+			op_efence <= wop_efence;
+			op_ecb <= wop_ecb;	
+			r_type <= wr_type;
+			i_type <= wi_type;
+			s_type <= ws_type;
+			b_type <= wb_type;
+			j_type <= wj_type;
+			u_type <= wu_type;
+			funct3 <= wfunct3;
+			funct7 <= wfunct7;
+			reg_d <= wreg_d;
+			reg_s1 <= wreg_s1;
+			reg_s2 <= wreg_s2;
+			imm13_b <= wimm13_b;
+			imm12_i_s <= wimm12_i_s;
+			imm32_u <= wimm32_u;
+			imm21_j <= wimm21_j;
+		end
 	end
 
 endmodule

@@ -91,7 +91,7 @@ assign pin[0] = Pn[0];
 
     initial begin
         init();
-		for (int i = 0;i<348; i++) begin
+		for (int i = 0;i<376; i++) begin
 			data = rammem[i];
 			data_ss = {1'b1,data,1'b0};
 			for(int j=0;j<10;j++)
@@ -104,6 +104,7 @@ assign pin[0] = Pn[0];
 
 		progEn = 1'b0;
 		Pn[0] = 1'b1;
+		$display("Programmed");
 
         #((100)*CLK_PERIOD);
 		while(1)

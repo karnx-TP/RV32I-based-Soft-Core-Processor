@@ -2,6 +2,7 @@ module pc_reg (
     clk,
     rstB,
     clkEn,
+	stall,
 
     condEn,
     next_pc_cond,
@@ -11,6 +12,7 @@ module pc_reg (
     input logic clk;
     input logic rstB;
     input logic clkEn;
+	input logic stall;
     input logic condEn;
     input logic[31:0] next_pc_cond;
     output logic[31:0] pc_out;
@@ -23,7 +25,7 @@ module pc_reg (
     assign pc_out = rPC_current;
 
     always_comb begin : uPC_next
-        if(clkEn) begin
+        if(clkEn & !stall) begin
             if(condEn) begin
                 wPC_next = next_pc_cond;
             end else begin

@@ -1,6 +1,7 @@
 module branch_unit (
 	clk,
 	rstB,
+	stall,
 
 	b_type,
     op_jal,
@@ -23,6 +24,7 @@ module branch_unit (
 //Port
 	input logic			clk;
     input logic         rstB;
+	input logic			stall;
 	input logic			b_type;
     input logic         op_jal;
     input logic         op_jalr;
@@ -96,8 +98,10 @@ module branch_unit (
 
 //Sequencial
 	always @(posedge clk ) begin
-		rPc_current_reg1 <= pc_current;
-		rPc_current_reg2 <= rPc_current_reg1;
+		if(!stall)begin
+			rPc_current_reg1 <= pc_current;
+			rPc_current_reg2 <= rPc_current_reg1;
+		end
 	end
 
 	always @(posedge clk) begin
