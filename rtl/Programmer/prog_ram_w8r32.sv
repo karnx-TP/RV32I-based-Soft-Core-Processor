@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : prog_ram_w8r32.sv
+// Author : Thitipong Pav
+// Desc : fpga synthesizable insruction ram 
+//----------------------------------------
+
 module prog_ram_w8r32
 	#(parameter MEM_SIZE = 1024)
     (clk, we, addr, din, dout);

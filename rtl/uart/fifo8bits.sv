@@ -1,3 +1,8 @@
+//----------------------------------------
+// File : sync_fifo.sv
+// Author : Thitipong Pav
+// Desc : synthesizable Synchronous 8 bits FIFO
+//----------------------------------------
 
 module sync_fifo 
 #(

@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : io_buf.sv
+// Author : Thitipong Pav
+// Desc : Behavioral sim model of IOBUF Xilinx FPGA Primitive
+//----------------------------------------
+
 module IOBUF (
 	I,
 	O,

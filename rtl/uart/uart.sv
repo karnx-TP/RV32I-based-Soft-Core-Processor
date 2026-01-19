@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : uart.sv
+// Author : Thitipong Pav
+// Desc : Top module of uart
+//----------------------------------------
+
 module uart #(
     parameter BAUD_CYCLE = 868,
     parameter LSB_FIRST = 1'b1,	

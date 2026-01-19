@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : rv32i_top_Soc.sv
+// Author : Thitipong Pav
+// Desc : Top Module for rv32i SoC
+//----------------------------------------
+
 module rv32i_top_Soc(
     clk,
     rstB,

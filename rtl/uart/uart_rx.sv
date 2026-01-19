@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : uart_rx.sv
+// Author : Thitipong Pav
+// Desc : RX side for uart module
+//----------------------------------------
+
 module uart_rx #(
 	parameter BAUD_CYCLE = 868, //BAUD_RATE = 115200 for clk=10n
 	parameter LSB_FIRST = 1'b1

@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : branch_unit.sv
+// Author : Thitipong Pav
+// Desc : branch and jump handling logic
+//----------------------------------------
+
 module branch_unit (
 	clk,
 	rstB,

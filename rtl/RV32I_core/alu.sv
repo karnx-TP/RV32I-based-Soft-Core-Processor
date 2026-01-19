@@ -1,3 +1,10 @@
+//----------------------------------------
+// File : alu.sv
+// Author : Thitipong Pav
+// Desc : alu for rv32i core
+//----------------------------------------
+
+
 module ALU32bits (
 	r_type,
     i_type,

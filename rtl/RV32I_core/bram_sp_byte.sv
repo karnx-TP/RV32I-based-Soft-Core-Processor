@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : bram_sp_byte.sv
+// Author : Thitipong Pav
+// Desc : synthesizable byte_en single port BRAM
+//----------------------------------------
+
 module bram_sp_byte #(
     parameter DEPTH = 4096,
     parameter XLEN = 32

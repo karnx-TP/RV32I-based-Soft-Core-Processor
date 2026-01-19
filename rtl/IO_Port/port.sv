@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : port.sv
+// Author : Thitipong Pav
+// Desc : IO PORT peripherals
+//----------------------------------------
+
 module io_port #(
 	parameter DDR_ADDR = 11'h404,
 	parameter PVL_ADDR = 11'h405,

@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : single_tx.sv
+// Author : Thitipong Pav
+// Desc : tx moduel for RX echo
+//----------------------------------------
+
 module single_tx (
 	clk,
 	rstB,

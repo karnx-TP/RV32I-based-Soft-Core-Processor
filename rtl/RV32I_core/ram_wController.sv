@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : ram_Controller.sv
+// Author : Thitipong Pav
+// Desc : ram controller module
+//----------------------------------------
+
 module ram_Controller #(
     parameter DEPTH = 4096,
 	parameter XLEN = 32

@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : rv32i_core.sv
+// Author : Thitipong Pav
+// Desc : RV32I processor cpu core
+//----------------------------------------
+
 module rv32i_core (
     clk,
     rstB,

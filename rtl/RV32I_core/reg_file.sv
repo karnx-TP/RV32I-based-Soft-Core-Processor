@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : reg_file.sv
+// Author : Thitipong Pav
+// Desc : 32-depth register file
+//----------------------------------------
+
 module reg_file (
     clk,
     rstB,

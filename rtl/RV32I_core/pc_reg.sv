@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : pc_reg.sv
+// Author : Thitipong Pav
+// Desc : program counter register
+//----------------------------------------
+
 module pc_reg (
     clk,
     rstB,

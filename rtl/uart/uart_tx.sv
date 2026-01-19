@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : uart_tx.sv
+// Author : Thitipong Pav
+// Desc : TX side for uart module
+//----------------------------------------
+
 module uart_tx_ff #(
     parameter BAUD_CYCLE = 868, //BAUD_RATE = 115200 for clk=10n
 	parameter LSB_FIRST = 1'b1

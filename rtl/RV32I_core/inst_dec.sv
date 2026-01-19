@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : inst_dec.sv
+// Author : Thitipong Pav
+// Desc : rv32i instruction decoder
+//----------------------------------------
+
 module inst_dec (
     clk,
     rstB,

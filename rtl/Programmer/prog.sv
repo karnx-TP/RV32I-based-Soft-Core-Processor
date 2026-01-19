@@ -1,3 +1,9 @@
+//----------------------------------------
+// File : prog.sv
+// Author : Thitipong Pav
+// Desc : Instruction ram programmer 
+//----------------------------------------
+
 module programmer #(
 	parameter MEM_SIZE = 32767
 )(
