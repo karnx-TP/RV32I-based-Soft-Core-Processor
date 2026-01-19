@@ -1,0 +1,6 @@
+{
+  "DESIGN_NAME": "rv32i_core",
+  "VERILOG_FILES": "dir::rtl/*.sv",
+  "CLOCK_PERIOD": 30,
+  "CLOCK_PORT": "clk"
+}
