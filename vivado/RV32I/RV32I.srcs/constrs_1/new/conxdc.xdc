@@ -31,4 +31,3 @@ set_false_path -from [get_ports {pin[*]}] -to [get_clocks clk]
 
 set_property IOSTANDARD LVCMOS33 [get_ports rx_echo]
 set_property PACKAGE_PIN J18 [get_ports rx_echo]
-
