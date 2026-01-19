@@ -47,8 +47,8 @@ module ALU32bits (
             4'b0000	:	wOut_int =  {1'b0,A} + {1'b0,B}; //ADD
 			4'b0001	:	wOut_int =  {wExtA,A} - {wExtB,B}; //SUB w sign-ext
 			4'b0010	:	wOut_int =  {1'b0,A<<(B[4:0])}; //SLL
-			4'b0100	:	wOut_int =  {1'b0,($signed(A)<$signed(B))}; //SLT
-			4'b0110	:	wOut_int =  {1'b0,(A<B)}; //SLTU
+			4'b0100	:	wOut_int =  {{32{1'b0}},($signed(A)<$signed(B))}; //SLT
+			4'b0110	:	wOut_int =  {{32{1'b0}},(A<B)}; //SLTU
 			4'b1000	:	wOut_int =  {1'b0,A^B}; //XOR
             4'b1010	:	wOut_int =  {1'b0,A>>(B[4:0])}; //SRL
             4'b1011	:	wOut_int =  {1'b0,$signed(A)>>>(B[4:0])}; //SRA

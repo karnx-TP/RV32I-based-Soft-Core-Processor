@@ -40,7 +40,7 @@ module programmer #(
 //Combinational
 	assign wMemFull = (rMemAddr == MEM_SIZE);
     assign rxRdEn = progEn & !rxFfEmpty & !rRxRdEn; //No Burst Read
-	assign memWrEn = uartOutEn & !wMemFull;
+	assign memWrEn = progEn & uartOutEn & !wMemFull;
 	assign memAddr = rMemAddr;
 	assign memData = {8{progEn}} & rxData; 
 

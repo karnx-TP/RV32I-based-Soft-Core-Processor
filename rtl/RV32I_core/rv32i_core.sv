@@ -108,6 +108,7 @@ module rv32i_core (
     logic			wRamHalfEn;
     logic			wRamWordEn;
     logic			wRamUnsignedEn;
+	logic[31:0]		wForwardAddr;
 
     
 //Module Declaration
@@ -221,8 +222,8 @@ module rv32i_core (
 //Hazard Handle
     assign wHazardRs1 = rRegWrEn && (rReg_d == reg_s1) && (rReg_d != 0);
     assign wHazardRs2 = rRegWrEn && (rReg_d == reg_s2) && (rReg_d != 0);
-	assign wHazard_2_Rs1 = rRegWrEn2 && (rReg_d2 == reg_s1) && (rReg_d != 0);
-    assign wHazard_2_Rs2 = rRegWrEn2 && (rReg_d2 == reg_s2) && (rReg_d != 0);
+	assign wHazard_2_Rs1 = rRegWrEn2 && (rReg_d2 == reg_s1) && (rReg_d2 != 0);
+    assign wHazard_2_Rs2 = rRegWrEn2 && (rReg_d2 == reg_s2) && (rReg_d2 != 0);
 	assign wHazardStall = clkEn && (wHazardRs1 || wHazardRs2) && rOp_memLd && 
 						  !(rHazardStallRs1 || rHazardStallRs2);
 	always @(posedge clk ) begin
@@ -310,7 +311,10 @@ module rv32i_core (
     end
 
 //Mem/RAM
-    assign addr = (op_memLd | op_memSt) ? wRs1Data + imm12_i_s : {32{1'b0}};
+	assign wForwardAddr =  wHazardRs1 ? rWrData : 
+						   (wHazard_2_Rs1 || rHazardStallRs1) ? rWrDataWB : 
+						   wRs1Data;
+    assign addr = (op_memLd | op_memSt) ? wForwardAddr + imm12_i_s : {32{1'b0}};
     assign wrEn = (rstB) & (op_memSt);
 	assign rdEn = (rstB) & (op_memLd);
     assign dataBusOut = wHazardRs2 ? rWrData : 

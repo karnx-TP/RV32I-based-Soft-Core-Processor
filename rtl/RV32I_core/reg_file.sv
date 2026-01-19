@@ -36,11 +36,11 @@ module reg_file (
 	always @(posedge clk) begin
 		if(!rstB)begin
 			for (int i = 0;i<32;i=i+1) begin
-				gprf[i] = 0;
+				gprf[i] <= 0;
 			end
 		end else if(wrEn) begin
 			if(wrAddr != 0) begin
-				gprf[wrAddr] = wrData;
+				gprf[wrAddr] <= wrData;
 			end
 		end
 	end

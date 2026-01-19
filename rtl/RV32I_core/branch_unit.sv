@@ -82,7 +82,7 @@ module branch_unit (
 		end else if(op_jalr) begin
 			pc_jmpto = (link_reg_in + {{20{imm12_i_s[11]}},imm12_i_s}) & {{31{1'b1}},1'b0}; 
 		end else if (b_type & wCond) begin
-			pc_jmpto = rPc_current_reg2 + {{10{imm13_b[12]}},imm13_b,1'b0};
+			pc_jmpto = rPc_current_reg2 + {{18{imm13_b[12]}},imm13_b,1'b0};
 		end else begin
 			pc_jmpto = pc_current + 4;
 		end
