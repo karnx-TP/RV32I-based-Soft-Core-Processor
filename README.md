@@ -1,4 +1,4 @@
-# RV32I-Based Soft-Core Processor and System-on-Chip
+# RV32I-Based Soft-Core Processor and Embedded System-on-Chip
 RTL Design, FPGA Prototyping (Xilinx), and ASIC Physical Design (SKY130)
 
 
@@ -22,7 +22,7 @@ For suggestions, feedback, or technical discussions, feel free to contact me.
 
 ## Overview
 
-This project implements a custom **RV32I-based soft-core processor** integrated into a complete **System-on-Chip (SoC)**.
+This project implements a custom **RV32I-based soft-core processor** integrated into a complete **Microcontroller System-on-chip (SoC)**.
 
 The design has been:
 - Architected and verified at RTL level
@@ -80,8 +80,11 @@ The project emphasizes **ASIC-friendly RTL design**, modular SoC architecture, a
 
 | Address | Function |
 |------|---------|
-| `0x402` | UART RX |
-| `0x403` | UART TX |
+| `0x402` | UART Data Register|
+| `0x403` | UART Control Register |
+- RX : Write Data via UDR address
+- TX : Read Data via UDR address
+- Start TX and RX Valid via UCR Address
 
 ---
 
