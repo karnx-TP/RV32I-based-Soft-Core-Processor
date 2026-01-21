@@ -8,7 +8,7 @@
   **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
   **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
   **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Thu Jan 15 20:28:13 2026
+  **** Start of session at: Wed Jan 21 14:48:30 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -25,70 +25,70 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 28336
+INFO: [Synth 8-7075] Helper process launched with PID 19164
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1363.852 ; gain = 541.906
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1363.895 ; gain = 541.398
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'rv32i_top_Soc' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Top_Module/RV32I_top_SoC.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'rv32i_top_Soc' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Top_Module/RV32I_top_SoC.sv:7]
 INFO: [Synth 8-6157] synthesizing module 'IOBUF' [C:/AMDDesignTools/2025.2/Vivado/scripts/rt/data/unisim_comp.v:87566]
 INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (0#1) [C:/AMDDesignTools/2025.2/Vivado/scripts/rt/data/unisim_comp.v:87566]
-INFO: [Synth 8-6157] synthesizing module 'rv32i_core' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'pc_reg' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'pc_reg' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'inst_dec' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/inst_dec.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'inst_dec' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/inst_dec.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'ALU32bits' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/alu.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'ALU32bits' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/alu.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'reg_file' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'reg_file' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'branch_unit' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/branch_unit.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'branch_unit' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/branch_unit.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'rv32i_core' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'ram_Controller' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'rv32i_core' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'pc_reg' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'pc_reg' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/pc_reg.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'inst_dec' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/inst_dec.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'inst_dec' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/inst_dec.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'ALU32bits' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/alu.sv:8]
+INFO: [Synth 8-6155] done synthesizing module 'ALU32bits' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/alu.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'reg_file' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'reg_file' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'branch_unit' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/branch_unit.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'branch_unit' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/branch_unit.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'rv32i_core' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'ram_Controller' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv:7]
 	Parameter DEPTH bound to: 1024 - type: integer 
 	Parameter XLEN bound to: 32 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'bram_sp_byte' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/bram_sp_byte.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'bram_sp_byte' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/bram_sp_byte.sv:7]
 	Parameter DEPTH bound to: 1024 - type: integer 
 	Parameter XLEN bound to: 32 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'bram_sp_byte' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/bram_sp_byte.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'ram_Controller' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'uart' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'bram_sp_byte' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/bram_sp_byte.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'ram_Controller' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'uart' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv:7]
 	Parameter BAUD_CYCLE bound to: 868 - type: integer 
 	Parameter LSB_FIRST bound to: 1'b1 
 	Parameter UDR_ADDR bound to: 11'b10000000010 
 	Parameter UCR_ADDR bound to: 11'b10000000011 
-INFO: [Synth 8-6157] synthesizing module 'uart_rx' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'uart_rx' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv:7]
 	Parameter BAUD_CYCLE bound to: 868 - type: integer 
 	Parameter LSB_FIRST bound to: 1'b1 
-INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'sync_fifo' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/fifo8bits.sv:2]
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'sync_fifo' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/fifo8bits.sv:7]
 	Parameter WIDTH bound to: 8 - type: integer 
 	Parameter DEPTH bound to: 256 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'sync_fifo' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/fifo8bits.sv:2]
-INFO: [Synth 8-6157] synthesizing module 'uart_tx_ff' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'sync_fifo' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/fifo8bits.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'uart_tx_ff' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:7]
 	Parameter BAUD_CYCLE bound to: 868 - type: integer 
 	Parameter LSB_FIRST bound to: 1'b1 
-INFO: [Synth 8-6155] done synthesizing module 'uart_tx_ff' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'uart' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'programmer' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx_ff' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'uart' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'programmer' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv:7]
 	Parameter MEM_SIZE bound to: 32767 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'programmer' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'prog_ram_w8r32' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'programmer' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'prog_ram_w8r32' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv:7]
 	Parameter MEM_SIZE bound to: 32767 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'prog_ram_w8r32' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'io_port' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/IO_Port/port.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'prog_ram_w8r32' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'io_port' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/IO_Port/port.sv:7]
 	Parameter DDR_ADDR bound to: 11'b10000000100 
 	Parameter PVL_ADDR bound to: 11'b10000000101 
 	Parameter PIN_ADDR bound to: 11'b10000000110 
 	Parameter PORT_SIZE bound to: 8 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'io_port' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/IO_Port/port.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'single_tx' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/addition_module/single_tx.sv:1]
-INFO: [Synth 8-6157] synthesizing module 'uart_tx_ff__parameterized0' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:1]
+INFO: [Synth 8-6155] done synthesizing module 'io_port' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/IO_Port/port.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'single_tx' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/addition_module/single_tx.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'uart_tx_ff__parameterized0' [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:7]
 	Parameter BAUD_CYCLE bound to: 868 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'uart_tx_ff__parameterized0' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'single_tx' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/addition_module/single_tx.sv:1]
-INFO: [Synth 8-6155] done synthesizing module 'rv32i_top_Soc' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Top_Module/RV32I_top_SoC.sv:1]
-WARNING: [Synth 8-6014] Unused sequential element rWrEn_reg was removed.  [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv:65]
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx_ff__parameterized0' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'single_tx' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/addition_module/single_tx.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'rv32i_top_Soc' (0#1) [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Top_Module/RV32I_top_SoC.sv:7]
+WARNING: [Synth 8-6014] Unused sequential element rWrEn_reg was removed.  [C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv:71]
 WARNING: [Synth 8-7129] Port wrData[31] in module io_port is either unconnected or has no load
 WARNING: [Synth 8-7129] Port wrData[30] in module io_port is either unconnected or has no load
 WARNING: [Synth 8-7129] Port wrData[29] in module io_port is either unconnected or has no load
@@ -138,6 +138,50 @@ WARNING: [Synth 8-7129] Port wrData[10] in module uart is either unconnected or 
 WARNING: [Synth 8-7129] Port wrData[9] in module uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port wrData[8] in module uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port wordEn in module ram_Controller is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[11] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[10] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[9] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[8] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[7] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[6] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[5] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[4] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[3] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[2] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[1] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port imm12_i_s[0] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[31] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[30] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[29] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[28] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[27] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[26] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[25] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[24] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[23] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[22] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[21] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[20] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[19] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[18] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[17] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[16] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[15] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[14] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[13] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[12] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[11] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[10] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[9] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[8] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[7] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[6] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[5] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[4] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[3] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[2] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[1] in module branch_unit is either unconnected or has no load
+WARNING: [Synth 8-7129] Port link_reg_in[0] in module branch_unit is either unconnected or has no load
 WARNING: [Synth 8-7129] Port i_type in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[6] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[4] in module ALU32bits is either unconnected or has no load
@@ -145,20 +189,20 @@ WARNING: [Synth 8-7129] Port funct7[3] in module ALU32bits is either unconnected
 WARNING: [Synth 8-7129] Port funct7[2] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[1] in module ALU32bits is either unconnected or has no load
 WARNING: [Synth 8-7129] Port funct7[0] in module ALU32bits is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataBusInEn in module rv32i_core is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1494.727 ; gain = 672.781
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1495.180 ; gain = 672.684
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1494.727 ; gain = 672.781
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1495.180 ; gain = 672.684
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1494.727 ; gain = 672.781
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1495.180 ; gain = 672.684
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 1494.727 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 1495.180 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 8 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -171,29 +215,29 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/rv32i_top_Soc_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1561.316 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1535.789 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 8 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 8 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1561.316 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1535.789 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1561.316 ; gain = 739.371
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1535.789 ; gain = 713.293
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1561.316 ; gain = 739.371
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1535.789 ; gain = 713.293
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1561.316 ; gain = 739.371
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1535.789 ; gain = 713.293
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'rState_current_reg' in module 'uart_rx'
 INFO: [Synth 8-802] inferred FSM for state register 'rState_current_reg' in module 'uart_tx_ff'
@@ -216,7 +260,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'rState_current_reg' using 
 WARNING: [Synth 8-6841] Block RAM (ram_reg) originally specified as a Byte Wide Write Enable RAM cannot take advantage of ByteWide feature and is implemented with single write enable per RAM due to following reason.
 (address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired.)
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1561.316 ; gain = 739.371
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1535.789 ; gain = 713.293
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -225,7 +269,7 @@ Detailed RTL Component Info :
 +---Adders : 
 	   2 Input   33 Bit       Adders := 1     
 	   3 Input   33 Bit       Adders := 1     
-	   2 Input   32 Bit       Adders := 5     
+	   2 Input   32 Bit       Adders := 4     
 	   2 Input   10 Bit       Adders := 3     
 	   2 Input    9 Bit       Adders := 3     
 	   2 Input    8 Bit       Adders := 9     
@@ -250,9 +294,8 @@ Detailed RTL Component Info :
 	               8K Bit	(256 X 32 bit)          RAMs := 1     
 	               2K Bit	(256 X 8 bit)          RAMs := 3     
 +---Muxes : 
-	   2 Input   32 Bit        Muxes := 35    
+	   2 Input   32 Bit        Muxes := 38    
 	   4 Input   32 Bit        Muxes := 1     
-	   2 Input   24 Bit        Muxes := 1     
 	   2 Input   15 Bit        Muxes := 1     
 	   2 Input   12 Bit        Muxes := 3     
 	   2 Input   11 Bit        Muxes := 1     
@@ -283,14 +326,6 @@ Finished Part Resource Summary
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-7129] Port i_type in module ALU32bits is either unconnected or has no load
-WARNING: [Synth 8-7129] Port funct7[6] in module ALU32bits is either unconnected or has no load
-WARNING: [Synth 8-7129] Port funct7[4] in module ALU32bits is either unconnected or has no load
-WARNING: [Synth 8-7129] Port funct7[3] in module ALU32bits is either unconnected or has no load
-WARNING: [Synth 8-7129] Port funct7[2] in module ALU32bits is either unconnected or has no load
-WARNING: [Synth 8-7129] Port funct7[1] in module ALU32bits is either unconnected or has no load
-WARNING: [Synth 8-7129] Port funct7[0] in module ALU32bits is either unconnected or has no load
-WARNING: [Synth 8-7129] Port dataBusInEn in module rv32i_core is either unconnected or has no load
 RAM Pipeline Warning: Read Address Register Found For RAM ram/BRAM/genblk1[1].ram_reg. We will not be able to pipeline it. This may degrade performance. 
 RAM Pipeline Warning: Read Address Register Found For RAM ram/BRAM/genblk1[1].ram_reg. We will not be able to pipeline it. This may degrade performance. 
 RAM Pipeline Warning: Read Address Register Found For RAM ram/BRAM/genblk1[1].ram_reg. We will not be able to pipeline it. This may degrade performance. 
@@ -298,7 +333,7 @@ WARNING: [Synth 8-6841] Block RAM (prog_ram/ram_reg) originally specified as a B
 (address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired.)
 RAM Pipeline Warning: Read Address Register Found For RAM ram/BRAM/genblk1[1].ram_reg. We will not be able to pipeline it. This may degrade performance. 
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1609.016 ; gain = 787.070
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 1616.547 ; gain = 794.051
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -323,13 +358,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1704.223 ; gain = 882.277
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1709.250 ; gain = 886.754
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:24 ; elapsed = 00:00:24 . Memory (MB): peak = 1808.918 ; gain = 986.973
+Finished Timing Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1800.621 ; gain = 978.125
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -364,7 +399,7 @@ INFO: [Synth 8-7052] The timing for the instance prog_ram/ram_reg_3_0 (implement
 INFO: [Synth 8-7052] The timing for the instance prog_ram/ram_reg_3_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance rx_echo_module/tx_fifo/buffer_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1808.918 ; gain = 986.973
+Finished Technology Mapping : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 1809.664 ; gain = 987.168
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -382,37 +417,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1997.270 ; gain = 1175.324
+Finished IO Insertion : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2005.324 ; gain = 1182.828
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1997.270 ; gain = 1175.324
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2005.324 ; gain = 1182.828
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 1997.270 ; gain = 1175.324
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 2005.324 ; gain = 1182.828
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 1997.270 ; gain = 1175.324
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 2005.324 ; gain = 1182.828
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 1999.332 ; gain = 1177.387
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 2007.328 ; gain = 1184.832
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 1999.332 ; gain = 1177.387
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 2007.328 ; gain = 1184.832
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -429,46 +464,46 @@ Report Cell Usage:
 |      |Cell     |Count |
 +------+---------+------+
 |1     |BUFG     |     1|
-|2     |CARRY4   |    77|
-|3     |LUT1     |    25|
-|4     |LUT2     |   256|
-|5     |LUT3     |   146|
-|6     |LUT4     |   216|
-|7     |LUT5     |   333|
-|8     |LUT6     |  1121|
+|2     |CARRY4   |    69|
+|3     |LUT1     |    24|
+|4     |LUT2     |   172|
+|5     |LUT3     |   179|
+|6     |LUT4     |   237|
+|7     |LUT5     |   392|
+|8     |LUT6     |  1115|
 |9     |MUXF7    |   256|
 |10    |MUXF8    |     2|
 |11    |RAMB18E1 |     4|
 |13    |RAMB36E1 |     8|
-|14    |FDRE     |  1517|
-|15    |FDSE     |    12|
+|14    |FDRE     |  1508|
+|15    |FDSE     |    13|
 |16    |IBUF     |     4|
 |17    |IOBUF    |     8|
 |18    |OBUF     |     3|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 1999.332 ; gain = 1177.387
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 2007.328 ; gain = 1184.832
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 10 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:21 ; elapsed = 00:00:27 . Memory (MB): peak = 1999.332 ; gain = 1110.797
-Synthesis Optimization Complete : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1999.332 ; gain = 1177.387
+Synthesis finished with 0 errors, 0 critical warnings and 54 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 2007.328 ; gain = 1144.223
+Synthesis Optimization Complete : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 2007.328 ; gain = 1184.832
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 1999.332 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 355 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.025 . Memory (MB): peak = 2007.328 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 347 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2012.133 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2020.102 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 8 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 8 instances
 
-Synth Design complete | Checksum: a237ad11
+Synth Design complete | Checksum: 406a6ec
 INFO: [Common 17-83] Releasing license: Synthesis
-76 Infos, 68 Warnings, 0 Critical Warnings and 0 Errors encountered.
+77 Infos, 103 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 2012.133 ; gain = 1399.008
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 2012.133 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 2020.102 ; gain = 1405.500
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2020.102 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/vivado/RV32I/RV32I.runs/synth_1/rv32i_top_Soc.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file rv32i_top_Soc_utilization_synth.rpt -pb rv32i_top_Soc_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Jan 15 20:28:52 2026...
+INFO: [Common 17-206] Exiting Vivado at Wed Jan 21 14:49:11 2026...

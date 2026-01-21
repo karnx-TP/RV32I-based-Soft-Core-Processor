@@ -82,8 +82,8 @@ The project emphasizes **ASIC-friendly RTL design**, modular SoC architecture, a
 |------|---------|
 | `0x402` | UART Data Register|
 | `0x403` | UART Control Register |
-- RX : Write Data via UDR address
-- TX : Read Data via UDR address
+- TX : Write Data via UDR address
+- RX : Read Data via UDR address
 - Start TX and RX Valid via UCR Address
 
 ---

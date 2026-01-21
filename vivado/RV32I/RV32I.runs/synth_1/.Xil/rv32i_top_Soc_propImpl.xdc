@@ -27,5 +27,5 @@ set_property src_info {type:XDC file:1 line:27 export:INPUT save:INPUT read:READ
 set_property PACKAGE_PIN G19 [get_ports tx]
 set_property src_info {type:XDC file:1 line:28 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN M14 [get_ports statusLED]
-set_property src_info {type:XDC file:1 line:33 export:INPUT save:INPUT read:READ} [current_design]
+set_property src_info {type:XDC file:1 line:32 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN J18 [get_ports rx_echo]

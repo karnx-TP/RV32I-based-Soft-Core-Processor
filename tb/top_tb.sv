@@ -80,7 +80,7 @@ assign pin[0] = Pn[0];
     endtask
 
 	initial begin
-		file = $fopen("../../software/tiny-risc-v-main/program.bin" , "rb");
+		file = $fopen("../../software/risv-v-sw/program.bin" , "rb");
 		if (file == 0) begin
                 $display("Could not open file");
             end
@@ -91,7 +91,7 @@ assign pin[0] = Pn[0];
 
     initial begin
         init();
-		for (int i = 0;i<376; i++) begin
+		for (int i = 0;i<508; i++) begin
 			data = rammem[i];
 			data_ss = {1'b1,data,1'b0};
 			for(int j=0;j<10;j++)
@@ -124,6 +124,16 @@ assign pin[0] = Pn[0];
 		end
 
 		# (10*CLK_PERIOD);
+
+		rstB = 1'b0;
+
+		#(2*CLK_PERIOD);
+
+		rstB = (1'b1);
+
+		# (100*CLK_PERIOD);
+
+
 
 		$display("Testbench End");
         $stop;

@@ -210,8 +210,8 @@ module rv32i_core (
         .imm13_b(imm13_b),
 
         .funct3(funct3),
-        .sub_result(wAluOut),
-	    .sub_sign(wAluFlag),
+        .alu_result(wAluOut),
+	    .alu_flag(wAluFlag),
 
         .pc_current(wPc_int),
         .link_reg_in(wRs1Data),
@@ -252,7 +252,7 @@ module rv32i_core (
     assign wAluSextEn = (b_type & (funct3[2:1] == 2'b11)) ? 1'b0 : 1'b1;
     always_comb begin : MuxForAlu
 		//A
-        if(r_type | b_type | op_consShf | op_intRegImm) begin
+        if(r_type | b_type | op_consShf | op_intRegImm | op_jalr) begin
 			wAluA = wHazardRs1 ? rWrData : 
 					(wHazard_2_Rs1 || rHazardStallRs1) ? wRegWrData :
 					wRs1Data;
@@ -267,7 +267,7 @@ module rv32i_core (
 			wAluB = wHazardRs2 ? rWrData : 
 					(wHazard_2_Rs2 || rHazardStallRs2) ? wRegWrData :
 					wRs2Data;
-		end else if(op_consShf | op_intRegImm) begin
+		end else if(op_consShf | op_intRegImm | op_jalr) begin
 			wAluB = {{20{imm12_i_s[11]}},imm12_i_s}; //Sign-Extended
         end else if (op_auipc) begin
             wAluB = imm32_u;

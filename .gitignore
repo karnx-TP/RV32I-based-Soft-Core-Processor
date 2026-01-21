@@ -1,13 +1,4 @@
 /tb/sim_core/work/*
-software/tiny-risc-v-main/errors.py
-software/tiny-risc-v-main/i_binaries_gen.py
-software/tiny-risc-v-main/LICENSE
-software/tiny-risc-v-main/program.bin
-software/tiny-risc-v-main/program.mem
-software/tiny-risc-v-main/README.md
-software/tiny-risc-v-main/RiscV.py
-software/tiny-risc-v-main/__pycache__/errors.cpython-314.pyc
-software/tiny-risc-v-main/__pycache__/i_binaries_gen.cpython-314.pyc
 tb/sim_top/work/_info
 tb/sim_top/work/_lib.qdb
 tb/sim_top/work/_lib1_10.qdb
@@ -66,3 +57,12 @@ vivado/RV32I/RV32I.cache/ip/2025.2/f/a/fa0a6e583a6a0e7c/u_ila_0.dcp
 vivado/RV32I/RV32I.cache/wt/project.wpc
 vivado/RV32I/RV32I.cache/wt/synthesis.wdf
 vivado/RV32I/RV32I.cache/wt/webtalk_pa.xml
+software/risv-v-sw/errors.py
+software/risv-v-sw/i_binaries_gen.py
+software/risv-v-sw/LICENSE
+software/risv-v-sw/program.bin
+software/risv-v-sw/program.mem
+software/risv-v-sw/README.md
+software/risv-v-sw/RiscV.py
+software/risv-v-sw/__pycache__/errors.cpython-314.pyc
+software/risv-v-sw/__pycache__/i_binaries_gen.cpython-314.pyc

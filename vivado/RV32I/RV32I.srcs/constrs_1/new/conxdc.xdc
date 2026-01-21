@@ -27,7 +27,6 @@ set_property PACKAGE_PIN F19 [get_ports rx]
 set_property PACKAGE_PIN G19 [get_ports tx]
 set_property PACKAGE_PIN M14 [get_ports statusLED]
 create_clock -period 20.000 -name clk -waveform {0.000 10.000} [get_ports clk]
-set_false_path -from [get_ports {pin[*]}] -to [get_clocks clk]
 
 set_property IOSTANDARD LVCMOS33 [get_ports rx_echo]
 set_property PACKAGE_PIN J18 [get_ports rx_echo]

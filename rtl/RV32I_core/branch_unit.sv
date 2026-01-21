@@ -17,8 +17,8 @@ module branch_unit (
     imm13_b,
 
 	funct3,
-	sub_result,
-	sub_sign,
+	alu_result,
+	alu_flag,
 
 	pc_current,
 	link_reg_in,
@@ -39,8 +39,8 @@ module branch_unit (
     input logic[12:0]	imm13_b;
 
 	input logic[2:0]	funct3;
-	input logic[31:0]	sub_result;
-	input logic			sub_sign;
+	input logic[31:0]	alu_result;
+	input logic			alu_flag;
 
 	input logic[31:0]	pc_current;
 	input logic[31:0]	link_reg_in;
@@ -63,9 +63,9 @@ module branch_unit (
 	logic[31:0]	rPc_current_reg2;
 
 //Comb Logic
-	assign wNEq = |{sub_sign,sub_result};
-	assign wLt = sub_sign & wNEq;
-	assign wGt = !sub_sign & wNEq;
+	assign wNEq = |{alu_flag,alu_result};
+	assign wLt = alu_flag & wNEq;
+	assign wGt = !alu_flag & wNEq;
 	
 	assign wJmp = op_jal | op_jalr | (b_type & wCond);
 	assign jmp_occur = wJmp | rJumping;
@@ -86,7 +86,7 @@ module branch_unit (
 		if(op_jal) begin
 			pc_jmpto = rPc_current_reg2 + {{10{imm21_j[20]}},imm21_j,1'b0};
 		end else if(op_jalr) begin
-			pc_jmpto = (link_reg_in + {{20{imm12_i_s[11]}},imm12_i_s}) & {{31{1'b1}},1'b0}; 
+			pc_jmpto = {alu_result[31:1],1'b0}; 
 		end else if (b_type & wCond) begin
 			pc_jmpto = rPc_current_reg2 + {{18{imm13_b[12]}},imm13_b,1'b0};
 		end else begin

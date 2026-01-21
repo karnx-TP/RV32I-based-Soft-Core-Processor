@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date             : Thu Jan 15 20:29:50 2026
+| Date             : Wed Jan 21 14:50:12 2026
 | Host             : LAPTOP-GM1L3F93 running 64-bit major release  (build 9200)
 | Command          : report_power -file rv32i_top_Soc_power_routed.rpt -pb rv32i_top_Soc_power_summary_routed.pb -rpx rv32i_top_Soc_power_routed.rpx
 | Design           : rv32i_top_Soc
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.120        |
+| Total On-Chip Power (W)  | 0.119        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.026        |
+| Dynamic (W)              | 0.025        |
 | Device Static (W)        | 0.094        |
 | Effective TJA (C/W)      | 11.5         |
 | Max Ambient (C)          | 83.6         |
@@ -53,17 +53,17 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.003 |        3 |       --- |             --- |
-| Slice Logic    |     0.003 |     4007 |       --- |             --- |
+| Slice Logic    |     0.003 |     4014 |       --- |             --- |
 |   LUT as Logic |     0.003 |     1885 |     17600 |           10.71 |
-|   CARRY4       |    <0.001 |       77 |      4400 |            1.75 |
-|   Register     |    <0.001 |     1530 |     35200 |            4.35 |
+|   CARRY4       |    <0.001 |       69 |      4400 |            1.57 |
+|   Register     |    <0.001 |     1522 |     35200 |            4.32 |
 |   F7/F8 Muxes  |    <0.001 |      258 |     17600 |            1.47 |
-|   Others       |     0.000 |       35 |       --- |             --- |
-| Signals        |     0.006 |     3237 |       --- |             --- |
+|   Others       |     0.000 |       34 |       --- |             --- |
+| Signals        |     0.006 |     3256 |       --- |             --- |
 | Block RAM      |     0.010 |       10 |        60 |           16.67 |
 | I/O            |     0.003 |       15 |       100 |           15.00 |
 | Static Power   |     0.094 |          |           |                 |
-| Total          |     0.120 |          |           |                 |
+| Total          |     0.119 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -149,7 +149,7 @@ Table of Contents
 +----------------+-----------+
 | Name           | Power (W) |
 +----------------+-----------+
-| rv32i_top_Soc  |     0.026 |
+| rv32i_top_Soc  |     0.025 |
 |   core         |     0.011 |
 |     dec        |     0.006 |
 |     reg_module |     0.004 |
