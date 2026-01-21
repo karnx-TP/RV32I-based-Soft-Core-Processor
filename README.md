@@ -31,157 +31,38 @@ The design has been:
 
 The project emphasizes **ASIC-friendly RTL design**, modular SoC architecture, and a realistic path from **FPGA prototyping to ASIC implementation**.
 
+- Tools Used
+	- RTL Design: SystemVerilog
+	- Functional Verification: ModelSim
+	- FPGA Implementation: Vivado, Teraterm(for uart communication)
+	- ASIC Implementation: 
+		- Librelane Flow
+		- Software: Yosys, OpenROAD, Magic, Klayout
+
 ---
 
 ## Completed Design
 
 ### 1. RV32I CPU Core
-
-- **5-stage pipelined RV32I processor**
-  
-  **Pipeline stages:**  
-  IF → ID → EXE → MEM → WB
-
-- Implements:
-  - Instruction Decoder
-  - ALU
-  - Branch Unit
-  - 32 General-Purpose Registers
-
-- Hazard handling:
-  - Data forwarding (bypassing)
-  - Pipeline stalling
-  - Pipeline bubbling
-
-- Not implemented (current scope):
-  - `FENCE`
-  - `ECALL`
-  - `EBREAK`
-
----
-
+- 5-stage pipeline Processor Core with RV32I Base Intruction 
 ### 2. RAM and Memory Controller
-
-- Parameterized memory depth and word width
-- Supports:
-  - Byte access
-  - Halfword access
-  - Word access
-- Synthesizable into FPGA **Block RAM (BRAM)**
-- Designed to be replaceable by **SRAM macros** in ASIC flow
-
----
-
+- Design RTL of RAM and its controller focusing on BRAM-synthsized on FPGA and ASIC-friendly
 ### 3. UART Peripheral
-
-- Simple UART peripheral
-- Independent RX and TX FIFOs
-- Memory-mapped interface via Load/Store instructions:
-
-| Address | Function |
-|------|---------|
-| `0x402` | UART Data Register|
-| `0x403` | UART Control Register |
-- TX : Write Data via UDR address
-- RX : Read Data via UDR address
-- Start TX and RX Valid via UCR Address
-
----
-
+- UART peripheral with generic BAUD_RATE
 ### 4. Instruction RAM and Programmer Module
-
-- Instruction memory implemented using **Block RAM**
-- UART-based programming interface
-- Instruction memory writable externally when `progEn` is asserted low
-- Enables program upload **without re-synthesizing FPGA bitstream**
-
----
-
+- Instruction RAM and programmer module for wrinting instruction through uart
 ### 5. GPIO Peripheral
-
-- Memory-mapped GPIO registers:
-  - `DDR` — Direction control (input/output)
-  - `PVL` — Output value register
-  - `PIN` — Input read / output toggle (write `1` toggles output)
-
-- Address mapping:
-
-| Address | Register |
-|------|----------|
-| `0x404` | DDR |
-| `0x405` | PVL |
-| `0x406` | PIN |
-
-- FPGA tri-state buffers instantiated at the **SoC top-level**
-
----
-
+- GPIO with direction control, Input Reading, Output sending
+- FPGA tri-state buffers (IOBUF) instantiated at the **SoC top-level**
 ### 6. RX Echo Debug Module
-
 - Debug module for validating UART-based instruction upload
-- Samples instruction memory write data
-- Echoes data through a dedicated output pin
-- Used to confirm programming correctness on hardware
 
----
+#### For the Design Details See /rtl
 
 ## FPGA Implementation
-
-### 3.1 Version 1 — 3-Stage Pipeline
-
-**Pipeline:** IF → ID/EXE/MEM → WB  
-**Target Board:** AX7010 (Zynq-7000 series)
-
-#### Resource Utilization
-- LUTs: 2948
-- FFs: 3292
-- BRAMs: 11.5  
-- Includes Chipscope
-
-#### Power
-- 0.125 W
-
-#### Timing
-- Operating frequency: **50 MHz**
-- WNS:
-  - Setup: 0.425 ns
-  - Hold: 0.011 ns
-  - Pulse width: 8.75 ns
-
-#### Functionality
-- Assembly programs compiled to binary
-- Program upload via UART (verified using echo pin)
-- Correct UART transmission via software
-- GPIO output verified using LED display
-
----
-
-### 3.2 Version 2 — 5-Stage Pipeline (Current)
-
-**Target Board:** AX7010 (Zynq-7000 series)
-
-#### Resource Utilization
-- LUTs: 1885
-- FFs: 1530
-- BRAMs: 10
-- No Chipscope
-
-#### Power
-- 0.120 W
-
-#### Timing
-- Operating frequency: **50 MHz**
-- WNS:
-  - Setup: 2.262 ns
-  - Hold: 0.050 ns
-  - Pulse width: 9.5 ns
-
-#### Improvements over Version 1
-- Improved timing margin
-- Reduced resource utilization
-- Equivalent functionality
-
----
+- **Target Board:** AX7010 (Zynq-7000 series)
+- **Operating frequency**: 50 MHz
+#### For the Details See /vivado
 
 ## ASIC Implementation (RV32I Core Only)
 
@@ -191,30 +72,7 @@ The project emphasizes **ASIC-friendly RTL design**, modular SoC architecture, a
 - OpenROAD
 - SKY130 PDK
 
-### Results
-- Full synthesis, placement, and routing completed
-- Passed DRC and LVS
-- No setup or hold violations across **TT / SS / FF corners**
-
-### Area
-- **192,824 µm²**
-
-### Timing
-- Clock period: **30 ns**
-- Operating frequency: **33 MHz**
-- WNS:
-  - Setup: 0.713 ns
-  - Hold: 0.104 ns
-
-### Power
-- **4 mW** (core-only, estimated)
-
-### Design Statistics
-- Wires: 7,383
-- Ports: 12
-- Cells: 7,473
-
----
+#### For the Details See /asic_pd
 
 ## Future Work
 
