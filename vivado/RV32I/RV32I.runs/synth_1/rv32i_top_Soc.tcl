@@ -109,7 +109,7 @@ read_checkpoint -auto_incremental -incremental C:/FPGA/RV32I-Processor/RV32I-bas
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top rv32i_top_Soc -part xc7z010clg400-1
+synth_design -top rv32i_top_Soc -part xc7z010clg400-1 -flatten_hierarchy none
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"

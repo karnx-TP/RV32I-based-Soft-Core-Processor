@@ -33,12 +33,24 @@ module reg_file (
 
 //Signal Decclaration
     reg[0:31][31:0]     gprf;
+	reg[4:0]			rRs1;
+	reg[4:0]			rRs2;
 
 //Comb Logic
-    assign r1out = gprf[rdR1Addr];
-    assign r2out = gprf[rdR2Addr];
+    assign r1out = gprf[rRs1];
+    assign r2out = gprf[rRs2];
 
 //Sequencial Logic
+	always @(posedge clk ) begin
+		if(!rstB)begin
+			rRs1 <= 0;
+			rRs2 <= 0;
+		end else begin
+			rRs1 <= rdR1Addr;
+			rRs2 <= rdR2Addr;
+		end
+	end
+
 	always @(posedge clk) begin
 		if(!rstB)begin
 			for (int i = 0;i<32;i=i+1) begin

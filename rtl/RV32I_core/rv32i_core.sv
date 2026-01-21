@@ -89,22 +89,29 @@ module rv32i_core (
     logic           wHazard_2_Rs2;
     logic[4:0]      rReg_d;
 	logic[4:0]      rReg_d2;
-	logic			wHazardStall;
+	logic			wStall;
 	logic			rHazardStallRs1;
 	logic			rHazardStallRs2;
+	//Branch&Jumo
+	logic			rJumpingStall;
     //ALU
     logic[31:0]     wAluA;
+	logic[31:0]		wAluAFw;
     logic[31:0]     wAluB;
+	logic[31:0]		wAluBFw;
     logic[2:0]      wFunct3_aluIn;
     logic[6:0]      wFunct7_aluIn;
     logic           wAluSextEn;
     //Reg
+	wire[4:0]		wReg_s1_out;
+	wire[4:0]		wReg_s2_out;
     logic[31:0]     rWrData;
 	logic[31:0]     rWrDataWB;
     logic           wRegWrEn;
     logic           rRegWrEn;
 	logic           rRegWrEn2;
     logic[31:0]     wRegWrData;
+	logic[31:0]     rRegWrData;
 	logic[31:0]     wRs1Data;
     logic[31:0]     wRs2Data;
     //Ram
@@ -122,7 +129,7 @@ module rv32i_core (
         .clk(clk),
         .rstB(rstB),
         .clkEn(clkEn),
-		.stall(wHazardStall),
+		.stall(wStall),
         
         .condEn(wPcCondEn),
         .next_pc_cond(wPcNextCond),
@@ -136,7 +143,7 @@ module rv32i_core (
 
         .instruction_in(inst_in),
         .jmp(wJmp_occur),
-		.stall(wHazardStall),
+		.stall(wStall),
 
         .Op_code(Op_code),
         .r_type(r_type),
@@ -152,6 +159,8 @@ module rv32i_core (
         .reg_d(reg_d),
         .reg_s1(reg_s1),
         .reg_s2(reg_s2),
+		.wReg_s1_out(wReg_s1_out),
+		.wReg_s2_out(wReg_s2_out),
 
         .imm13_b(imm13_b),
         .imm12_i_s(imm12_i_s),
@@ -192,8 +201,8 @@ module rv32i_core (
         .wrData(wRegWrData),
         .wrAddr(rReg_d2),
 
-        .rdR1Addr(reg_s1),
-        .rdR2Addr(reg_s2),
+        .rdR1Addr(wReg_s1_out),
+        .rdR2Addr(wReg_s2_out),
 
         .r1out(wRs1Data),
         .r2out(wRs2Data)
@@ -201,7 +210,7 @@ module rv32i_core (
     branch_unit brancher (
         .clk(clk),
 	    .rstB(rstB),
-		.stall(wHazardStall),
+		.stall(wStall),
         .b_type(b_type),
         .op_jal(op_jal),
         .op_jalr(op_jalr),
@@ -224,21 +233,24 @@ module rv32i_core (
 //PC
     assign pc = wPc_int;
     assign wPcCondEn = op_jal | op_jalr | b_type;
+	always @(posedge clk ) begin
+		rJumpingStall <= op_jal | op_jalr;
+	end
 
 //Hazard Handle
     assign wHazardRs1 = rRegWrEn && (rReg_d == reg_s1) && (rReg_d != 0);
     assign wHazardRs2 = rRegWrEn && (rReg_d == reg_s2) && (rReg_d != 0);
 	assign wHazard_2_Rs1 = rRegWrEn2 && (rReg_d2 == reg_s1) && (rReg_d2 != 0);
     assign wHazard_2_Rs2 = rRegWrEn2 && (rReg_d2 == reg_s2) && (rReg_d2 != 0);
-	assign wHazardStall = clkEn && (wHazardRs1 || wHazardRs2) && rOp_memLd && 
+	assign wStall = clkEn && (wHazardRs1 || wHazardRs2) && rOp_memLd && 
 						  !(rHazardStallRs1 || rHazardStallRs2);
 	always @(posedge clk ) begin
 		if(!rstB)begin
 			rHazardStallRs1 <= 1'b0;
 			rHazardStallRs2 <= 1'b0;
 		end
-		rHazardStallRs1 <= wHazardStall & wHazardRs1;
-		rHazardStallRs2 <= wHazardStall & wHazardRs2;
+		rHazardStallRs1 <= wStall & wHazardRs1;
+		rHazardStallRs2 <= wStall & wHazardRs2;
 	end
 
 
@@ -250,13 +262,14 @@ module rv32i_core (
                            op_auipc ? 7'b0000000 : 
                            funct7;
     assign wAluSextEn = (b_type & (funct3[2:1] == 2'b11)) ? 1'b0 : 1'b1;
+
     always_comb begin : MuxForAlu
 		//A
-        if(r_type | b_type | op_consShf | op_intRegImm | op_jalr) begin
+        if(r_type | op_consShf | op_intRegImm | b_type | op_jalr) begin
 			wAluA = wHazardRs1 ? rWrData : 
 					(wHazard_2_Rs1 || rHazardStallRs1) ? wRegWrData :
 					wRs1Data;
-        end else if (op_auipc) begin
+		end else if (op_auipc) begin
             wAluA = wPc_int;
         end else begin
 			wAluA = 0;
@@ -280,6 +293,7 @@ module rv32i_core (
 	always @(posedge clk) begin
         rReg_d <= reg_d;
 		rReg_d2 <= rReg_d;
+		rRegWrData <= wRegWrData;
     end
 
 	always_comb begin : u_wrReg
@@ -312,7 +326,7 @@ module rv32i_core (
         if(!rstB)begin
             rRegWrEn <= 1'b0;
         end else begin
-            rRegWrEn <= (rstB) & (op_jalr | op_memLd | op_intRegImm | op_intRegReg | op_consShf | op_lui | op_jal | op_auipc); 
+            rRegWrEn <= (rstB) & (op_jalr | op_jal | op_memLd | op_intRegImm | op_intRegReg | op_consShf | op_lui | op_auipc) ; 
         end
     end
 

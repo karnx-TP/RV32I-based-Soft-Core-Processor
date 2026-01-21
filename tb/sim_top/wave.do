@@ -178,8 +178,13 @@ add wave -noupdate -radix hexadecimal {/top_tb/dut/prog_ram/ram[77]}
 add wave -noupdate -radix hexadecimal {/top_tb/dut/prog_ram/ram[78]}
 add wave -noupdate -radix hexadecimal {/top_tb/dut/prog_ram/ram[79]}
 add wave -noupdate -radix hexadecimal {/top_tb/dut/prog_ram/ram[80]}
+add wave -noupdate /top_tb/dut/core/reg_module/rRs1
+add wave -noupdate /top_tb/dut/core/reg_module/rRs2
+add wave -noupdate /top_tb/dut/core/wReg_s1_out
+add wave -noupdate /top_tb/dut/core/wReg_s2_out
+add wave -noupdate /top_tb/dut/core/dec/wNOP
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {44095214600 ps} 0}
+WaveRestoreCursors {{Cursor 1} {44119994000 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 274
 configure wave -valuecolwidth 100
@@ -195,4 +200,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {44095120800 ps} {44095319200 ps}
+WaveRestoreZoom {43954351400 ps} {44360674600 ps}

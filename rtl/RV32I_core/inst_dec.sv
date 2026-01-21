@@ -27,6 +27,8 @@ module inst_dec (
     reg_d,
     reg_s1,
     reg_s2,
+	wReg_s1_out,
+	wReg_s2_out,
 
     imm13_b,
     imm12_i_s,
@@ -70,6 +72,8 @@ module inst_dec (
     output logic[4:0]   reg_d;
     output logic[4:0]   reg_s1;
     output logic[4:0]   reg_s2;
+	output wire[4:0]	wReg_s1_out;
+	output wire[4:0]	wReg_s2_out;
 
     output logic[12:0]  imm13_b;
     output logic[11:0]  imm12_i_s;
@@ -108,6 +112,8 @@ module inst_dec (
 	wire            wop_efence;
 	wire            wop_ecb;
 
+	wire			wNOP;
+
 	wire            wr_type;
 	wire            wi_type;
 	wire            ws_type;
@@ -128,6 +134,9 @@ module inst_dec (
     
 
 //Combinational Circuit
+	assign wReg_s1_out = wreg_s1;
+	assign wReg_s2_out = wreg_s2;
+
 	always_comb begin : uInstr
 		if(!rstB)begin
 			wInst_in = 0;
@@ -156,6 +165,7 @@ module inst_dec (
     assign wop_intRegReg = (wOp_code == 7'b0110011) ? 1'b1 : 1'b0;
     assign wop_efence    = (wOp_code == 7'b0001111) ? 1'b1 : 1'b0;
     assign wop_ecb     	= (wOp_code == 7'b1110011) ? 1'b1 : 1'b0;
+	assign wNOP 		= (wInst_in == 0);
 
 
     assign wr_type       = wop_intRegReg;

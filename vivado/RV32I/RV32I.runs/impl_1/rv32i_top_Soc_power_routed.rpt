@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date             : Wed Jan 21 14:50:12 2026
+| Date             : Wed Jan 21 20:17:08 2026
 | Host             : LAPTOP-GM1L3F93 running 64-bit major release  (build 9200)
 | Command          : report_power -file rv32i_top_Soc_power_routed.rpt -pb rv32i_top_Soc_power_summary_routed.pb -rpx rv32i_top_Soc_power_routed.rpx
 | Design           : rv32i_top_Soc
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.119        |
+| Total On-Chip Power (W)  | 0.114        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.025        |
+| Dynamic (W)              | 0.020        |
 | Device Static (W)        | 0.094        |
 | Effective TJA (C/W)      | 11.5         |
-| Max Ambient (C)          | 83.6         |
-| Junction Temperature (C) | 26.4         |
+| Max Ambient (C)          | 83.7         |
+| Junction Temperature (C) | 26.3         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -53,17 +53,17 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.003 |        3 |       --- |             --- |
-| Slice Logic    |     0.003 |     4014 |       --- |             --- |
-|   LUT as Logic |     0.003 |     1885 |     17600 |           10.71 |
+| Slice Logic    |     0.002 |     4070 |       --- |             --- |
+|   LUT as Logic |     0.002 |     1799 |     17600 |           10.22 |
 |   CARRY4       |    <0.001 |       69 |      4400 |            1.57 |
-|   Register     |    <0.001 |     1522 |     35200 |            4.32 |
-|   F7/F8 Muxes  |    <0.001 |      258 |     17600 |            1.47 |
-|   Others       |     0.000 |       34 |       --- |             --- |
-| Signals        |     0.006 |     3256 |       --- |             --- |
+|   Register     |    <0.001 |     1536 |     35200 |            4.36 |
+|   F7/F8 Muxes  |    <0.001 |      320 |     17600 |            1.82 |
+|   Others       |     0.000 |       37 |       --- |             --- |
+| Signals        |     0.004 |     3193 |       --- |             --- |
 | Block RAM      |     0.010 |       10 |        60 |           16.67 |
-| I/O            |     0.003 |       15 |       100 |           15.00 |
+| I/O            |    <0.001 |       15 |       100 |           15.00 |
 | Static Power   |     0.094 |          |           |                 |
-| Total          |     0.119 |          |           |                 |
+| Total          |     0.114 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,9 +73,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.026 |       0.022 |      0.004 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.022 |       0.018 |      0.004 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.005 |       0.000 |      0.005 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -149,9 +149,9 @@ Table of Contents
 +----------------+-----------+
 | Name           | Power (W) |
 +----------------+-----------+
-| rv32i_top_Soc  |     0.025 |
-|   core         |     0.011 |
-|     dec        |     0.006 |
+| rv32i_top_Soc  |     0.020 |
+|   core         |     0.008 |
+|     brancher   |     0.001 |
 |     reg_module |     0.004 |
 |   prog_ram     |     0.008 |
 |   ram          |     0.001 |

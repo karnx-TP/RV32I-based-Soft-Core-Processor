@@ -33,21 +33,22 @@
 ### Version 2 — 5-Stage Pipeline (Current)
 
 **Target Board:** AX7010 (Zynq-7000 series)
+**Synthesis Config** Keep Hierarchy
 
 #### Resource Utilization
-- LUTs: 1885
-- FFs: 1530
+- LUTs: 1799
+- FFs: 1536
 - BRAMs: 10
 - No Chipscope
 
 #### Power
-- 0.120 W
+- 0.114 W
 
 #### Timing
 - Operating frequency: **50 MHz**
 - WNS:
-  - Setup: 2.262 ns
-  - Hold: 0.050 ns
+  - Setup: 2.103 ns
+  - Hold: 0.075 ns
   - Pulse width: 9.5 ns
 
 #### Improvements over Version 1
