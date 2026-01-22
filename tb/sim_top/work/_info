@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/tb/sim_top
 vALU32bits
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1769000590
+Z2 !s110 1769075851
 !i10b 1
 !s100 R?[E31Z6D2QgKdG8AINk31
 Idc^=VE0HH72Z?f00bn_I31
@@ -26,7 +26,7 @@ Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z6 !s108 1769000590.000000
+Z6 !s108 1769075851.000000
 !s107 ../../rtl/RV32I_core/alu.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/alu.sv|
 !i113 1
@@ -36,7 +36,7 @@ Z9 tCvgOpt 0
 n@a@l@u32bits
 vbram_sp_byte
 R1
-Z10 !s110 1769000591
+Z10 !s110 1769075854
 !i10b 1
 !s100 dDU][b3lK^aj;`N?]@eCE1
 IELbZlS08iEXFZ88FYS3NM3
@@ -52,7 +52,7 @@ R5
 r1
 !s85 0
 31
-R6
+Z11 !s108 1769075854.000000
 !s107 ../../rtl/RV32I_core/bram_sp_byte.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/bram_sp_byte.sv|
 !i113 1
@@ -61,15 +61,15 @@ R8
 R9
 vbranch_unit
 R1
-R2
+Z12 !s110 1769075852
 !i10b 1
-!s100 BRUHXiKgY<<ejAQ0cmFIQ1
-I_Y1L6DWW^[a=hzJPmD?;43
+!s100 hdhL0d]@l;YIDnnlUoH<O2
+Iko9dR=RTLF4[BhmSNb[C@2
 R3
 !s105 branch_unit_sv_unit
 S1
 R0
-w1768999378
+w1769054309
 8../../rtl/RV32I_core/branch_unit.sv
 F../../rtl/RV32I_core/branch_unit.sv
 L0 7
@@ -77,7 +77,7 @@ R5
 r1
 !s85 0
 31
-R6
+Z13 !s108 1769075852.000000
 !s107 ../../rtl/RV32I_core/branch_unit.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/branch_unit.sv|
 !i113 1
@@ -88,13 +88,13 @@ vinst_dec
 R1
 R2
 !i10b 1
-!s100 3bSKV>MG=GL=A5A3gQ_zM1
-Id]lVYVGF=g3J9_@]4J_`e3
+!s100 l1VJWM_jT?SDjhX?iJ6QW2
+I=m?[`HH]IB?Uo`0fm;Mz=3
 R3
 !s105 inst_dec_sv_unit
 S1
 R0
-w1768999281
+w1769062653
 8../../rtl/RV32I_core/inst_dec.sv
 F../../rtl/RV32I_core/inst_dec.sv
 L0 7
@@ -111,7 +111,7 @@ R8
 R9
 vio_port
 R1
-R2
+R10
 !i10b 1
 !s100 a_YcoJSbDBPPn>QBn3H]20
 Ieozem`7Rc4JY:hTU9MG4^3
@@ -127,7 +127,7 @@ R5
 r1
 !s85 0
 31
-R6
+Z14 !s108 1769075853.000000
 !s107 ../../rtl/IO_Port/port.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/IO_Port/port.sv|
 !i113 1
@@ -136,7 +136,7 @@ R8
 R9
 vIOBUF
 R1
-R2
+Z15 !s110 1769075853
 !i10b 1
 !s100 nd_GUh0ZVQ0_0Ek`6Mh^X0
 IV3K4Uk^;O8=GD3B[;D?oJ0
@@ -152,7 +152,7 @@ R5
 r1
 !s85 0
 31
-R6
+R14
 !s107 ../../rtl/IO_Port/io_buf.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/IO_Port/io_buf.sv|
 !i113 1
@@ -162,7 +162,7 @@ R9
 n@i@o@b@u@f
 vpc_reg
 R1
-R2
+R12
 !i10b 1
 !s100 GTnO7KS>81Q^^P411>QXI0
 IO0[_;OhklOg=3i[dOF7b<2
@@ -187,7 +187,7 @@ R8
 R9
 vprog_ram_w8r32
 R1
-R2
+R10
 !i10b 1
 !s100 njHGDGXchd8aZ6X7^3=FE3
 IH6S5WdN4JndEkl6EB>]Sl1
@@ -203,7 +203,7 @@ R5
 r1
 !s85 0
 31
-R6
+R11
 !s107 ../../rtl/Programmer/prog_ram_w8r32.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/Programmer/prog_ram_w8r32.sv|
 !i113 1
@@ -238,7 +238,7 @@ R9
 n@program_@mem
 vprogrammer
 R1
-R2
+R15
 !i10b 1
 !s100 3b8mokTReRzPHB]I0JXSR1
 I6ZU^80YEdU@iUWMW[8LcB1
@@ -254,7 +254,7 @@ R5
 r1
 !s85 0
 31
-R6
+R14
 !s107 ../../rtl/Programmer/prog.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/Programmer/prog.sv|
 !i113 1
@@ -263,7 +263,7 @@ R8
 R9
 vram_Controller
 R1
-R2
+R12
 !i10b 1
 !s100 :o4c=7GY79`fUo8c_>^VT3
 IV?KK5C`CC_F=BfhQZX4>a3
@@ -279,7 +279,7 @@ R5
 r1
 !s85 0
 31
-R6
+R13
 !s107 ../../rtl/RV32I_core/ram_wController.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/ram_wController.sv|
 !i113 1
@@ -289,7 +289,7 @@ R9
 nram_@controller
 vreg_file
 R1
-R2
+R12
 !i10b 1
 !s100 Hz:XFG>VPWh;n^hDhmWlo1
 IJf0z1djRT252A[U8=VTAl1
@@ -305,7 +305,7 @@ R5
 r1
 !s85 0
 31
-R6
+R13
 !s107 ../../rtl/RV32I_core/reg_file.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/reg_file.sv|
 !i113 1
@@ -314,15 +314,15 @@ R8
 R9
 vrv32i_core
 R1
-R2
+R12
 !i10b 1
-!s100 5Ad8ES<Lia]Hn>BzJTRPP1
-IBHDP?PWP]J2gVCLfi3S[e0
+!s100 dWE^[[MC<ZnJ3:>SaCNkg1
+II[n;h0odJ;LH<I2aZdn[c2
 R3
 !s105 rv32i_core_sv_unit
 S1
 R0
-w1769000520
+w1769069818
 8../../rtl/RV32I_core/rv32i_core.sv
 F../../rtl/RV32I_core/rv32i_core.sv
 L0 7
@@ -330,7 +330,7 @@ R5
 r1
 !s85 0
 31
-R6
+R13
 !s107 ../../rtl/RV32I_core/rv32i_core.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/RV32I_core/rv32i_core.sv|
 !i113 1
@@ -339,7 +339,7 @@ R8
 R9
 vrv32i_top_Soc
 R1
-R2
+R10
 !i10b 1
 !s100 H;O[m];lMRQY_^<OjA]?L1
 IjjozZ_2goLecLFjfMS5HQ0
@@ -355,7 +355,7 @@ R5
 r1
 !s85 0
 31
-R6
+R11
 !s107 ../../rtl/Top_Module/RV32I_top_SoC.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/Top_Module/RV32I_top_SoC.sv|
 !i113 1
@@ -365,7 +365,7 @@ R9
 nrv32i_top_@soc
 vsingle_tx
 R1
-R2
+R10
 !i10b 1
 !s100 GCYnV:z<CzI0KBTjQU36F1
 I8Tz><JkR8f8RUULGEVe]N0
@@ -381,7 +381,7 @@ R5
 r1
 !s85 0
 31
-R6
+R11
 !s107 ../../rtl/addition_module/single_tx.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/addition_module/single_tx.sv|
 !i113 1
@@ -390,7 +390,7 @@ R8
 R9
 vsync_fifo
 R1
-R2
+R15
 !i10b 1
 !s100 GGbfkRiAm`@00e8CUc8;63
 I]E=mN^F0bT1glUim8aYlV1
@@ -406,7 +406,7 @@ R5
 r1
 !s85 0
 31
-R6
+R14
 !s107 ../../rtl/uart/fifo8bits.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/fifo8bits.sv|
 !i113 1
@@ -431,7 +431,7 @@ R5
 r1
 !s85 0
 31
-!s108 1769000591.000000
+R11
 !s107 ../top_tb.sv|
 !s90 -reportprogress|300|-work|work|../top_tb.sv|
 !i113 1
@@ -439,7 +439,7 @@ o-work work
 R9
 vuart
 R1
-R2
+R15
 !i10b 1
 !s100 ?=f>=IU8@<;OXmillNLTZ1
 InHC`[dnl<Ez_;3jMYm3;`2
@@ -455,7 +455,7 @@ R5
 r1
 !s85 0
 31
-R6
+R14
 !s107 ../../rtl/uart/uart.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/uart.sv|
 !i113 1
@@ -464,7 +464,7 @@ R8
 R9
 vuart_rx
 R1
-R2
+R15
 !i10b 1
 !s100 V_zcNU:an8fz[QSNicESk0
 IVzjRd[CEUzRAdMUWXecb62
@@ -480,7 +480,7 @@ R5
 r1
 !s85 0
 31
-R6
+R13
 !s107 ../../rtl/uart/uart_rx.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/uart_rx.sv|
 !i113 1
@@ -489,7 +489,7 @@ R8
 R9
 vuart_tx_ff
 R1
-R2
+R12
 !i10b 1
 !s100 <4oJoJ7QQGCQ4`_V0>D?=3
 IEDPICb1Lo]1F2Ri16ToJm3
@@ -505,7 +505,7 @@ R5
 r1
 !s85 0
 31
-R6
+R13
 !s107 ../../rtl/uart/uart_tx.sv|
 !s90 -reportprogress|300|-cover|bcse|-work|work|../../rtl/uart/uart_tx.sv|
 !i113 1

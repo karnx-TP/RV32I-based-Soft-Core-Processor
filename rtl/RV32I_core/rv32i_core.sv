@@ -78,10 +78,9 @@ module rv32i_core (
 //Internal Signal , Control Signal
     //PC
     logic[31:0]     wPc_int;
-    logic           wPcCondEn;
+    logic           rPcCondEn;
     logic[31:0]     wPcNextCond;
     logic[31:0]     wPcReturn;
-    logic           wJmp_occur;
     //Hazard Handle
     logic           wHazardRs1; //pc = i-1
     logic           wHazardRs2;
@@ -90,10 +89,26 @@ module rv32i_core (
     logic[4:0]      rReg_d;
 	logic[4:0]      rReg_d2;
 	logic			wStall;
+	logic			wStall1;
+	logic			rStall2;
 	logic			rHazardStallRs1;
 	logic			rHazardStallRs2;
+	logic			rHazardStallRs1_2;
+	logic			rHazardStallRs2_2;
 	//Branch&Jumo
-	logic			rJumpingStall;
+	logic			rJumping1;
+	logic			rJumping2;
+	logic			wJumping;
+	logic           wJmp_occur;
+	logic 			rOp_jalr;
+	logic[31:0]		rAluJmpFW;
+		//Test add 1 near condition decision
+	logic 	wCond;
+	logic	rCond;
+	logic	wNEq;
+	logic	wLt;
+	logic	wGt;
+	logic	wJmp;
     //ALU
     logic[31:0]     wAluA;
 	logic[31:0]		wAluAFw;
@@ -131,7 +146,7 @@ module rv32i_core (
         .clkEn(clkEn),
 		.stall(wStall),
         
-        .condEn(wPcCondEn),
+        .condEn(rJumping1),
         .next_pc_cond(wPcNextCond),
         .pc_out(wPc_int)
 
@@ -142,7 +157,7 @@ module rv32i_core (
 		.clkEn(clkEn),
 
         .instruction_in(inst_in),
-        .jmp(wJmp_occur),
+        .jmp(wJumping),
 		.stall(wStall),
 
         .Op_code(Op_code),
@@ -227,30 +242,61 @@ module rv32i_core (
 
         .pc_return(wPcReturn),
         .pc_jmpto(wPcNextCond),
-        .jmp_occur(wJmp_occur)
+        .jmp_occur(wJmp_occur),
+		.Cond(rCond)
     );
 
 //PC
     assign pc = wPc_int;
-    assign wPcCondEn = op_jal | op_jalr | b_type;
-	always @(posedge clk ) begin
-		rJumpingStall <= op_jal | op_jalr;
-	end
+	
 
 //Hazard Handle
     assign wHazardRs1 = rRegWrEn && (rReg_d == reg_s1) && (rReg_d != 0);
     assign wHazardRs2 = rRegWrEn && (rReg_d == reg_s2) && (rReg_d != 0);
 	assign wHazard_2_Rs1 = rRegWrEn2 && (rReg_d2 == reg_s1) && (rReg_d2 != 0);
     assign wHazard_2_Rs2 = rRegWrEn2 && (rReg_d2 == reg_s2) && (rReg_d2 != 0);
-	assign wStall = clkEn && (wHazardRs1 || wHazardRs2) && rOp_memLd && 
+	assign wStall = wStall1 | rStall2;
+	assign wStall1 = clkEn && (wHazardRs1 || wHazardRs2) && (rOp_memLd) && 
 						  !(rHazardStallRs1 || rHazardStallRs2);
 	always @(posedge clk ) begin
 		if(!rstB)begin
 			rHazardStallRs1 <= 1'b0;
 			rHazardStallRs2 <= 1'b0;
 		end
+		rStall2 <= wStall1;
 		rHazardStallRs1 <= wStall & wHazardRs1;
 		rHazardStallRs2 <= wStall & wHazardRs2;
+		rHazardStallRs1_2 <= rHazardStallRs1;
+		rHazardStallRs2_2 <= rHazardStallRs2;
+	end
+
+//Branch
+	always @(posedge clk ) begin
+		rJumping1 <= wJmp_occur;
+		rJumping2 <= rJumping1;
+		rCond <= wCond;
+	end
+	assign wJumping = rJumping2 | rJumping1 | wJmp_occur;
+	assign wNEq = |{wAluFlag,wAluOut};
+	assign wLt = wAluFlag & wNEq;
+	assign wGt = !wAluFlag & wNEq;
+	
+	// assign wJmp = clkEn ? op_jal | op_jalr | (b_type & wCond) : 1'b0;
+	assign wJmp = (!clkEn) ? 1'b0 :
+					b_type ? wCond :
+					op_jal | op_jalr;
+	assign wJmp_occur = wJmp;
+
+	always_comb begin : uCond
+		case (funct3)
+			3'b000 : wCond = !wNEq;
+			3'b001 : wCond = wNEq;
+			3'b100 : wCond = wLt;
+			3'b101 : wCond = wGt;
+			3'b110 : wCond = wLt|(!wNEq);
+			3'b111 : wCond = wGt;
+			default: wCond = 1'b0;
+		endcase
 	end
 
 
@@ -267,7 +313,7 @@ module rv32i_core (
 		//A
         if(r_type | op_consShf | op_intRegImm | b_type | op_jalr) begin
 			wAluA = wHazardRs1 ? rWrData : 
-					(wHazard_2_Rs1 || rHazardStallRs1) ? wRegWrData :
+					(wHazard_2_Rs1 && !rOp_memLd2) ? wRegWrData :
 					wRs1Data;
 		end else if (op_auipc) begin
             wAluA = wPc_int;
@@ -278,7 +324,7 @@ module rv32i_core (
 		//B
 		if(r_type | b_type) begin
 			wAluB = wHazardRs2 ? rWrData : 
-					(wHazard_2_Rs2 || rHazardStallRs2) ? wRegWrData :
+					(wHazard_2_Rs2 && !rOp_memLd2) ? wRegWrData :
 					wRs2Data;
 		end else if(op_consShf | op_intRegImm | op_jalr) begin
 			wAluB = {{20{imm12_i_s[11]}},imm12_i_s}; //Sign-Extended
@@ -296,13 +342,14 @@ module rv32i_core (
 		rRegWrData <= wRegWrData;
     end
 
-	always_comb begin : u_wrReg
-		if (rOp_memLd2) begin
-            wRegWrData = dataBusIn;
-        end else begin
-            wRegWrData = rWrDataWB;
-        end 
-	end
+	// always_comb begin : u_wrReg
+	// 	if (rOp_memLd2) begin
+    //         wRegWrData = dataBusIn;
+    //     end else begin
+	// 		wRegWrData = rWrDataWB;
+	// 	end 
+	// end
+    assign wRegWrData = (rOp_memLd2) ? dataBusIn : rWrDataWB;
 	assign wRegWrEn = rRegWrEn2;
 
 	always @(posedge clk ) begin
@@ -332,13 +379,13 @@ module rv32i_core (
 
 //Mem/RAM
 	assign wForwardAddr =  wHazardRs1 ? rWrData : 
-						   (wHazard_2_Rs1 || rHazardStallRs1) ? rWrDataWB : 
+						   (wHazard_2_Rs1  && !rOp_memLd2) ? rWrDataWB : 
 						   wRs1Data;
     assign addr = (op_memLd | op_memSt) ? wForwardAddr + imm12_i_s : {32{1'b0}};
     assign wrEn = (rstB) & (op_memSt);
 	assign rdEn = (rstB) & (op_memLd);
     assign dataBusOut = wHazardRs2 ? rWrData : 
-						(wHazard_2_Rs2 || rHazardStallRs2) ? rWrDataWB : 
+						(wHazard_2_Rs2  && !rOp_memLd2) ? rWrDataWB : 
 						wRs2Data;
 	assign RamMode = {wRamByteEn,wRamHalfEn,wRamWordEn,wRamUnsignedEn};
     assign wRamByteEn = (funct3[1:0] == 2'b00);
@@ -349,6 +396,7 @@ module rv32i_core (
     always @(posedge clk) begin
         rOp_memLd <= op_memLd;
 		rOp_memLd2 <= rOp_memLd;
+		rOp_jalr <= op_jalr;
     end
 
 endmodule

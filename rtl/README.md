@@ -87,4 +87,3 @@
 - Samples instruction memory write data
 - Echoes data through a dedicated output pin
 - Used to confirm programming correctness on hardware
-

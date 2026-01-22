@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Wed Jan 21 20:16:47 2026
+| Date         : Thu Jan 22 15:26:43 2026
 | Host         : LAPTOP-GM1L3F93 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file rv32i_top_Soc_control_sets_placed.rpt
 | Design       : rv32i_top_Soc
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    57 |
-|    Minimum number of control sets                        |    57 |
+| Total control sets                                       |    58 |
+|    Minimum number of control sets                        |    58 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    64 |
+| Unused register locations in slices containing registers |    68 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,7 +39,7 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    57 |
+| Total control sets |    58 |
 | >= 0 to < 4        |     2 |
 | >= 4 to < 6        |     0 |
 | >= 6 to < 8        |     0 |
@@ -47,7 +47,7 @@ Table of Contents
 | >= 10 to < 12      |     4 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     1 |
-| >= 16              |    36 |
+| >= 16              |    37 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,12 +58,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             198 |           87 |
+| No           | No                    | No                     |             293 |           99 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              52 |           23 |
-| Yes          | No                    | No                     |             122 |           44 |
+| No           | Yes                   | No                     |              52 |           20 |
+| Yes          | No                    | No                     |             136 |           46 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |            1164 |          553 |
+| Yes          | Yes                   | No                     |            1195 |          447 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -75,61 +75,62 @@ Table of Contents
 +----------------+----------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
 |  clk_IBUF_BUFG | rx_echo_module/tx_module/rParData[0]_i_2_n_0 |                                               |                1 |              1 |         1.00 |
 |  clk_IBUF_BUFG | uart_module/tx_module/rParData[0]_i_2_n_0    |                                               |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG | rx_echo_module/tx_fifo/p_0_in                | rx_echo_module/tx_fifo/WrAddr[7]_i_1_n_0      |                3 |              8 |         2.67 |
 |  clk_IBUF_BUFG |                                              | io_port_module/rDataOut[7]_i_1_n_0            |                3 |              8 |         2.67 |
-|  clk_IBUF_BUFG | rx_echo_module/tx_fifo/RdAddr0               | rx_echo_module/tx_fifo/WrAddr[7]_i_1_n_0      |                3 |              8 |         2.67 |
-|  clk_IBUF_BUFG | uart_module/fftx/p_0_in                      | uart_module/fftx/WrAddr[7]_i_1_n_0            |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG | rx_echo_module/tx_module/rParData[0]_i_2_n_0 | rx_echo_module/tx_module/rParData[0]_i_1_n_0  |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG | uart_module/ffrx/RdAddr0                     | uart_module/ffrx/WrAddr[7]_i_1_n_0            |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG | uart_module/ffrx/p_0_in                      | uart_module/ffrx/WrAddr[7]_i_1_n_0            |                3 |              8 |         2.67 |
-|  clk_IBUF_BUFG | uart_module/fftx/RdAddr0                     | uart_module/fftx/WrAddr[7]_i_1_n_0            |                3 |              8 |         2.67 |
-|  clk_IBUF_BUFG | io_port_module/rPVL[0]                       | io_port_module/p_0_in                         |                1 |              8 |         8.00 |
-|  clk_IBUF_BUFG | uart_module/tx_module/rParData[0]_i_2_n_0    | uart_module/tx_module/rParData[0]_i_1_n_0     |                1 |              8 |         8.00 |
+|  clk_IBUF_BUFG | io_port_module/rPVL[0]                       | io_port_module/p_0_in                         |                2 |              8 |         4.00 |
 |  clk_IBUF_BUFG | io_port_module/rDDR[0]                       | io_port_module/p_0_in                         |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG | rx_echo_module/tx_module/rBitInCnt[9]        | rx_echo_module/tx_module/rBitInCnt[9]_i_1_n_0 |                3 |              9 |         3.00 |
+|  clk_IBUF_BUFG | uart_module/ffrx/RdAddr0                     | uart_module/ffrx/WrAddr[7]_i_1_n_0            |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | rx_echo_module/tx_fifo/RdAddr0               | rx_echo_module/tx_fifo/WrAddr[7]_i_1_n_0      |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG | rx_echo_module/tx_fifo/p_0_in                | rx_echo_module/tx_fifo/WrAddr[7]_i_1_n_0      |                4 |              8 |         2.00 |
+|  clk_IBUF_BUFG | rx_echo_module/tx_module/rParData[0]_i_2_n_0 | rx_echo_module/tx_module/rParData[0]_i_1_n_0  |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | uart_module/ffrx/p_0_in                      | uart_module/ffrx/WrAddr[7]_i_1_n_0            |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG | uart_module/fftx/RdAddr0                     | uart_module/fftx/WrAddr[7]_i_1_n_0            |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | uart_module/fftx/p_0_in                      | uart_module/fftx/WrAddr[7]_i_1_n_0            |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | uart_module/tx_module/rParData[0]_i_2_n_0    | uart_module/tx_module/rParData[0]_i_1_n_0     |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | uart_module/tx_module/rBitInCnt[9]           | uart_module/tx_module/rBitInCnt[9]_i_1_n_0    |                2 |              9 |         4.50 |
+|  clk_IBUF_BUFG | rx_echo_module/tx_module/rBitInCnt[9]        | rx_echo_module/tx_module/rBitInCnt[9]_i_1_n_0 |                2 |              9 |         4.50 |
 |  clk_IBUF_BUFG | uart_module/rx_module/wMidBaud               |                                               |                3 |              9 |         3.00 |
-|  clk_IBUF_BUFG | uart_module/tx_module/rBitInCnt[9]           | uart_module/tx_module/rBitInCnt[9]_i_1_n_0    |                3 |              9 |         3.00 |
 |  clk_IBUF_BUFG |                                              | rx_echo_module/tx_module/rBaudCnt[9]_i_1_n_0  |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG |                                              | uart_module/rx_module/rBaudCnt[9]_i_1_n_0     |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG |                                              | uart_module/rx_module/rBaudCnt[9]_i_1_n_0     |                3 |             10 |         3.33 |
 |  clk_IBUF_BUFG |                                              | uart_module/tx_module/rBaudCnt[9]_i_1_n_0     |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG | uart_module/rx_module/wMidBaud               | uart_module/rx_module/rBitInCnt0              |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG |                                              | core/reg_module/p_0_in                        |               10 |             14 |         1.40 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[13][31]_i_1_n_0         | core/reg_module/p_0_in                        |               20 |             32 |         1.60 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[27][31]_i_1_n_0         | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | programmer_module/rMemAddr0                  | programmer_module/rMemAddr[14]_i_1_n_0        |                8 |             32 |         4.00 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[6][31]_i_1_n_0          | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | core/rpc/rPC_current[31]_i_2_n_0             | core/rpc/p_0_in                               |               12 |             32 |         2.67 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[20][31]_i_1_n_0         | core/reg_module/p_0_in                        |               17 |             32 |         1.88 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[11][31]_i_1_n_0         | core/reg_module/p_0_in                        |               15 |             32 |         2.13 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[19][31]_i_1_n_0         | core/reg_module/p_0_in                        |               20 |             32 |         1.60 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[1][31]_i_2_n_0          | core/reg_module/p_0_in                        |               20 |             32 |         1.60 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[23][31]_i_1_n_0         | core/reg_module/p_0_in                        |               19 |             32 |         1.68 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[29][31]_i_1_n_0         | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG | uart_module/rx_module/wMidBaud               | uart_module/rx_module/rBitInCnt0              |                2 |             10 |         5.00 |
+|  clk_IBUF_BUFG |                                              | core/reg_module/p_0_in                        |                8 |             14 |         1.75 |
+|  clk_IBUF_BUFG | core/dec/p_1_in                              |                                               |               14 |             29 |         2.07 |
+|  clk_IBUF_BUFG | core/dec/p_1_in                              | core/dec/funct7[5]_i_1_n_0                    |               14 |             31 |         2.21 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[17][31]_i_1_n_0         | core/reg_module/p_0_in                        |               12 |             32 |         2.67 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[28][31]_i_1_n_0         | core/reg_module/p_0_in                        |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[8][31]_i_1_n_0          | core/reg_module/p_0_in                        |               10 |             32 |         3.20 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[30][31]_i_1_n_0         | core/reg_module/p_0_in                        |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[9][31]_i_1_n_0          | core/reg_module/p_0_in                        |               16 |             32 |         2.00 |
 |  clk_IBUF_BUFG | core/reg_module/gprf[4][31]_i_1_n_0          | core/reg_module/p_0_in                        |               11 |             32 |         2.91 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[22][31]_i_1_n_0         | core/reg_module/p_0_in                        |               16 |             32 |         2.00 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[3][31]_i_1_n_0          | core/reg_module/p_0_in                        |               11 |             32 |         2.91 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[9][31]_i_1_n_0          | core/reg_module/p_0_in                        |               19 |             32 |         1.68 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[17][31]_i_1_n_0         | core/reg_module/p_0_in                        |               17 |             32 |         1.88 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[16][31]_i_1_n_0         | core/reg_module/p_0_in                        |               21 |             32 |         1.52 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[18][31]_i_1_n_0         | core/reg_module/p_0_in                        |               16 |             32 |         2.00 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[28][31]_i_1_n_0         | core/reg_module/p_0_in                        |               15 |             32 |         2.13 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[2][31]_i_1_n_0          | core/reg_module/p_0_in                        |               17 |             32 |         1.88 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[31][31]_i_1_n_0         | core/reg_module/p_0_in                        |               17 |             32 |         1.88 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[5][31]_i_1_n_0          | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[15][31]_i_1_n_0         | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[8][31]_i_1_n_0          | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[10][31]_i_1_n_0         | core/reg_module/p_0_in                        |               19 |             32 |         1.68 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[12][31]_i_1_n_0         | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[14][31]_i_1_n_0         | core/reg_module/p_0_in                        |               15 |             32 |         2.13 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[24][31]_i_1_n_0         | core/reg_module/p_0_in                        |               23 |             32 |         1.39 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[25][31]_i_1_n_0         | core/reg_module/p_0_in                        |               13 |             32 |         2.46 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[26][31]_i_1_n_0         | core/reg_module/p_0_in                        |               15 |             32 |         2.13 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[30][31]_i_1_n_0         | core/reg_module/p_0_in                        |               15 |             32 |         2.13 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[14][31]_i_1_n_0         | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[24][31]_i_1_n_0         | core/reg_module/p_0_in                        |               15 |             32 |         2.13 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[5][31]_i_1_n_0          | core/reg_module/p_0_in                        |               12 |             32 |         2.67 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[20][31]_i_1_n_0         | core/reg_module/p_0_in                        |                7 |             32 |         4.57 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[25][31]_i_1_n_0         | core/reg_module/p_0_in                        |               12 |             32 |         2.67 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[2][31]_i_1_n_0          | core/reg_module/p_0_in                        |               13 |             32 |         2.46 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[6][31]_i_1_n_0          | core/reg_module/p_0_in                        |               12 |             32 |         2.67 |
 |  clk_IBUF_BUFG | core/reg_module/gprf[7][31]_i_1_n_0          | core/reg_module/p_0_in                        |               16 |             32 |         2.00 |
-|  clk_IBUF_BUFG | core/reg_module/gprf[21][31]_i_1_n_0         | core/reg_module/p_0_in                        |               17 |             32 |         1.88 |
-|  clk_IBUF_BUFG | core/dec/p_0_in                              |                                               |               16 |             47 |         2.94 |
-|  clk_IBUF_BUFG | core/brancher/rPc_current_reg1[31]_i_1_n_0   |                                               |               23 |             64 |         2.78 |
-|  clk_IBUF_BUFG |                                              |                                               |               87 |            198 |         2.28 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[31][31]_i_1_n_0         | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[27][31]_i_1_n_0         | core/reg_module/p_0_in                        |               10 |             32 |         3.20 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[3][31]_i_1_n_0          | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[26][31]_i_1_n_0         | core/reg_module/p_0_in                        |               10 |             32 |         3.20 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[29][31]_i_1_n_0         | core/reg_module/p_0_in                        |               10 |             32 |         3.20 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[22][31]_i_1_n_0         | core/reg_module/p_0_in                        |               12 |             32 |         2.67 |
+|  clk_IBUF_BUFG | programmer_module/rMemAddr0                  | programmer_module/rMemAddr[14]_i_1_n_0        |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG | core/rpc/rPC_current[31]_i_2_n_0             | core/rpc/clear                                |                9 |             32 |         3.56 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[13][31]_i_1_n_0         | core/reg_module/p_0_in                        |               12 |             32 |         2.67 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[15][31]_i_1_n_0         | core/reg_module/p_0_in                        |               10 |             32 |         3.20 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[16][31]_i_1_n_0         | core/reg_module/p_0_in                        |               17 |             32 |         1.88 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[23][31]_i_1_n_0         | core/reg_module/p_0_in                        |               18 |             32 |         1.78 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[18][31]_i_1_n_0         | core/reg_module/p_0_in                        |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[19][31]_i_1_n_0         | core/reg_module/p_0_in                        |                9 |             32 |         3.56 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[1][31]_i_2_n_0          | core/reg_module/p_0_in                        |               18 |             32 |         1.78 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[12][31]_i_1_n_0         | core/reg_module/p_0_in                        |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[10][31]_i_1_n_0         | core/reg_module/p_0_in                        |               16 |             32 |         2.00 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[11][31]_i_1_n_0         | core/reg_module/p_0_in                        |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG | core/reg_module/gprf[21][31]_i_1_n_0         | core/reg_module/p_0_in                        |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG | core/brancher/rPc_current_reg1[31]_i_1_n_0   |                                               |               27 |             96 |         3.56 |
+|  clk_IBUF_BUFG |                                              |                                               |               99 |            293 |         2.96 |
 +----------------+----------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
 
 

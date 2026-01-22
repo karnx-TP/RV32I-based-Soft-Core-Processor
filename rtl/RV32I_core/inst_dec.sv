@@ -95,55 +95,58 @@ module inst_dec (
 
 //Signal Assignment
 	logic[31:0]		wInst_in;
-	logic[31:0]		rInstrustion;
-	logic			rStall;
-	wire[6:0]       wOp_code;
+	logic[31:0]		rInstrustion1;
+	logic[31:0]		rInstrustion2;
+	logic			rStall1;
+	logic			rStall2;
+	logic			rJmp;
+	logic[6:0]       wOp_code;
 
-	wire            wop_lui;
-	wire            wop_auipc;
-	wire            wop_jal;
-	wire            wop_jalr;
-	wire            wop_branch;
-	wire            wop_memLd;
-	wire            wop_intRegImm;
-	wire            wop_memSt;
-	wire            wop_consShf;
-	wire            wop_intRegReg;
-	wire            wop_efence;
-	wire            wop_ecb;
+	logic            wop_lui;
+	logic            wop_auipc;
+	logic            wop_jal;
+	logic            wop_jalr;
+	logic            wop_branch;
+	logic            wop_memLd;
+	logic            wop_intRegImm;
+	logic            wop_memSt;
+	logic            wop_consShf;
+	logic            wop_intRegReg;
+	logic            wop_efence;
+	logic            wop_ecb;
 
-	wire			wNOP;
+	logic		 	 wNOP;
 
-	wire            wr_type;
-	wire            wi_type;
-	wire            ws_type;
-	wire            wb_type;
-	wire            wj_type;
-	wire            wu_type;
+	logic            wr_type;
+	logic            wi_type;
+	logic            ws_type;
+	logic            wb_type;
+	logic            wj_type;
+	logic            wu_type;
 
-	wire[2:0]     	wfunct3;
-	wire[6:0]     	wfunct7;
-	wire[4:0]     	wreg_d;
-	wire[4:0]     	wreg_s1;
-	wire[4:0]     	wreg_s2;
+	logic[2:0]     	wfunct3;
+	logic[6:0]     	wfunct7;
+	logic[4:0]     	wreg_d;
+	logic[4:0]     	wreg_s1;
+	logic[4:0]     	wreg_s2;
 
-	wire[12:0]    	wimm13_b;
-	wire[11:0]    	wimm12_i_s;
-	wire[31:0]    	wimm32_u;
-	wire[20:0]    	wimm21_j;
+	logic[12:0]    	wimm13_b;
+	logic[11:0]    	wimm12_i_s;
+	logic[31:0]    	wimm32_u;
+	logic[20:0]    	wimm21_j;
     
 
 //Combinational Circuit
-	assign wReg_s1_out = wreg_s1;
-	assign wReg_s2_out = wreg_s2;
+	assign wReg_s1_out = stall ? reg_s1 : wreg_s1;
+	assign wReg_s2_out = stall ? reg_s2 : wreg_s2;
 
 	always_comb begin : uInstr
 		if(!rstB)begin
 			wInst_in = 0;
-		end else if(jmp) begin
-			wInst_in = 0;
-		end else if (rStall)begin
-			wInst_in = rInstrustion;
+		end else if (rStall1)begin
+			wInst_in = rInstrustion1;
+		end else if (rStall2)begin
+			wInst_in = rInstrustion2;
 		end else if(clkEn) begin
 			wInst_in = instruction_in;
 		end else begin
@@ -151,47 +154,85 @@ module inst_dec (
 		end
 	end  
 
-    assign wOp_code      = wInst_in[6:0]; 
+	always_comb begin : wDecoder
+		if(jmp)begin //Bubble when jump occur
+			wOp_code      = 0; 
+			wop_lui       = 1'b0;
+			wop_auipc     = 1'b0;
+			wop_jal       = 1'b0;
+			wop_jalr      = 1'b0;
+			wop_branch    = 1'b0; 
+			wop_memLd     = 1'b0;
+			wop_intRegImm = 1'b0;
+			wop_consShf   = 1'b0;
+			wop_memSt     = 1'b0;
+			wop_intRegReg = 1'b0;
+			wop_efence    = 1'b0;
+			wop_ecb       = 1'b0;
+			wNOP 		  = 1'b1;
+			wr_type       = 1'b0;
+			wi_type       = 1'b0;
+			ws_type       = 1'b0;
+			wb_type       = 1'b0;
+			wj_type       = 1'b0;
+			wu_type       = 1'b0;
+			wfunct3       = 3'b000;
+			wfunct7       = 7'b0000000;
+			wreg_d        = 5'b00000;
+			wreg_s1       = 5'b00000;
+			wreg_s2       = 5'b00000;
+			wimm12_i_s    = 12'h000;
+			wimm13_b      = 13'h0000;
+			wimm32_u      = 32'h00000000;
+			wimm21_j      = 21'h00000;
+		end else begin
+			wOp_code      = wInst_in[6:0]; 
 
-	assign wop_lui       = (wOp_code == 7'b0110111) ? 1'b1 : 1'b0;
-    assign wop_auipc     = (wOp_code == 7'b0010111) ? 1'b1 : 1'b0;
-    assign wop_jal       = (wOp_code == 7'b1101111) ? 1'b1 : 1'b0;
-    assign wop_jalr      = (wOp_code == 7'b1100111) ? 1'b1 : 1'b0;
-    assign wop_branch    = (wOp_code == 7'b1100011) ? 1'b1 : 1'b0; 
-    assign wop_memLd     = (wOp_code == 7'b0000011) ? 1'b1 : 1'b0;
-    assign wop_intRegImm = (wOp_code == 7'b0010011) && (wfunct3 != 3'b001 && wfunct3 != 3'b101) ? 1'b1 : 1'b0;
-    assign wop_consShf   = (wOp_code == 7'b0010011) && (wfunct3 == 3'b001 || wfunct3 == 3'b101) ? 1'b1 : 1'b0;
-    assign wop_memSt     = (wOp_code == 7'b0100011) ? 1'b1 : 1'b0;
-    assign wop_intRegReg = (wOp_code == 7'b0110011) ? 1'b1 : 1'b0;
-    assign wop_efence    = (wOp_code == 7'b0001111) ? 1'b1 : 1'b0;
-    assign wop_ecb     	= (wOp_code == 7'b1110011) ? 1'b1 : 1'b0;
-	assign wNOP 		= (wInst_in == 0);
+			wop_lui       = (wOp_code == 7'b0110111) ? 1'b1 : 1'b0;
+			wop_auipc     = (wOp_code == 7'b0010111) ? 1'b1 : 1'b0;
+			wop_jal       = (wOp_code == 7'b1101111) ? 1'b1 : 1'b0;
+			wop_jalr      = (wOp_code == 7'b1100111) ? 1'b1 : 1'b0;
+			wop_branch    = (wOp_code == 7'b1100011) ? 1'b1 : 1'b0; 
+			wop_memLd     = (wOp_code == 7'b0000011) ? 1'b1 : 1'b0;
+			wop_intRegImm = (wOp_code == 7'b0010011) && (wfunct3 != 3'b001 && wfunct3 != 3'b101) ? 1'b1 : 1'b0;
+			wop_consShf   = (wOp_code == 7'b0010011) && (wfunct3 == 3'b001 || wfunct3 == 3'b101) ? 1'b1 : 1'b0;
+			wop_memSt     = (wOp_code == 7'b0100011) ? 1'b1 : 1'b0;
+			wop_intRegReg = (wOp_code == 7'b0110011) ? 1'b1 : 1'b0;
+			wop_efence    = (wOp_code == 7'b0001111) ? 1'b1 : 1'b0;
+			wop_ecb       = (wOp_code == 7'b1110011) ? 1'b1 : 1'b0;
+			wNOP 		  = (wInst_in == 0);
 
 
-    assign wr_type       = wop_intRegReg;
-    assign wi_type       = wop_jalr | wop_memLd | wop_intRegImm | wop_consShf | wop_efence | wop_ecb;
-    assign ws_type       = wop_memSt;
-    assign wb_type       = wop_branch;
-    assign wj_type       = wop_jal;
-    assign wu_type       = wop_lui | wop_auipc;
+			wr_type       = wop_intRegReg;
+			wi_type       = wop_jalr | wop_memLd | wop_intRegImm | wop_consShf | wop_efence | wop_ecb;
+			ws_type       = wop_memSt;
+			wb_type       = wop_branch;
+			wj_type       = wop_jal;
+			wu_type       = wop_lui | wop_auipc;
 
-    assign wfunct3       = wInst_in[14:12];
-    assign wfunct7       = wInst_in[31:25];
-    assign wreg_d        = wInst_in[11:7];
-    assign wreg_s1       = wInst_in[19:15];
-    assign wreg_s2       = wInst_in[24:20];
+			wfunct3       = wInst_in[14:12];
+			wfunct7       = wInst_in[31:25];
+			wreg_d        = wInst_in[11:7];
+			wreg_s1       = wInst_in[19:15];
+			wreg_s2       = wInst_in[24:20];
 
-    assign wimm12_i_s    = (wi_type) ? wInst_in[31:20] :
-				           (ws_type) ? {wInst_in[31:25],wInst_in[11:7]} :
-                          12'h000;
-    assign wimm13_b      = {wInst_in[31],wInst_in[7],wInst_in[30:25],wInst_in[11:8],1'b0}; //B
-    assign wimm32_u      = {wInst_in[31:12],12'h000}; //U
-    assign wimm21_j      = {wInst_in[31],wInst_in[19:12],wInst_in[20],wInst_in[30:21],1'b0}; //J          
+			wimm12_i_s    = (wi_type) ? wInst_in[31:20] :
+							(ws_type) ? {wInst_in[31:25],wInst_in[11:7]} :
+							12'h000;
+			wimm13_b      = {wInst_in[31],wInst_in[7],wInst_in[30:25],wInst_in[11:8],1'b0}; //B
+			wimm32_u      = {wInst_in[31:12],12'h000}; //U
+			wimm21_j      = {wInst_in[31],wInst_in[19:12],wInst_in[20],wInst_in[30:21],1'b0}; //J 
+		end
+	end
+             
 
 //Sequencial
 	always @(posedge clk ) begin
-		rInstrustion <= instruction_in;
-		rStall <= stall;
+		rInstrustion1 <= instruction_in;
+		rInstrustion2 <= rInstrustion1;
+		rStall1 <= stall;
+		rStall2 <= rStall1;
+		rJmp <= jmp;
 
 		if(!stall)begin
 			Op_code <= wOp_code;

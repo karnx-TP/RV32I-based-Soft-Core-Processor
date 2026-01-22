@@ -25,7 +25,8 @@ module branch_unit (
 
     pc_return,
     pc_jmpto,
-	jmp_occur
+	jmp_occur,
+	Cond
 );
 //Port
 	input logic			clk;
@@ -47,7 +48,8 @@ module branch_unit (
 
     output logic[31:0]	pc_return;
     output logic[31:0]	pc_jmpto;
-	output logic		jmp_occur;
+	input logic		jmp_occur;
+	input logic		Cond;
 
 //Signal
 	//B/J Executing
@@ -61,34 +63,42 @@ module branch_unit (
 	//PC reg of currently exe instr
 	logic[31:0]	rPc_current_reg1;
 	logic[31:0]	rPc_current_reg2;
+	logic[31:0]	rPc_current_reg3;
+	//Reg for 2nd Cycle
+	logic[31:0]		rAlu_result;
+	logic			rOp_jal;
+	logic			rOp_jalr;
+	logic			rOp_b_type;
+	logic[31:0]		rAdder_jal;
+	logic[31:0]		rAdder_b;
 
 //Comb Logic
-	assign wNEq = |{alu_flag,alu_result};
-	assign wLt = alu_flag & wNEq;
-	assign wGt = !alu_flag & wNEq;
+	// assign wNEq = |{alu_flag,alu_result};
+	// assign wLt = alu_flag & wNEq;
+	// assign wGt = !alu_flag & wNEq;
 	
-	assign wJmp = op_jal | op_jalr | (b_type & wCond);
-	assign jmp_occur = wJmp | rJumping;
+	// assign wJmp = op_jal | op_jalr | (b_type & wCond);
+	// assign jmp_occur = wJmp;
 
-	always_comb begin : uCond
-		case (funct3)
-			3'b000 : wCond = !wNEq;
-			3'b001 : wCond = wNEq;
-			3'b100 : wCond = wLt;
-			3'b101 : wCond = wGt;
-			3'b110 : wCond = wLt|(!wNEq);
-			3'b111 : wCond = wGt;
-			default: wCond = 1'b0;
-		endcase
-	end
+	// always_comb begin : uCond
+	// 	case (funct3)
+	// 		3'b000 : wCond = !wNEq;
+	// 		3'b001 : wCond = wNEq;
+	// 		3'b100 : wCond = wLt;
+	// 		3'b101 : wCond = wGt;
+	// 		3'b110 : wCond = wLt|(!wNEq);
+	// 		3'b111 : wCond = wGt;
+	// 		default: wCond = 1'b0;
+	// 	endcase
+	// end
 
 	always_comb begin : uJmp
-		if(op_jal) begin
-			pc_jmpto = rPc_current_reg2 + {{10{imm21_j[20]}},imm21_j,1'b0};
-		end else if(op_jalr) begin
-			pc_jmpto = {alu_result[31:1],1'b0}; 
-		end else if (b_type & wCond) begin
-			pc_jmpto = rPc_current_reg2 + {{18{imm13_b[12]}},imm13_b,1'b0};
+		if(rOp_jal) begin
+			pc_jmpto = rPc_current_reg3 + rAdder_jal;
+		end else if(rOp_jalr) begin
+			pc_jmpto = {rAlu_result[31:1],1'b0}; 
+		end else if (rOp_b_type & Cond) begin
+			pc_jmpto = rPc_current_reg3 + rAdder_b;
 		end else begin
 			pc_jmpto = pc_current + 4;
 		end
@@ -107,6 +117,7 @@ module branch_unit (
 		if(!stall)begin
 			rPc_current_reg1 <= pc_current;
 			rPc_current_reg2 <= rPc_current_reg1;
+			rPc_current_reg3 <= rPc_current_reg2;
 		end
 	end
 
@@ -118,5 +129,14 @@ module branch_unit (
 		end
 	end
 
+	always @(posedge clk ) begin
+		rAlu_result <= alu_result;
+		rOp_jal <= op_jal;
+		rOp_jalr <= op_jalr;
+		rOp_b_type <= b_type;
+
+		rAdder_jal <= {{10{imm21_j[20]}},imm21_j,1'b0};
+		rAdder_b <= {{18{imm13_b[12]}},imm13_b,1'b0};
+	end
     
 endmodule

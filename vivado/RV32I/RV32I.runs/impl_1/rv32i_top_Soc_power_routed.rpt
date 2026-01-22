@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date             : Wed Jan 21 20:17:08 2026
+| Date             : Thu Jan 22 15:27:12 2026
 | Host             : LAPTOP-GM1L3F93 running 64-bit major release  (build 9200)
 | Command          : report_power -file rv32i_top_Soc_power_routed.rpt -pb rv32i_top_Soc_power_summary_routed.pb -rpx rv32i_top_Soc_power_routed.rpx
 | Design           : rv32i_top_Soc
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.114        |
+| Total On-Chip Power (W)  | 0.124        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.020        |
+| Dynamic (W)              | 0.030        |
 | Device Static (W)        | 0.094        |
 | Effective TJA (C/W)      | 11.5         |
-| Max Ambient (C)          | 83.7         |
-| Junction Temperature (C) | 26.3         |
+| Max Ambient (C)          | 83.6         |
+| Junction Temperature (C) | 26.4         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,18 +52,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.003 |        3 |       --- |             --- |
-| Slice Logic    |     0.002 |     4070 |       --- |             --- |
-|   LUT as Logic |     0.002 |     1799 |     17600 |           10.22 |
+| Clocks         |     0.004 |        3 |       --- |             --- |
+| Slice Logic    |     0.003 |     4188 |       --- |             --- |
+|   LUT as Logic |     0.003 |     1882 |     17600 |           10.69 |
+|   Register     |    <0.001 |     1676 |     35200 |            4.76 |
 |   CARRY4       |    <0.001 |       69 |      4400 |            1.57 |
-|   Register     |    <0.001 |     1536 |     35200 |            4.36 |
-|   F7/F8 Muxes  |    <0.001 |      320 |     17600 |            1.82 |
+|   F7/F8 Muxes  |    <0.001 |      256 |     17600 |            1.45 |
 |   Others       |     0.000 |       37 |       --- |             --- |
-| Signals        |     0.004 |     3193 |       --- |             --- |
-| Block RAM      |     0.010 |       10 |        60 |           16.67 |
-| I/O            |    <0.001 |       15 |       100 |           15.00 |
+| Signals        |     0.005 |     3378 |       --- |             --- |
+| Block RAM      |     0.013 |       10 |        60 |           16.67 |
+| I/O            |     0.004 |       15 |       100 |           15.00 |
 | Static Power   |     0.094 |          |           |                 |
-| Total          |     0.114 |          |           |                 |
+| Total          |     0.124 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,16 +73,16 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.022 |       0.018 |      0.004 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.029 |       0.025 |      0.004 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.005 |       0.000 |      0.005 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.001 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -136,7 +136,7 @@ Table of Contents
 +-------+--------+-----------------+
 | Clock | Domain | Constraint (ns) |
 +-------+--------+-----------------+
-| clk   | clk    |            20.0 |
+| clk   | clk    |            15.0 |
 +-------+--------+-----------------+
 
 
@@ -149,13 +149,15 @@ Table of Contents
 +----------------+-----------+
 | Name           | Power (W) |
 +----------------+-----------+
-| rv32i_top_Soc  |     0.020 |
-|   core         |     0.008 |
-|     brancher   |     0.001 |
-|     reg_module |     0.004 |
-|   prog_ram     |     0.008 |
+| rv32i_top_Soc  |     0.030 |
+|   core         |     0.011 |
+|     brancher   |     0.002 |
+|     dec        |     0.002 |
+|     reg_module |     0.005 |
+|   prog_ram     |     0.011 |
 |   ram          |     0.001 |
-|   uart_module  |     0.001 |
+|     BRAM       |     0.001 |
+|   uart_module  |     0.002 |
 +----------------+-----------+
 
 
