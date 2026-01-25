@@ -14,11 +14,16 @@ The goal of this project is to complete the **full digital IC design flow**, inc
 - FPGA prototyping
 - ASIC physical design from RTL to GDSII
 
+**Note**
+``` 
+This project documents my design and implementation journey, focusing on the learning process rather than only final results.  
+It includes my work steps for those who want to learn or discuss RTL and physical design.  
+Each part of the work is organized into separate directories to make the flow easy to follow and study.
+
 If you use or reference this design, proper credit would be greatly appreciated.  
 For suggestions, feedback, or technical discussions, feel free to contact me.
-
 📧 **Email:** thitipong.pav@gmail.com
-
+```
 
 ## Overview
 
@@ -39,7 +44,7 @@ The project emphasizes **ASIC-friendly RTL design**, modular SoC architecture, a
 		- Librelane Flow
 		- Software: Yosys, OpenROAD, Magic, Klayout
 
----
+
 
 ## Completed Design
 
@@ -61,7 +66,7 @@ The project emphasizes **ASIC-friendly RTL design**, modular SoC architecture, a
 
 ## FPGA Implementation
 - **Target Board:** AX7010 (Zynq-7000 series)
-- **Operating frequency**: 50 MHz
+- **Current Operating frequency**: 66.67 MHz
 #### For the Details See /vivado
 
 ## ASIC Implementation (RV32I Core Only)

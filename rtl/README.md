@@ -1,4 +1,6 @@
 # RTL Design Description
+This document include my design idea of the SoC. For the Improvement and Optimization See /vivado
+
 
 ### 1. RV32I CPU Core
 

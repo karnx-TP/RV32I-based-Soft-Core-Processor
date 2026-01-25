@@ -32,8 +32,13 @@
 
 ### Version 2 — 5-Stage Pipeline
 
-**Target Board:** AX7010 (Zynq-7000 series)
-**Synthesis Config** Keep Hierarchy
+**Target Board:** AX7010 (Zynq-7000 series)     
+**Synthesis Config:** Keep Hierarchy
+
+#### Method
+- Add more stage : IF->ID->EXE->MEM->WB
+- Use 2-cycle latency RAM (Reduce critical path)
+- Change peripheral's reg read to 2-cycle latency
 
 #### Resource Utilization
 - LUTs: 1799
@@ -91,6 +96,9 @@
   - Setup: 0.354 ns
   - Hold: 0.034 ns
   - Pulse width: 7.0 ns
+
+- Vivado Implementation Timing Report
+![Alt text](../pic/vivado_imp_timing_report.png)
 
 #### Improvements over Version 1
 - Improved timing margin
