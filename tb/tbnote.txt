@@ -32,10 +32,3 @@ Version2 Reg Dump
 # x29 = 0
 # x30 = 0
 # x31 = 10f8
-
-now i am continue trying to improve my RV32I soc.
-I try optimize it into 5-stage pipeline
-This cause me some more complex hazard logic
-I need to bypass data from 2 stage (MEM->EXE, WB->EXE) instead of 1 (WB->EXE/MEM)
-But first, while i designing the logic for this improvement, i realized that may be it will cause new hazard condition when current instruction want to use data from RAM in EXE which is ready after MEM (in WB cycle) so i need to make a stall logic to temporary stop running instruction to wait for data from ram ready.
-After i do a improvement, i realized that for my RV32I isa there are no instruction that will cause this 
