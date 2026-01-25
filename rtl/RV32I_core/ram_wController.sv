@@ -51,7 +51,9 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 	logic						rHalfEn2;
 	logic						rUnsignedEn2;
 	logic						rRdEn;
-	logic						rWrEn;
+	logic[3:0]					wByteSel;
+	logic[3:0]					wHalfSel;
+	logic[XLEN-1:0]				wDataIn;
 
 //RAM
 	bram_sp_byte #(
@@ -62,14 +64,55 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 		.enA(1'b1),
 		.wrEn(wrEn),
 		.addr(addr),
-		.dataIn(wrData),
+		.dataIn(wDataIn),
 		.byte_we(wRamByte_we),
 		.dataOut(RamDataOut)
 	);
+					 
+//Byte Enable Wr
+	always_comb begin : ByteSelDec
+		case (addr[1:0])
+			2'b00 : wByteSel <= 4'b0001;
+			2'b01 : wByteSel <= 4'b0010;
+			2'b10 : wByteSel <= 4'b0100;
+			2'b11 : wByteSel <= 4'b1000;
+			default: wByteSel <= 4'b0001;
+		endcase
+	end
+	always_comb begin : HalfSelDec
+		case (addr[1:0])
+			2'b00 : wHalfSel <= 4'b0011;
+			2'b01 : wHalfSel <= 4'b0110;
+			2'b10 : wHalfSel <= 4'b1100;
+			2'b11 : wHalfSel <= 4'b1100;
+			default: wHalfSel <= 4'b0011;
+		endcase
+	end
+	assign wRamByte_we = byteEn ? wByteSel :
+						halfEn ? wHalfSel :
+						4'b1111;
 
-//reg wrEn
-	always @(posedge clk ) begin
-		rWrEn <= wrEn;
+//Data In
+	always_comb begin : DataInByte
+		if(byteEn)begin
+			case (addr[1:0])
+				2'b00 : wDataIn <= wrData;
+				2'b01 : wDataIn <= {16'h0000,wrData[7:0],8'h00};
+				2'b10 : wDataIn <= {8'h00,wrData[7:0],16'h0000};
+				2'b11 : wDataIn <= {wrData[7:0],24'h000000};
+				default: wDataIn <= wrData;
+			endcase
+		end else if(halfEn)begin
+			case (addr[1:0])
+				2'b00 : wDataIn <= wrData;
+				2'b01 : wDataIn <= {8'h00,wrData[15:0],8'h00};
+				2'b10 : wDataIn <= {wrData[15:0],16'h0000};
+				2'b11 : wDataIn <= {wrData[15:0],16'h0000};
+				default: wDataIn <= wrData;
+			endcase
+		end else begin
+			wDataIn <= wrData;
+		end
 	end
 
 //reg for ByteEn
@@ -91,12 +134,6 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 					 RamDataOut;
 	end
 	
-					 
-//Byte Enable
-	assign wRamByte_we = byteEn ? 4'b0001 :
-						halfEn ? 4'b0011 :
-						4'b1111;
-
 //OutEn
 	always @(posedge clk ) begin
 		rRdEn <= rdEn;
