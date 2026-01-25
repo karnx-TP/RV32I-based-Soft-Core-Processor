@@ -53,13 +53,13 @@ module branch_unit (
 
 //Signal
 	//B/J Executing
-	logic		wJmp;
-	logic		rJumping;
+	// logic		wJmp;
+	// logic		rJumping;
 	//Comparison
-	logic 	wCond;
-	logic	wNEq;
-	logic	wLt;
-	logic	wGt;
+	// logic 	wCond;
+	// logic	wNEq;
+	// logic	wLt;
+	// logic	wGt;
 	//PC reg of currently exe instr
 	logic[31:0]	rPc_current_reg1;
 	logic[31:0]	rPc_current_reg2;
@@ -121,13 +121,13 @@ module branch_unit (
 		end
 	end
 
-	always @(posedge clk) begin
-		if(!rstB) begin
-			rJumping <= 1'b0;
-		end else begin
-			rJumping <= wJmp;
-		end
-	end
+	// always @(posedge clk) begin
+	// 	if(!rstB) begin
+	// 		rJumping <= 1'b0;
+	// 	end else begin
+	// 		rJumping <= wJmp;
+	// 	end
+	// end
 
 	always @(posedge clk ) begin
 		rAlu_result <= alu_result;

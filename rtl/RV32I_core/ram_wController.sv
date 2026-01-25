@@ -43,6 +43,7 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 	//RAM I/F
 	logic[3:0]					wRamByte_we;
     logic[XLEN-1:0]				RamDataOut;
+	logic[XLEN-1:0]				rDataOut;
 	logic						rByteEn;
 	logic						rHalfEn;
 	logic						rUnsignedEn;
@@ -83,9 +84,13 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 	end
 
 //DataOut
-	assign dataOut = (rByteEn2) ? {{(XLEN-8){(!rUnsignedEn2)&RamDataOut[7]}},RamDataOut[7:0]} :
+	assign dataOut = rDataOut;
+	always @(posedge clk) begin
+		rDataOut <= (rByteEn2) ? {{(XLEN-8){(!rUnsignedEn2)&RamDataOut[7]}},RamDataOut[7:0]} :
 					 (rHalfEn2) ? {{(XLEN/2){(!rUnsignedEn2)&RamDataOut[15]}},RamDataOut[15:0]} :
 					 RamDataOut;
+	end
+	
 					 
 //Byte Enable
 	assign wRamByte_we = byteEn ? 4'b0001 :

@@ -98,3 +98,25 @@
 - Equivalent functionality
 
 ---
+
+## CPI and MIPS Calculation for FPGA (Current Version)
+
+### Assumptions
+- Base CPI (ideal pipeline): 0.65  
+- 20% of instructions incur a branching (2-cycle execution)
+- 15% of instructions incur a 3-cycle stall (load-use hazard)  
+- Clock frequency: 66.67 MHz  
+
+### CPI Calculation
+```
+CPI = 0.65 + (0.20 × 2) + (0.15 × 3)
+    = 0.65 + 0.40 + 0.45
+    = 1.50
+```
+
+### MIPS Calculation
+```
+MIPS = Clock Frequency / CPI
+     = 66.67 MHz / 1.50
+     ≈ 44.44 MIPS
+```

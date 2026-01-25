@@ -51,7 +51,7 @@ localparam BYTE_WIDTH = 4;
     endgenerate
 
     //Read
-    always @(posedge clk) begin
+    always @(negedge clk) begin
         if(enA)begin
             dataOut <= ram[rAddr[ADDRWIDTH-1:2]];
         end

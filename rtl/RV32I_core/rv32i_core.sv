@@ -78,7 +78,7 @@ module rv32i_core (
 //Internal Signal , Control Signal
     //PC
     logic[31:0]     wPc_int;
-    logic           rPcCondEn;
+    // logic           rPcCondEn;
     logic[31:0]     wPcNextCond;
     logic[31:0]     wPcReturn;
     //Hazard Handle
@@ -101,7 +101,7 @@ module rv32i_core (
 	logic			wJumping;
 	logic           wJmp_occur;
 	logic 			rOp_jalr;
-	logic[31:0]		rAluJmpFW;
+	// logic[31:0]		rAluJmpFW;
 		//Test add 1 near condition decision
 	logic 	wCond;
 	logic	rCond;
@@ -111,9 +111,9 @@ module rv32i_core (
 	logic	wJmp;
     //ALU
     logic[31:0]     wAluA;
-	logic[31:0]		wAluAFw;
+	// logic[31:0]		wAluAFw;
     logic[31:0]     wAluB;
-	logic[31:0]		wAluBFw;
+	// logic[31:0]		wAluBFw;
     logic[2:0]      wFunct3_aluIn;
     logic[6:0]      wFunct7_aluIn;
     logic           wAluSextEn;
