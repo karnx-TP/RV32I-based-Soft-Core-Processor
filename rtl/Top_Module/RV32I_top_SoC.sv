@@ -81,6 +81,8 @@ module rv32i_top_Soc(
     logic[0:PERI_SIZE-1]    			wDataBusEn;
 	logic								wRamRdEn;
 	logic								wPeriRdEn;
+	logic								wRamWrEn;
+	logic								wPeriWrEn;
 
 //DataBus
 	assign wCoreDataIn = 	(wDataBusEn[RAM]) ? wDataBus[RAM] :
@@ -90,6 +92,8 @@ module rv32i_top_Soc(
 	assign wCoreDataInEn = |wDataBusEn;
 
 //RAM
+	assign wRamWrEn = wCoreWrEn & (wCoreAddr[XLEN-1:RAM_ADDRW] == 0);
+	assign wPeriWrEn = wCoreWrEn & (|wCoreAddr[XLEN-1:RAM_ADDRW]);
 	assign wRamRdEn = wCoreRdEn & (wCoreAddr[XLEN-1:RAM_ADDRW] == 0);
 	assign wPeriRdEn = wCoreRdEn & (|wCoreAddr[XLEN-1:RAM_ADDRW]);
 
@@ -128,7 +132,7 @@ module rv32i_top_Soc(
 
         .addr(wCoreAddr[RAM_ADDRW-1:0]),
         .wrData(wCoreDataOut),
-        .wrEn(wCoreWrEn),
+        .wrEn(wRamWrEn),
         .rdEn(wRamRdEn),
         .dataOut(wDataBus[RAM]),
         .outEn(wDataBusEn[RAM]),
@@ -153,7 +157,7 @@ module rv32i_top_Soc(
 
 		.addr(wUartAddr),
         .wrData(wCoreDataOut),
-        .wrEn(wCoreWrEn),
+        .wrEn(wPeriWrEn),
         .rdEn(wUartRdEn),
         .dataOut(wDataBus[UART]),
         .outEn(wDataBusEn[UART]),
@@ -205,7 +209,7 @@ module rv32i_top_Soc(
 
 		.addr(wCoreAddr[RAM_ADDRW:0]),
 		.wrData(wCoreDataOut),
-		.wrEn(wCoreWrEn),
+		.wrEn(wPeriWrEn),
 		.rdEn(wPeriRdEn),
 		.dataOut(wDataBus[PORT]),
 		.outEn(wDataBusEn[PORT]),

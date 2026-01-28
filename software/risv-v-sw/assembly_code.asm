@@ -48,8 +48,8 @@ main:
 	addi x0,x0,0 
 	addi x0,x0,0 
 
-	beq x18,x19,4
-	beq x20,x19,4
+	beq x18,x0,4
+	beq x0,x0,4
 
 	addi x0,x0,0 
 
@@ -63,7 +63,7 @@ main:
 	bltu x11,x10,4
 	bltu x10,x11,4
 	addi x0,x0,0 
-	bltu x30,x31,4
+	bltu x0,x0,4
 	addi x0,x0,0 
 
 	bge x10,x9,4

@@ -25,7 +25,6 @@ module branch_unit (
 
     pc_return,
     pc_jmpto,
-	jmp_occur,
 	Cond
 );
 //Port
@@ -48,7 +47,6 @@ module branch_unit (
 
     output logic[31:0]	pc_return;
     output logic[31:0]	pc_jmpto;
-	input logic		jmp_occur;
 	input logic		Cond;
 
 //Signal
@@ -73,24 +71,6 @@ module branch_unit (
 	logic[31:0]		rAdder_b;
 
 //Comb Logic
-	// assign wNEq = |{alu_flag,alu_result};
-	// assign wLt = alu_flag & wNEq;
-	// assign wGt = !alu_flag & wNEq;
-	
-	// assign wJmp = op_jal | op_jalr | (b_type & wCond);
-	// assign jmp_occur = wJmp;
-
-	// always_comb begin : uCond
-	// 	case (funct3)
-	// 		3'b000 : wCond = !wNEq;
-	// 		3'b001 : wCond = wNEq;
-	// 		3'b100 : wCond = wLt;
-	// 		3'b101 : wCond = wGt;
-	// 		3'b110 : wCond = wLt|(!wNEq);
-	// 		3'b111 : wCond = wGt;
-	// 		default: wCond = 1'b0;
-	// 	endcase
-	// end
 
 	always_comb begin : uJmp
 		if(rOp_jal) begin

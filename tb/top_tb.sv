@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+`timescale 1ns/1ns
 module top_tb ();
 
 
@@ -120,7 +120,7 @@ assign pin[0] = Pn[0];
 		//Dump Register
 		$display("Register Dump:");
 		for (int i = 0; i < 32; i++) begin
-			$display("x%0d = %0h", i, dut.core.reg_module.gprf[i]);
+			$display("x%0d = %0h", i, dut.core.reg_module.sram_reg1.mem[i]);
 		end
 
 		# (10*CLK_PERIOD);
@@ -138,6 +138,12 @@ assign pin[0] = Pn[0];
 		$display("Testbench End");
         $stop;
     end
+	
+	initial begin
+		# (60000000*CLK_PERIOD);
+		$display("Testbench End");
+        $stop;
+	end
 
 //Monitor
 // initial begin

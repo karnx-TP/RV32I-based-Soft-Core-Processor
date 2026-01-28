@@ -46,7 +46,14 @@ module inst_dec (
     op_consShf,
     op_intRegReg,
     op_efence,
-    op_ecb
+    op_ecb,
+
+	hazardS1,
+	hazardS2,
+	hazardS1_2,
+	hazardS2_2,
+	hazardS1_3,
+	hazardS2_3
 
 );
 
@@ -57,7 +64,7 @@ module inst_dec (
 
     input   logic[31:0]      instruction_in;
     input   logic       jmp;
-	input 	logic		stall;
+	output 	logic		stall;
 
     output logic[6:0]   Op_code;
     output logic        r_type;
@@ -93,12 +100,17 @@ module inst_dec (
     output logic        op_efence;
     output logic        op_ecb;
 
+	output logic 		hazardS1;
+	output logic		hazardS2;
+	output logic 		hazardS1_2;
+	output logic		hazardS2_2;
+	output logic 		hazardS1_3;
+	output logic		hazardS2_3;
+
 //Signal Assignment
 	logic[31:0]		wInst_in;
 	logic[31:0]		rInstrustion1;
 	logic[31:0]		rInstrustion2;
-	logic			rStall1;
-	logic			rStall2;
 	logic			rJmp;
 	logic[6:0]       wOp_code;
 
@@ -134,18 +146,41 @@ module inst_dec (
 	logic[11:0]    	wimm12_i_s;
 	logic[31:0]    	wimm32_u;
 	logic[20:0]    	wimm21_j;
+
+	//Hazard Handle
+	logic			rRegWrEn;
+	logic			rRegWrEn2;
+	logic			rRegWrEn3;
+	logic			rOp_memLd;
+    logic           wHazardRs1; //pc = i-1
+    logic           wHazardRs2;
+	logic           wHazard_2_Rs1; //pc = i-2
+    logic           wHazard_2_Rs2;
+	logic           wHazard_3_Rs1; //pc = i-3
+    logic           wHazard_3_Rs2;
+	logic			wHazardStall_EXE;
+	logic			wHazardStall_MEM;
+	logic[4:0]      rReg_d2;
+	logic[4:0]      rReg_d3;
+	logic			wStall;
+	logic			wStall_1;
+	logic			rStall;
+	logic			rStall2;
+	logic			rPostStall;
+	logic			rStallCnt1;
+	logic			rStallCnt2;
     
 
 //Combinational Circuit
-	assign wReg_s1_out = stall ? reg_s1 : wreg_s1;
-	assign wReg_s2_out = stall ? reg_s2 : wreg_s2;
+	assign wReg_s1_out = rStall ? reg_s1 : wreg_s1;
+	assign wReg_s2_out = rStall ? reg_s2 : wreg_s2;
 
 	always_comb begin : uInstr
 		if(!rstB)begin
 			wInst_in = 0;
-		end else if (rStall1)begin
+		end else if (rPostStall && rStallCnt2)begin
 			wInst_in = rInstrustion1;
-		end else if (rStall2)begin
+		end else if (rPostStall && !rStallCnt2)begin
 			wInst_in = rInstrustion2;
 		end else if(clkEn) begin
 			wInst_in = instruction_in;
@@ -187,6 +222,11 @@ module inst_dec (
 			wimm21_j      = 21'h00000;
 		end else begin
 			wOp_code      = wInst_in[6:0]; 
+			wfunct3       = wInst_in[14:12];
+			wfunct7       = wInst_in[31:25];
+			wreg_d        = wInst_in[11:7];
+			wreg_s1       = wInst_in[19:15];
+			wreg_s2       = wInst_in[24:20];
 
 			wop_lui       = (wOp_code == 7'b0110111) ? 1'b1 : 1'b0;
 			wop_auipc     = (wOp_code == 7'b0010111) ? 1'b1 : 1'b0;
@@ -210,12 +250,6 @@ module inst_dec (
 			wj_type       = wop_jal;
 			wu_type       = wop_lui | wop_auipc;
 
-			wfunct3       = wInst_in[14:12];
-			wfunct7       = wInst_in[31:25];
-			wreg_d        = wInst_in[11:7];
-			wreg_s1       = wInst_in[19:15];
-			wreg_s2       = wInst_in[24:20];
-
 			wimm12_i_s    = (wi_type) ? wInst_in[31:20] :
 							(ws_type) ? {wInst_in[31:25],wInst_in[11:7]} :
 							12'h000;
@@ -230,11 +264,19 @@ module inst_dec (
 	always @(posedge clk ) begin
 		rInstrustion1 <= instruction_in;
 		rInstrustion2 <= rInstrustion1;
-		rStall1 <= stall;
-		rStall2 <= rStall1;
+
+		rOp_memLd <= op_memLd;
+
 		rJmp <= jmp;
 
-		if(!stall)begin
+		rRegWrEn <= (rstB) & (op_jalr | op_jal | op_memLd | op_intRegImm | op_intRegReg | op_consShf | op_lui | op_auipc) ; 
+		rRegWrEn2 <= rRegWrEn;
+		rRegWrEn3 <= rRegWrEn2;
+
+		rReg_d2 <= reg_d;
+		rReg_d3 <= rReg_d2;
+
+		if(!rStall)begin
 			Op_code <= wOp_code;
 			op_lui <= wop_lui;
 			op_auipc <= wop_auipc;
@@ -264,6 +306,47 @@ module inst_dec (
 			imm32_u <= wimm32_u;
 			imm21_j <= wimm21_j;
 		end
+	end
+
+	
+
+//Hazard Handle
+	assign stall = rStall;
+
+    assign wHazardRs1 = rRegWrEn && (reg_d == wreg_s1) && (reg_d != 0);
+    assign wHazardRs2 = rRegWrEn && (reg_d == wreg_s2) && (reg_d != 0);
+	assign wHazardStall_EXE = (wHazardRs1 || wHazardRs2) && (wop_memLd);
+	assign hazardS1 = wHazardRs1;
+	assign hazardS2 = wHazardRs2;
+	
+	assign wHazard_2_Rs1 = rRegWrEn2 && (rReg_d2 == wreg_s1) && (rReg_d2 != 0);
+    assign wHazard_2_Rs2 = rRegWrEn2 && (rReg_d2 == wreg_s2) && (rReg_d2 != 0);
+	assign wHazardStall_MEM = (wHazard_2_Rs1 || wHazard_2_Rs2) && (op_memLd);
+	assign hazardS1_2 = wHazard_2_Rs1;
+	assign hazardS2_2 = wHazard_2_Rs2; 
+
+	assign wHazard_3_Rs1 = rRegWrEn3 && (rReg_d3 == wreg_s1) && (rReg_d3 != 0);
+    assign wHazard_3_Rs2 = rRegWrEn3 && (rReg_d3 == wreg_s2) && (rReg_d3 != 0);
+	assign hazardS1_3 = wHazard_3_Rs1;
+	assign hazardS2_3 = wHazard_3_Rs2;
+
+	assign wStall = wStall_1 | rStall2;
+	assign wStall_1 = clkEn && (wHazardStall_EXE || wHazardStall_MEM) && (!rStall);
+
+	always @(posedge clk ) begin
+		if(!rstB)begin
+			rStall <= 1'b0;
+			rStall2 <= 1'b0;
+		end else begin
+			rStall <= wStall;
+			rStall2 <= wStall_1 & !wHazardStall_MEM;	
+		end
+
+		rStallCnt1 <= wStall_1;
+		rStallCnt2 <= rStallCnt1;	
+
+		rPostStall <=  !wStall & rStall;
+	
 	end
 
 endmodule

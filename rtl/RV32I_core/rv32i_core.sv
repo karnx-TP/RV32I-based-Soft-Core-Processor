@@ -81,20 +81,20 @@ module rv32i_core (
     // logic           rPcCondEn;
     logic[31:0]     wPcNextCond;
     logic[31:0]     wPcReturn;
-    //Hazard Handle
-    logic           wHazardRs1; //pc = i-1
-    logic           wHazardRs2;
-	logic           wHazard_2_Rs1; //pc = i-2
-    logic           wHazard_2_Rs2;
-    logic[4:0]      rReg_d;
-	logic[4:0]      rReg_d2;
-	logic			wStall;
-	logic			wStall1;
-	logic			rStall2;
-	logic			rHazardStallRs1;
-	logic			rHazardStallRs2;
-	logic			rHazardStallRs1_2;
-	logic			rHazardStallRs2_2;
+	//Hazard
+	logic			wHazardRs1;
+	logic			wHazardRs2;
+	logic			wHazard_2_Rs1;
+	logic			wHazard_2_Rs2;
+	logic			wHazard_3_Rs1;
+	logic			wHazard_3_Rs2;
+	logic			rHazardRs1;
+	logic			rHazardRs2;
+	logic			rHazard_2_Rs1;
+	logic			rHazard_2_Rs2;
+	logic			rHazard_3_Rs1;
+	logic			rHazard_3_Rs2;
+	logic			wHazardStall;
 	//Branch&Jumo
 	logic			rJumping1;
 	logic			rJumping2;
@@ -102,13 +102,12 @@ module rv32i_core (
 	logic           wJmp_occur;
 	logic 			rOp_jalr;
 	// logic[31:0]		rAluJmpFW;
-		//Test add 1 near condition decision
+	//Test add 1 near condition decision
 	logic 	wCond;
 	logic	rCond;
 	logic	wNEq;
 	logic	wLt;
 	logic	wGt;
-	logic	wJmp;
     //ALU
     logic[31:0]     wAluA;
 	// logic[31:0]		wAluAFw;
@@ -120,15 +119,20 @@ module rv32i_core (
     //Reg
 	wire[4:0]		wReg_s1_out;
 	wire[4:0]		wReg_s2_out;
+	logic[31:0]     wExeData;
     logic[31:0]     rWrData;
 	logic[31:0]     rWrDataWB;
     logic           wRegWrEn;
     logic           rRegWrEn;
 	logic           rRegWrEn2;
+	logic[4:0]		rReg_d;
+	logic[4:0]		rReg_d2;
     logic[31:0]     wRegWrData;
 	logic[31:0]     rRegWrData;
 	logic[31:0]     wRs1Data;
     logic[31:0]     wRs2Data;
+	logic[31:0]     rRs1DataBP;
+    logic[31:0]     rRs2DataBP;
     //Ram
     logic           rOp_memLd;
 	logic			rOp_memLd2;
@@ -193,7 +197,28 @@ module rv32i_core (
         .op_consShf(op_consShf),
         .op_intRegReg(op_intRegReg),
         .op_efence(op_efence),
-        .op_ecb(op_ecb)
+        .op_ecb(op_ecb),
+
+		.hazardS1(wHazardRs1),
+		.hazardS2(wHazardRs2),
+		.hazardS1_2(wHazard_2_Rs1),
+		.hazardS2_2(wHazard_2_Rs2),
+		.hazardS1_3(wHazard_3_Rs1),
+		.hazardS2_3(wHazard_3_Rs2)
+    );
+	reg_file_sky130sram reg_module (
+        .clk(clk),
+        .rstB(rstB),
+
+        .wrEn(wRegWrEn),
+        .wrData(wRegWrData),
+        .wrAddr(rReg_d2),
+
+        .rdR1Addr(wReg_s1_out),
+        .rdR2Addr(wReg_s2_out),
+
+        .r1out(wRs1Data),
+        .r2out(wRs2Data)
     );
     ALU32bits alu (
         .r_type(r_type),
@@ -207,20 +232,6 @@ module rv32i_core (
         .B(wAluB),
         .out(wAluOut),
         .flag(wAluFlag)
-    );
-    reg_file reg_module (
-        .clk(clk),
-        .rstB(rstB),
-
-        .wrEn(wRegWrEn),
-        .wrData(wRegWrData),
-        .wrAddr(rReg_d2),
-
-        .rdR1Addr(wReg_s1_out),
-        .rdR2Addr(wReg_s2_out),
-
-        .r1out(wRs1Data),
-        .r2out(wRs2Data)
     );
     branch_unit brancher (
         .clk(clk),
@@ -242,98 +253,45 @@ module rv32i_core (
 
         .pc_return(wPcReturn),
         .pc_jmpto(wPcNextCond),
-        .jmp_occur(wJmp_occur),
 		.Cond(rCond)
     );
 
 //PC
     assign pc = wPc_int;
-	
 
-//Hazard Handle
-    assign wHazardRs1 = rRegWrEn && (rReg_d == reg_s1) && (rReg_d != 0);
-    assign wHazardRs2 = rRegWrEn && (rReg_d == reg_s2) && (rReg_d != 0);
-	assign wHazard_2_Rs1 = rRegWrEn2 && (rReg_d2 == reg_s1) && (rReg_d2 != 0);
-    assign wHazard_2_Rs2 = rRegWrEn2 && (rReg_d2 == reg_s2) && (rReg_d2 != 0);
-	assign wStall = wStall1 | rStall2;
-	assign wStall1 = clkEn && (wHazardRs1 || wHazardRs2) && (rOp_memLd) && 
-						  !(rHazardStallRs1 || rHazardStallRs2);
+//Bypass
 	always @(posedge clk ) begin
-		if(!rstB)begin
-			rHazardStallRs1 <= 1'b0;
-			rHazardStallRs2 <= 1'b0;
+		rHazardRs1 <= wHazardRs1;
+		rHazardRs2 <= wHazardRs2;
+		rHazard_2_Rs1 <= wHazard_2_Rs1;
+		rHazard_2_Rs2 <= wHazard_2_Rs2;
+		rHazard_3_Rs1 <= wHazard_3_Rs1;
+		rHazard_3_Rs2 <= wHazard_3_Rs2;
+	end
+	always @(posedge clk) begin
+		if(wHazardRs1 & !wStall)begin
+			rRs1DataBP <= wExeData;
+		end else if(wHazard_2_Rs1 & !wStall) begin
+			rRs1DataBP <= rWrData;
+		end else if(wHazard_3_Rs1 | wStall) begin
+			rRs1DataBP <= rWrDataWB;
+		end else begin
+			rRs1DataBP <= rRs1DataBP;
 		end
-		rStall2 <= wStall1;
-		rHazardStallRs1 <= wStall & wHazardRs1;
-		rHazardStallRs2 <= wStall & wHazardRs2;
-		rHazardStallRs1_2 <= rHazardStallRs1;
-		rHazardStallRs2_2 <= rHazardStallRs2;
 	end
 
-//Branch
-	always @(posedge clk ) begin
-		rJumping1 <= wJmp_occur;
-		rJumping2 <= rJumping1;
-		rCond <= wCond;
+	always @(posedge clk) begin
+		if(wHazardRs2 & !wStall)begin
+			rRs2DataBP <= wExeData;
+		end else if(wHazard_2_Rs2 & !wStall) begin
+			rRs2DataBP <= rWrData;
+		end else if(wHazard_3_Rs2 | wStall) begin
+			rRs2DataBP <= wRegWrData;
+		end else begin
+			rRs2DataBP <= rRs2DataBP;
+		end
 	end
-	assign wJumping = rJumping2 | rJumping1 | wJmp_occur;
-	assign wNEq = |{wAluFlag,wAluOut};
-	assign wLt = wAluFlag & wNEq;
-	assign wGt = !wAluFlag & wNEq;
 	
-	// assign wJmp = clkEn ? op_jal | op_jalr | (b_type & wCond) : 1'b0;
-	assign wJmp = (!clkEn) ? 1'b0 :
-					b_type ? wCond :
-					op_jal | op_jalr;
-	assign wJmp_occur = wJmp;
-
-	always_comb begin : uCond
-		case (funct3)
-			3'b000 : wCond = !wNEq;
-			3'b001 : wCond = wNEq;
-			3'b100 : wCond = wLt;
-			3'b101 : wCond = wGt;
-			3'b110 : wCond = wLt|(!wNEq);
-			3'b111 : wCond = wGt;
-			default: wCond = 1'b0;
-		endcase
-	end
-
-
-//ALU
-    assign wFunct3_aluIn = b_type ? 3'b000 : //Use SUB in ALU for Branch
-                           op_auipc ? 3'b000 : //Add AUIPC
-                           funct3; 
-    assign wFunct7_aluIn = b_type ? 7'b0100000 : 
-                           op_auipc ? 7'b0000000 : 
-                           funct7;
-    assign wAluSextEn = (b_type & (funct3[2:1] == 2'b11)) ? 1'b0 : 1'b1;
-
-    always_comb begin : MuxForAlu
-		//A
-        if(r_type | op_consShf | op_intRegImm | b_type | op_jalr) begin
-			wAluA = wHazardRs1 ? rWrData : 
-					(wHazard_2_Rs1 && !rOp_memLd2) ? wRegWrData :
-					wRs1Data;
-		end else if (op_auipc) begin
-            wAluA = wPc_int;
-        end else begin
-			wAluA = 0;
-		end
-
-		//B
-		if(r_type | b_type) begin
-			wAluB = wHazardRs2 ? rWrData : 
-					(wHazard_2_Rs2 && !rOp_memLd2) ? wRegWrData :
-					wRs2Data;
-		end else if(op_consShf | op_intRegImm | op_jalr) begin
-			wAluB = {{20{imm12_i_s[11]}},imm12_i_s}; //Sign-Extended
-        end else if (op_auipc) begin
-            wAluB = imm32_u;
-        end else begin
-			wAluB = 0;
-		end
-    end
 
 //Reg file
 	always @(posedge clk) begin
@@ -342,28 +300,22 @@ module rv32i_core (
 		rRegWrData <= wRegWrData;
     end
 
-	// always_comb begin : u_wrReg
-	// 	if (rOp_memLd2) begin
-    //         wRegWrData = dataBusIn;
-    //     end else begin
-	// 		wRegWrData = rWrDataWB;
-	// 	end 
-	// end
     assign wRegWrData = (rOp_memLd2) ? dataBusIn : rWrDataWB;
 	assign wRegWrEn = rRegWrEn2;
 
 	always @(posedge clk ) begin
+		rWrData <= wExeData;
 		rWrDataWB <= rWrData; //rWrData = MEM
 	end
-    always @(posedge clk) begin
+    always_comb begin
         if(op_intRegImm | op_intRegReg | op_consShf | op_auipc) begin //ALU
-			rWrData <= wAluOut;
+			wExeData = wAluOut;
 		end else if(op_lui) begin //Load upper imm
-			rWrData <= imm32_u;
+			wExeData = imm32_u;
         end else if (op_jal | op_jalr) begin
-            rWrData <= wPcReturn;
+            wExeData = wPcReturn;
         end else begin	
-			rWrData <= 0;
+			wExeData = 0;
 		end
     end
 	always @(posedge clk ) begin
@@ -377,16 +329,73 @@ module rv32i_core (
         end
     end
 
+//ALU
+    assign wFunct3_aluIn = b_type ? 3'b000 : //Use SUB in ALU for Branch
+                           op_auipc ? 3'b000 : //Add AUIPC
+                           funct3; 
+    assign wFunct7_aluIn = b_type ? 7'b0100000 : 
+                           op_auipc ? 7'b0000000 : 
+                           funct7;
+    assign wAluSextEn = (b_type & (funct3[2:1] == 2'b11)) ? 1'b0 : 1'b1;
+
+    always_comb begin : MuxForAlu
+		//A
+        if(r_type | op_consShf | op_intRegImm | b_type | op_jalr) begin
+			wAluA = (rHazardRs1 | rHazard_2_Rs1 | rHazard_3_Rs1 | wStall) ? rRs1DataBP : wRs1Data; 
+		end else if (op_auipc) begin
+            wAluA = wPc_int;
+        end else begin
+			wAluA = 0;
+		end
+
+		//B
+		if(r_type | b_type) begin
+			wAluB = (rHazardRs2 | rHazard_2_Rs2 | rHazard_3_Rs2 | wStall) ? rRs2DataBP : wRs2Data; 
+		end else if(op_consShf | op_intRegImm | op_jalr) begin
+			wAluB = {{20{imm12_i_s[11]}},imm12_i_s}; //Sign-Extended
+        end else if (op_auipc) begin
+            wAluB = imm32_u;
+        end else begin
+			wAluB = 0;
+		end
+    end
+
+//Branch
+	
+	always_comb begin : uCond
+		case (funct3)
+			3'b000 : wCond = !wNEq;
+			3'b001 : wCond = wNEq;
+			3'b100 : wCond = wLt;
+			3'b101 : wCond = wGt;
+			3'b110 : wCond = wLt|(!wNEq);
+			3'b111 : wCond = wGt;
+			default: wCond = 1'b0;
+		endcase
+	end
+
+	// assign wJmp_occur = clkEn ? op_jal | op_jalr | (b_type & wCond) : 1'b0;
+	assign wJmp_occur = (!clkEn) ? 1'b0 :
+					b_type ? wCond :
+					op_jal | op_jalr;
+
+	assign wJumping = rJumping2 | rJumping1 | wJmp_occur;
+	assign wNEq = |{wAluFlag,wAluOut};
+	assign wLt = wAluFlag & wNEq;
+	assign wGt = !wAluFlag & wNEq;
+
+	always @(posedge clk ) begin
+		rJumping1 <= wJmp_occur;
+		rJumping2 <= rJumping1;
+		rCond <= wCond;
+	end
+
 //Mem/RAM
-	assign wForwardAddr =  wHazardRs1 ? rWrData : 
-						   (wHazard_2_Rs1  && !rOp_memLd2) ? rWrDataWB : 
-						   wRs1Data;
+	assign wForwardAddr =  (rHazardRs1 | rHazard_2_Rs1 | rHazard_3_Rs1 | wStall) ? rRs1DataBP : wRs1Data; 
     assign addr = (op_memLd | op_memSt) ? wForwardAddr + imm12_i_s : {32{1'b0}};
     assign wrEn = (rstB) & (op_memSt);
 	assign rdEn = (rstB) & (op_memLd);
-    assign dataBusOut = wHazardRs2 ? rWrData : 
-						(wHazard_2_Rs2  && !rOp_memLd2) ? rWrDataWB : 
-						wRs2Data;
+    assign dataBusOut = (rHazardRs2 | rHazard_2_Rs2 | rHazard_3_Rs2 | wStall) ? rRs2DataBP : wRs2Data; 
 	assign RamMode = {wRamByteEn,wRamHalfEn,wRamWordEn,wRamUnsignedEn};
     assign wRamByteEn = (funct3[1:0] == 2'b00);
     assign wRamHalfEn = (funct3[1:0] == 2'b01);

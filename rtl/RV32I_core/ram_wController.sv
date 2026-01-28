@@ -129,8 +129,8 @@ localparam ADDRWIDTH = $clog2(DEPTH);
 //DataOut
 	assign dataOut = rDataOut;
 	always @(posedge clk) begin
-		rDataOut <= (rByteEn2) ? {{(XLEN-8){(!rUnsignedEn2)&RamDataOut[7]}},RamDataOut[7:0]} :
-					 (rHalfEn2) ? {{(XLEN/2){(!rUnsignedEn2)&RamDataOut[15]}},RamDataOut[15:0]} :
+		rDataOut <= (rByteEn) ? {{(XLEN-8){(!rUnsignedEn)&RamDataOut[7]}},RamDataOut[7:0]} :
+					 (rHalfEn) ? {{(XLEN/2){(!rUnsignedEn)&RamDataOut[15]}},RamDataOut[15:0]} :
 					 RamDataOut;
 	end
 	
