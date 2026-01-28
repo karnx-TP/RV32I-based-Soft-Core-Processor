@@ -5,10 +5,10 @@ RTL Design, FPGA Prototyping (Xilinx), and ASIC Physical Design (SKY130)
 ---
 ### About Author&Project
 I am a senior Electrical Engineering student with a strong interest in **VLSI and Digital IC Design**.  
-This project is an individual learning-oriented work aimed at gaining hands-on experience in **real processor and SoC design**.
+This project is an individual work aimed at gaining hands-on experience in **real processor and SoC design** using open-source ISA like **RISC-V** and open-source tools.
 
 The goal of this project is to complete the **full digital IC design flow**, including:
-- Architecture definition
+- Architecture definition **: RISC-V**
 - RTL design and verification
 - System integration
 - FPGA prototyping
@@ -27,23 +27,32 @@ For suggestions, feedback, or technical discussions, feel free to contact me.
 
 ## Overview
 
-This project implements a custom **RV32I-based soft-core processor** integrated into a complete **Microcontroller System-on-chip (SoC)**.
+This project implements a custom **RISC-V based soft-core processor** integrated into a complete **Microcontroller System-on-Chip (SoC)**.
 
-The design has been:
-- Architected and verified at RTL level
-- Prototyped and validated on **real FPGA hardware**
-- Implemented through a **full ASIC physical design flow** (core-only) using **LibreLane + SKY130**
+**Goal**
+- Architect and verify at the RTL level
+- Prototype and validate on **real FPGA hardware**
+- Implemente through a **full ASIC physical design flow** using **LibreLane + SKY130**
 
-The project emphasizes **ASIC-friendly RTL design**, modular SoC architecture, and a realistic path from **FPGA prototyping to ASIC implementation**.
+The project emphasizes **ASIC-friendly RTL design**, modular **RISC-V SoC architecture**, and a realistic path from **FPGA prototyping to ASIC implementation**.
 
-- Tools Used
-	- RTL Design: SystemVerilog
-	- Functional Verification: ModelSim
-	- FPGA Implementation: Vivado, Teraterm(for uart communication)
-	- ASIC Implementation: 
-		- Librelane Flow
-		- Software: Yosys, OpenROAD, Magic, Klayout
+## Tools Used
 
+### RTL & Verification
+- **RTL Design:** SystemVerilog
+- **Functional Verification:** ModelSim
+
+### FPGA Implementation
+- **FPGA Tools:** Vivado
+- **UART Communication:** Tera Term
+
+### ASIC Implementation
+- **Flow:** LibreLane
+- **Tools:**  
+  - Yosys  
+  - OpenROAD  
+  - Magic  
+  - KLayout  
 
 
 ## Completed Design

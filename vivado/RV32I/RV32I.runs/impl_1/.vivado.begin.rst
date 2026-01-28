@@ -1,80 +1,10 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="5956" HostCore="16" HostMemory="033414819840">
+    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="25740" HostCore="16" HostMemory="033414819840">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="23432" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="15892" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="14752" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="16656" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="27804" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="29076" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="5396" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="31832" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="24560" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="30872" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="30788" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="33944" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="5012" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="21740" HostCore="16" HostMemory="033414819840">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="28308" HostCore="16" HostMemory="033414819840">
+    <Process Command="vivado.bat" Owner="ZENBOOK" Host="LAPTOP-GM1L3F93" Pid="25076" HostCore="16" HostMemory="033414819840">
     </Process>
 </ProcessHandle>

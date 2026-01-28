@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Thu Jan 22 15:27:11 2026
+| Date         : Wed Jan 28 11:21:56 2026
 | Host         : LAPTOP-GM1L3F93 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file rv32i_top_Soc_methodology_drc_routed.rpt -pb rv32i_top_Soc_methodology_drc_routed.pb -rpx rv32i_top_Soc_methodology_drc_routed.rpx
 | Design       : rv32i_top_Soc
@@ -23,11 +23,11 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 41
+             Checks found: 44
 +-----------+----------+--------------------------------------------+--------+
 | Rule      | Severity | Description                                | Checks |
 +-----------+----------+--------------------------------------------+--------+
-| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 11     |
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 14     |
 | SYNTH-15  | Warning  | Byte wide write enable not inferred        | 8      |
 | TIMING-18 | Warning  | Missing input or output delay              | 22     |
 +-----------+----------+--------------------------------------------+--------+
@@ -36,55 +36,70 @@ Table of Contents
 -----------------
 SYNTH-6#1 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance prog_ram/ram_reg_0_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance core/reg_module/sram_reg1/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#2 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance prog_ram/ram_reg_0_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance core/reg_module/sram_reg2/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#3 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance prog_ram/ram_reg_1_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance prog_ram/ram_reg_0_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#4 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance prog_ram/ram_reg_1_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance prog_ram/ram_reg_0_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#5 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance prog_ram/ram_reg_2_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance prog_ram/ram_reg_1_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#6 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance prog_ram/ram_reg_2_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance prog_ram/ram_reg_1_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#7 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance prog_ram/ram_reg_3_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance prog_ram/ram_reg_2_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#8 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance prog_ram/ram_reg_3_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance prog_ram/ram_reg_2_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#9 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance rx_echo_module/tx_fifo/buffer_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance prog_ram/ram_reg_3_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#10 Warning
 Timing of a RAM block might be sub-optimal  
-The timing for the instance uart_module/ffrx/buffer_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+The timing for the instance prog_ram/ram_reg_3_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 SYNTH-6#11 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram/BRAM/genblk1[1].ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#12 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance rx_echo_module/tx_fifo/buffer_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#13 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance uart_module/ffrx/buffer_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#14 Warning
 Timing of a RAM block might be sub-optimal  
 The timing for the instance uart_module/fftx/buffer_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>

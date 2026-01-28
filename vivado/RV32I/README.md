@@ -67,7 +67,7 @@
 ---
 
 
-### Version 3 — Timing Optimization (Current)
+### Version 3 — Max Frequency Optimization (Current)
 
 **Target Board:** AX7010 (Zynq-7000 series)
 **Synthesis Config** Keep Hierarchy
@@ -97,8 +97,24 @@
   - Hold: 0.034 ns
   - Pulse width: 7.0 ns
 
-- Vivado Implementation Timing Report
-![Alt text](../pic/vivado_imp_timing_report.png)
+
+#### Throughput
+
+- Assumptions
+	- Normal Instruction (1 cycle): 0.65  
+	- 20% of instructions incur a branching (2-cycle execution)
+	- 15% of instructions incur a 3-cycle stall (load-use hazard)  
+	- Clock frequency: 66.67 MHz  
+
+```
+CPI = 0.65 + (0.20 × 2) + (0.15 × 3)
+    = 0.65 + 0.40 + 0.45
+    = 1.50
+
+MIPS = Clock Frequency / CPI
+     = 66.67 MHz / 1.50
+     ≈ 44.44 MIPS
+```
 
 #### Improvements over Version 1
 - Improved timing margin
@@ -107,24 +123,78 @@
 
 ---
 
-## CPI and MIPS Calculation for FPGA (Current Version)
+### Version 4 — Resource & Frequency Optimization (Current)
 
-### Assumptions
-- Base CPI (ideal pipeline): 0.65  
-- 20% of instructions incur a branching (2-cycle execution)
-- 15% of instructions incur a 3-cycle stall (load-use hazard)  
-- Clock frequency: 66.67 MHz  
+**Target Board:** AX7010 (Zynq-7000 series)
+**Synthesis Config** Keep Hierarchy
 
-### CPI Calculation
+#### Optimization
+- Use BRAM-based register files : Addr Latech @ Negedge and Data Read Out @ Posedge
+- Move Register Read to ID Stage
+- Insert register after branch condition calculation
+- Use Instruction Flush if branch condition is true
+
+#### Resource Utilization
+- LUTs: 1437
+- FFs: **898**
+- BRAMs: 12
+- No Chipscope
+- Vivado Implementation Utilization Report
+![Alt text](../pic/util.png)
+
+#### Power
+- 0.130 W
+- Vivado Implementation Power Report
+![Alt text](../pic/power.png)
+
+#### Timing
+- Operating frequency: **76.9 MHz** (13ns)
+- WNS:
+  - Setup: 0.188 ns
+  - Hold: 0.019 ns
+  - Pulse width: 5.0 ns
+
+- Vivado Implementation Timing Report
+![Alt text](../pic/timing.png)
+
+#### Improvements over Version 1
+- Improved Max Frequency
+- Higher Throughput
+- Reduced resource utilization
+- Slightly higher power thourgh higher frequency and BRAM
+- Equivalent functionality
+
+#### Throughput
+
+- Assumptions
+	- Normal Instruction (1 cycle): 0.65  
+	- 10% of instructions incur a branching condition not matched
+	- 10% of instructions incur a branching condition matched (3 cycle penalty)
+	- 5% of instructions incur a 1-cycle stall (load-use hazard @ MEM)
+	- 5% of instructions incur a 2-cycle stall (load-use hazard @ EXE)  
+	- Clock frequency: 76.9 MHz  
+
 ```
-CPI = 0.65 + (0.20 × 2) + (0.15 × 3)
-    = 0.65 + 0.40 + 0.45
-    = 1.50
+CPI = 0.65 + (0.1 × 1) + (0.1 × 4) + (0.05 × 2) + (0.05 × 3)
+    = 1.5
+
+Throughput = Clock Frequency / CPI
+     = 76.9 MHz / 1.50
+     ≈ 51.3 MIPS
 ```
 
-### MIPS Calculation
-```
-MIPS = Clock Frequency / CPI
-     = 66.67 MHz / 1.50
-     ≈ 44.44 MIPS
-```
+---
+## Final Comparison Summary
+
+| Metric | Version 1 | Version 2 | Version 3 | Version 4 |
+|------|-----------|-----------|-----------|-----------|
+| Pipeline | 3-stage | 5-stage | 5-stage | 5-stage |
+| Register File | FF-based | FF-based | FF-based | **BRAM-based** |
+| Fmax (MHz) | 50.0 | 50.0 | 66.67 | **76.9** |
+| Have stall mechanism| No | No | Yes | Yes
+| Avg CPI | ~1.0 | ~1.0 | 1.50 | 1.50 |
+| Throughput (MIPS) | 50.0 | 50.0 | 44.4 | **51.3** |
+| LUTs | 2948 | 1799 | 1882 | **1437** |
+| FFs | 3292 | 1536 | 1676 | **898** |
+| BRAMs | 11.5 | 10 | 10 | 12 |
+| Power (W) | 0.125 | 0.114 | 0.124 | 0.130 |

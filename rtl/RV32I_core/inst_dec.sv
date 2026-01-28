@@ -10,7 +10,6 @@ module inst_dec (
 	clkEn,
     
     instruction_in,
-    jmp,
 	stall,
 
     Op_code,
@@ -63,7 +62,6 @@ module inst_dec (
 	input 	logic		clkEn;
 
     input   logic[31:0]      instruction_in;
-    input   logic       jmp;
 	output 	logic		stall;
 
     output logic[6:0]   Op_code;
@@ -111,7 +109,6 @@ module inst_dec (
 	logic[31:0]		wInst_in;
 	logic[31:0]		rInstrustion1;
 	logic[31:0]		rInstrustion2;
-	logic			rJmp;
 	logic[6:0]       wOp_code;
 
 	logic            wop_lui;
@@ -190,73 +187,41 @@ module inst_dec (
 	end  
 
 	always_comb begin : wDecoder
-		if(jmp)begin //Bubble when jump occur
-			wOp_code      = 0; 
-			wop_lui       = 1'b0;
-			wop_auipc     = 1'b0;
-			wop_jal       = 1'b0;
-			wop_jalr      = 1'b0;
-			wop_branch    = 1'b0; 
-			wop_memLd     = 1'b0;
-			wop_intRegImm = 1'b0;
-			wop_consShf   = 1'b0;
-			wop_memSt     = 1'b0;
-			wop_intRegReg = 1'b0;
-			wop_efence    = 1'b0;
-			wop_ecb       = 1'b0;
-			wNOP 		  = 1'b1;
-			wr_type       = 1'b0;
-			wi_type       = 1'b0;
-			ws_type       = 1'b0;
-			wb_type       = 1'b0;
-			wj_type       = 1'b0;
-			wu_type       = 1'b0;
-			wfunct3       = 3'b000;
-			wfunct7       = 7'b0000000;
-			wreg_d        = 5'b00000;
-			wreg_s1       = 5'b00000;
-			wreg_s2       = 5'b00000;
-			wimm12_i_s    = 12'h000;
-			wimm13_b      = 13'h0000;
-			wimm32_u      = 32'h00000000;
-			wimm21_j      = 21'h00000;
-		end else begin
-			wOp_code      = wInst_in[6:0]; 
-			wfunct3       = wInst_in[14:12];
-			wfunct7       = wInst_in[31:25];
-			wreg_d        = wInst_in[11:7];
-			wreg_s1       = wInst_in[19:15];
-			wreg_s2       = wInst_in[24:20];
+		wOp_code      = wInst_in[6:0]; 
+		wfunct3       = wInst_in[14:12];
+		wfunct7       = wInst_in[31:25];
+		wreg_d        = wInst_in[11:7];
+		wreg_s1       = wInst_in[19:15];
+		wreg_s2       = wInst_in[24:20];
 
-			wop_lui       = (wOp_code == 7'b0110111) ? 1'b1 : 1'b0;
-			wop_auipc     = (wOp_code == 7'b0010111) ? 1'b1 : 1'b0;
-			wop_jal       = (wOp_code == 7'b1101111) ? 1'b1 : 1'b0;
-			wop_jalr      = (wOp_code == 7'b1100111) ? 1'b1 : 1'b0;
-			wop_branch    = (wOp_code == 7'b1100011) ? 1'b1 : 1'b0; 
-			wop_memLd     = (wOp_code == 7'b0000011) ? 1'b1 : 1'b0;
-			wop_intRegImm = (wOp_code == 7'b0010011) && (wfunct3 != 3'b001 && wfunct3 != 3'b101) ? 1'b1 : 1'b0;
-			wop_consShf   = (wOp_code == 7'b0010011) && (wfunct3 == 3'b001 || wfunct3 == 3'b101) ? 1'b1 : 1'b0;
-			wop_memSt     = (wOp_code == 7'b0100011) ? 1'b1 : 1'b0;
-			wop_intRegReg = (wOp_code == 7'b0110011) ? 1'b1 : 1'b0;
-			wop_efence    = (wOp_code == 7'b0001111) ? 1'b1 : 1'b0;
-			wop_ecb       = (wOp_code == 7'b1110011) ? 1'b1 : 1'b0;
-			wNOP 		  = (wInst_in == 0);
+		wop_lui       = (wOp_code == 7'b0110111) ? 1'b1 : 1'b0;
+		wop_auipc     = (wOp_code == 7'b0010111) ? 1'b1 : 1'b0;
+		wop_jal       = (wOp_code == 7'b1101111) ? 1'b1 : 1'b0;
+		wop_jalr      = (wOp_code == 7'b1100111) ? 1'b1 : 1'b0;
+		wop_branch    = (wOp_code == 7'b1100011) ? 1'b1 : 1'b0; 
+		wop_memLd     = (wOp_code == 7'b0000011) ? 1'b1 : 1'b0;
+		wop_intRegImm = (wOp_code == 7'b0010011) && (wfunct3 != 3'b001 && wfunct3 != 3'b101) ? 1'b1 : 1'b0;
+		wop_consShf   = (wOp_code == 7'b0010011) && (wfunct3 == 3'b001 || wfunct3 == 3'b101) ? 1'b1 : 1'b0;
+		wop_memSt     = (wOp_code == 7'b0100011) ? 1'b1 : 1'b0;
+		wop_intRegReg = (wOp_code == 7'b0110011) ? 1'b1 : 1'b0;
+		wop_efence    = (wOp_code == 7'b0001111) ? 1'b1 : 1'b0;
+		wop_ecb       = (wOp_code == 7'b1110011) ? 1'b1 : 1'b0;
+		wNOP 		  = (wInst_in == 0);
 
 
-			wr_type       = wop_intRegReg;
-			wi_type       = wop_jalr | wop_memLd | wop_intRegImm | wop_consShf | wop_efence | wop_ecb;
-			ws_type       = wop_memSt;
-			wb_type       = wop_branch;
-			wj_type       = wop_jal;
-			wu_type       = wop_lui | wop_auipc;
+		wr_type       = wop_intRegReg;
+		wi_type       = wop_jalr | wop_memLd | wop_intRegImm | wop_consShf | wop_efence | wop_ecb;
+		ws_type       = wop_memSt;
+		wb_type       = wop_branch;
+		wj_type       = wop_jal;
+		wu_type       = wop_lui | wop_auipc;
 
-			wimm12_i_s    = (wi_type) ? wInst_in[31:20] :
-							(ws_type) ? {wInst_in[31:25],wInst_in[11:7]} :
-							12'h000;
-			wimm13_b      = {wInst_in[31],wInst_in[7],wInst_in[30:25],wInst_in[11:8],1'b0}; //B
-			wimm32_u      = {wInst_in[31:12],12'h000}; //U
-			wimm21_j      = {wInst_in[31],wInst_in[19:12],wInst_in[20],wInst_in[30:21],1'b0}; //J 
-		end
+		wimm12_i_s    = (wi_type) ? wInst_in[31:20] :
+						(ws_type) ? {wInst_in[31:25],wInst_in[11:7]} :
+						12'h000;
+		wimm13_b      = {wInst_in[31],wInst_in[7],wInst_in[30:25],wInst_in[11:8],1'b0}; //B
+		wimm32_u      = {wInst_in[31:12],12'h000}; //U
+		wimm21_j      = {wInst_in[31],wInst_in[19:12],wInst_in[20],wInst_in[30:21],1'b0}; //J 
 	end
              
 
@@ -266,8 +231,6 @@ module inst_dec (
 		rInstrustion2 <= rInstrustion1;
 
 		rOp_memLd <= op_memLd;
-
-		rJmp <= jmp;
 
 		rRegWrEn <= (rstB) & (op_jalr | op_jal | op_memLd | op_intRegImm | op_intRegReg | op_consShf | op_lui | op_auipc) ; 
 		rRegWrEn2 <= rRegWrEn;

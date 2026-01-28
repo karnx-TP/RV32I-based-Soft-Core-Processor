@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1769070280" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/rv32i_core.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1769573909" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/rv32i_core.dcp">
   <File Type="PA-TCL" Name="rv32i_top_Soc.tcl"/>
   <File Type="REPORTS-TCL" Name="rv32i_top_Soc_reports.tcl"/>
   <File Type="RDS-RDS" Name="rv32i_top_Soc.vds"/>
@@ -11,6 +11,14 @@
   <File Type="VDS-TIMING-PB" Name="rv32i_top_Soc_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/../../rtl/RV32I_core/reg_file.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/../../rtl/RV32I_core/alu.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -81,7 +89,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../rtl/RV32I_core/reg_file.sv">
+    <File Path="$PPRDIR/../../rtl/RV32I_core/reg_file_sky130sram.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -96,6 +104,13 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../../rtl/addition_module/single_tx.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../rtl/addition_module/sky130_sram_1w1r_8x.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -158,14 +173,20 @@
         <Attr Name="AutoDcp" Val="1"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/utils_1/imports/synth_2/rv32i_top_Soc.dcp">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedInSteps" Val="synth_2"/>
+        <Attr Name="AutoDcp" Val="1"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
     <Step Id="synth_design">
       <Option Id="FlattenHierarchy">1</Option>
     </Step>

@@ -83,9 +83,10 @@ read_verilog -library xil_defaultlib -sv {
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/Programmer/prog_ram_w8r32.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/ram_wController.sv
-  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/reg_file_sky130sram.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/RV32I_core/rv32i_core.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/addition_module/single_tx.sv
+  C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/addition_module/sky130_sram_1w1r_8x.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_rx.sv
   C:/FPGA/RV32I-Processor/RV32I-based-Soft-Core-Processor/rtl/uart/uart_tx.sv

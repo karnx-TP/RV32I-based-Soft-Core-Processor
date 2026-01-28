@@ -1,0 +1,257 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Wed Jan 28 10:52:27 2026
+| Host         : LAPTOP-GM1L3F93 running 64-bit major release  (build 9200)
+| Command      : report_methodology -file rv32i_top_Soc_methodology_drc_routed.rpt -pb rv32i_top_Soc_methodology_drc_routed.pb -rpx rv32i_top_Soc_methodology_drc_routed.rpx
+| Design       : rv32i_top_Soc
+| Device       : xc7z010clg400-1
+| Speed File   : -1
+| Design State : Fully Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max checks: <unlimited>
+             Checks found: 44
++-----------+----------+--------------------------------------------+--------+
+| Rule      | Severity | Description                                | Checks |
++-----------+----------+--------------------------------------------+--------+
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 14     |
+| SYNTH-15  | Warning  | Byte wide write enable not inferred        | 8      |
+| TIMING-18 | Warning  | Missing input or output delay              | 22     |
++-----------+----------+--------------------------------------------+--------+
+
+2. REPORT DETAILS
+-----------------
+SYNTH-6#1 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance core/reg_module/sram_reg1/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#2 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance core/reg_module/sram_reg2/mem_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#3 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance prog_ram/ram_reg_0_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#4 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance prog_ram/ram_reg_0_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#5 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance prog_ram/ram_reg_1_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#6 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance prog_ram/ram_reg_1_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#7 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance prog_ram/ram_reg_2_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#8 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance prog_ram/ram_reg_2_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#9 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance prog_ram/ram_reg_3_0, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#10 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance prog_ram/ram_reg_3_1, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#11 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance ram/BRAM/genblk1[1].ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#12 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance rx_echo_module/tx_fifo/buffer_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#13 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance uart_module/ffrx/buffer_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#14 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance uart_module/fftx/buffer_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-15#1 Warning
+Byte wide write enable not inferred  
+Byte wide write enable (BWWE) is not inferred for Block RAM prog_ram/ram_reg_0_0 because address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired..
+Related violations: <none>
+
+SYNTH-15#2 Warning
+Byte wide write enable not inferred  
+Byte wide write enable (BWWE) is not inferred for Block RAM prog_ram/ram_reg_0_1 because address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired..
+Related violations: <none>
+
+SYNTH-15#3 Warning
+Byte wide write enable not inferred  
+Byte wide write enable (BWWE) is not inferred for Block RAM prog_ram/ram_reg_1_0 because address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired..
+Related violations: <none>
+
+SYNTH-15#4 Warning
+Byte wide write enable not inferred  
+Byte wide write enable (BWWE) is not inferred for Block RAM prog_ram/ram_reg_1_1 because address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired..
+Related violations: <none>
+
+SYNTH-15#5 Warning
+Byte wide write enable not inferred  
+Byte wide write enable (BWWE) is not inferred for Block RAM prog_ram/ram_reg_2_0 because address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired..
+Related violations: <none>
+
+SYNTH-15#6 Warning
+Byte wide write enable not inferred  
+Byte wide write enable (BWWE) is not inferred for Block RAM prog_ram/ram_reg_2_1 because address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired..
+Related violations: <none>
+
+SYNTH-15#7 Warning
+Byte wide write enable not inferred  
+Byte wide write enable (BWWE) is not inferred for Block RAM prog_ram/ram_reg_3_0 because address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired..
+Related violations: <none>
+
+SYNTH-15#8 Warning
+Byte wide write enable not inferred  
+Byte wide write enable (BWWE) is not inferred for Block RAM prog_ram/ram_reg_3_1 because address width (13) is more than optimal threshold of 12. Implementing using BWWE will require more logic and timing would be suboptimal. Please use attribute ram_decomp = power if BWWE is desired..
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on pin[0] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on pin[1] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An input delay is missing on pin[2] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An input delay is missing on pin[3] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An input delay is missing on pin[4] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#6 Warning
+Missing input or output delay  
+An input delay is missing on pin[5] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#7 Warning
+Missing input or output delay  
+An input delay is missing on pin[6] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#8 Warning
+Missing input or output delay  
+An input delay is missing on pin[7] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#9 Warning
+Missing input or output delay  
+An input delay is missing on progEnB relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#10 Warning
+Missing input or output delay  
+An input delay is missing on rstB relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#11 Warning
+Missing input or output delay  
+An input delay is missing on rx relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#12 Warning
+Missing input or output delay  
+An output delay is missing on pin[0] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#13 Warning
+Missing input or output delay  
+An output delay is missing on pin[1] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#14 Warning
+Missing input or output delay  
+An output delay is missing on pin[2] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#15 Warning
+Missing input or output delay  
+An output delay is missing on pin[3] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#16 Warning
+Missing input or output delay  
+An output delay is missing on pin[4] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#17 Warning
+Missing input or output delay  
+An output delay is missing on pin[5] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#18 Warning
+Missing input or output delay  
+An output delay is missing on pin[6] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#19 Warning
+Missing input or output delay  
+An output delay is missing on pin[7] relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#20 Warning
+Missing input or output delay  
+An output delay is missing on rx_echo relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#21 Warning
+Missing input or output delay  
+An output delay is missing on statusLED relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+TIMING-18#22 Warning
+Missing input or output delay  
+An output delay is missing on tx relative to the rising and/or falling clock edge(s) of clk.
+Related violations: <none>
+
+

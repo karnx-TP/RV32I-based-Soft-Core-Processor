@@ -1,0 +1,110 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Wed Jan 28 10:51:54 2026
+| Host         : LAPTOP-GM1L3F93 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file rv32i_top_Soc_control_sets_placed.rpt
+| Design       : rv32i_top_Soc
+| Device       : xc7z010
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    32 |
+|    Minimum number of control sets                        |    32 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    86 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    32 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |     2 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |    14 |
+| >= 10 to < 12      |     4 |
+| >= 12 to < 14      |     1 |
+| >= 14 to < 16      |     0 |
+| >= 16              |     8 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             461 |          160 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              47 |           18 |
+| Yes          | No                    | No                     |             198 |           75 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             192 |           53 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------+----------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
+|  Clock Signal  |                 Enable Signal                |                Set/Reset Signal               | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------+----------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG | rx_echo_module/tx_module/rParData[0]_i_2_n_0 |                                               |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG | uart_module/tx_module/rParData[0]_i_2_n_0    |                                               |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG |                                              | core/p_0_in                                   |                3 |              4 |         1.33 |
+|  clk_IBUF_BUFG |                                              | core/wFlush                                   |                1 |              5 |         5.00 |
+|  clk_IBUF_BUFG | core/dec/p_0_in                              | core/dec/imm12_i_s[11]_i_1_n_0                |                2 |              7 |         3.50 |
+|  clk_IBUF_BUFG |                                              | io_port_module/rDataOut[7]_i_1_n_0            |                5 |              8 |         1.60 |
+|  clk_IBUF_BUFG | io_port_module/rDDR[0]                       | io_port_module/p_0_in                         |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | io_port_module/rPVL[0]                       | io_port_module/p_0_in                         |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | rx_echo_module/tx_fifo/p_0_in                | rx_echo_module/tx_fifo/WrAddr[7]_i_1_n_0      |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG | rx_echo_module/tx_fifo/RdAddr0               | rx_echo_module/tx_fifo/WrAddr[7]_i_1_n_0      |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG | rx_echo_module/tx_module/rParData[0]_i_2_n_0 | rx_echo_module/tx_module/rParData[0]_i_1_n_0  |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | uart_module/ffrx/p_0_in                      | uart_module/ffrx/WrAddr[7]_i_1_n_0            |                4 |              8 |         2.00 |
+|  clk_IBUF_BUFG | uart_module/ffrx/RdAddr0                     | uart_module/ffrx/WrAddr[7]_i_1_n_0            |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | uart_module/fftx/p_0_in                      | uart_module/fftx/WrAddr[7]_i_1_n_0            |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | uart_module/fftx/RdAddr0                     | uart_module/fftx/WrAddr[7]_i_1_n_0            |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | uart_module/tx_module/rParData[0]_i_2_n_0    | uart_module/tx_module/rParData[0]_i_1_n_0     |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG | rx_echo_module/tx_module/rBitInCnt[9]        | rx_echo_module/tx_module/rBitInCnt[9]_i_1_n_0 |                2 |              9 |         4.50 |
+|  clk_IBUF_BUFG | uart_module/rx_module/wMidBaud               |                                               |                2 |              9 |         4.50 |
+|  clk_IBUF_BUFG | uart_module/tx_module/rBitInCnt[9]           | uart_module/tx_module/rBitInCnt[9]_i_1_n_0    |                2 |              9 |         4.50 |
+|  clk_IBUF_BUFG |                                              | rx_echo_module/tx_module/rBaudCnt[9]_i_1_n_0  |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG |                                              | uart_module/rx_module/rBaudCnt[9]_i_1_n_0     |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG |                                              | uart_module/tx_module/rBaudCnt[9]_i_1_n_0     |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | uart_module/rx_module/wMidBaud               | uart_module/rx_module/rBitInCnt0              |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG | core/dec/p_0_in                              | core/dec/funct3[1]_i_1_n_0                    |                3 |             13 |         4.33 |
+|  clk_IBUF_BUFG | core/dec/p_0_in                              |                                               |               10 |             27 |         2.70 |
+|  clk_IBUF_BUFG | programmer_module/rMemAddr0                  | programmer_module/rMemAddr[14]_i_1_n_0        |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG | core/rRs1DataBP[31]_i_1_n_0                  |                                               |               13 |             32 |         2.46 |
+|  clk_IBUF_BUFG | core/rRs2DataBP[31]_i_1_n_0                  |                                               |               20 |             32 |         1.60 |
+|  clk_IBUF_BUFG | core/rpc/rPC_current[31]_i_2_n_0             | core/rpc/clear                                |                9 |             32 |         3.56 |
+| ~clk_IBUF_BUFG |                                              |                                               |               15 |             42 |         2.80 |
+|  clk_IBUF_BUFG | core/brancher/rPc_current_reg1[31]_i_1_n_0   |                                               |               28 |             96 |         3.43 |
+|  clk_IBUF_BUFG |                                              |                                               |              145 |            419 |         2.89 |
++----------------+----------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
+
+

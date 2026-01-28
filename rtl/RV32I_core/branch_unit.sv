@@ -21,7 +21,6 @@ module branch_unit (
 	alu_flag,
 
 	pc_current,
-	link_reg_in,
 
     pc_return,
     pc_jmpto,
@@ -43,7 +42,6 @@ module branch_unit (
 	input logic			alu_flag;
 
 	input logic[31:0]	pc_current;
-	input logic[31:0]	link_reg_in;
 
     output logic[31:0]	pc_return;
     output logic[31:0]	pc_jmpto;

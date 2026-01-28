@@ -190,38 +190,38 @@ add wave -noupdate -expand -group REG -radix hexadecimal /top_tb/dut/core/reg_mo
 add wave -noupdate -expand -group REG -radix hexadecimal /top_tb/dut/core/reg_module/sram_reg1/din0_reg
 add wave -noupdate -expand -group REG -radix hexadecimal /top_tb/dut/core/reg_module/sram_reg1/csb1_reg
 add wave -noupdate -expand -group REG -radix hexadecimal /top_tb/dut/core/reg_module/sram_reg1/addr1_reg
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[0]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[1]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[2]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[3]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[4]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[5]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[6]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[7]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[8]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[9]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[10]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[11]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[12]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[13]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[14]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[15]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[16]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[17]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[18]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[19]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[20]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[21]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[22]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[23]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[24]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[25]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[26]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[27]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[28]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[29]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[30]}
-add wave -noupdate -expand -group REG -expand -group GPRF -height 15 -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[31]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[0]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[1]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[2]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[3]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[4]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[5]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[6]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[7]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[8]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[9]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[10]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[11]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[12]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[13]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[14]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[15]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[16]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[17]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[18]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[19]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[20]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[21]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[22]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[23]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[24]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[25]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[26]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[27]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[28]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[29]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[30]}
+add wave -noupdate -expand -group REG -expand -group GPRF -radix hexadecimal {/top_tb/dut/core/reg_module/sram_reg1/mem[31]}
 add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/wrData
 add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/addr
 add wave -noupdate -group RAM -radix hexadecimal /top_tb/dut/ram/wrEn
@@ -362,7 +362,7 @@ add wave -noupdate /top_tb/dut/core/rHazard_2_Rs2
 add wave -noupdate /top_tb/dut/core/rHazard_3_Rs1
 add wave -noupdate /top_tb/dut/core/rHazard_3_Rs2
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {44094765000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {44094892500 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 371
 configure wave -valuecolwidth 100
@@ -378,4 +378,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {44094723300 ps} {44095047300 ps}
+WaveRestoreZoom {44094800100 ps} {44094963300 ps}
