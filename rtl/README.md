@@ -1,4 +1,4 @@
-# RTL Design Description
+# RTL Design Overview
 This document include my design idea of the SoC. For the Improvement and Optimization See /vivado
 
 
@@ -13,7 +13,11 @@ This document include my design idea of the SoC. For the Improvement and Optimiz
   - Instruction Decoder
   - ALU
   - Branch Unit
-  - 32 General-Purpose Registers
+  - **SRAM-based** 32 General-Purpose Registers
+
+- Branching Handling
+	- Jump stall insertion
+	- Instruction flush on taken branches
 
 - Hazard handling:
   - Data forwarding (bypassing)

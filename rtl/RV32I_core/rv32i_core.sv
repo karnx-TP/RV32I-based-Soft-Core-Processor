@@ -132,7 +132,7 @@ module rv32i_core (
 	logic			rHazard_2_Rs2;
 	logic			rHazard_3_Rs1;
 	logic			rHazard_3_Rs2;
-	logic			wHazardStall;
+	logic			wStall;
 	//Branch&Jump
 	logic           wJmp_occur;
 	logic			rJumping1;

@@ -36,7 +36,7 @@
 **Synthesis Config:** Keep Hierarchy
 
 #### Method
-- Add more stage : IF->ID->EXE->MEM->WB
+- Add pipeline stage : IF->ID->EXE->MEM->WB
 - Use 2-cycle latency RAM (Reduce critical path)
 - Change peripheral's reg read to 2-cycle latency
 
@@ -67,7 +67,7 @@
 ---
 
 
-### Version 3 — Max Frequency Optimization (Current)
+### Version 3 — Max Frequency Optimization
 
 **Target Board:** AX7010 (Zynq-7000 series)
 **Synthesis Config** Keep Hierarchy
@@ -129,7 +129,7 @@ MIPS = Clock Frequency / CPI
 **Synthesis Config** Keep Hierarchy
 
 #### Optimization
-- Use BRAM-based register files : Addr Latech @ Negedge and Data Read Out @ Posedge
+- Use BRAM-based register files : Addr Registered @ Negedge and Data Read Out @ Posedge
 - Move Register Read to ID Stage
 - Insert register after branch condition calculation
 - Use Instruction Flush if branch condition is true
@@ -161,7 +161,7 @@ MIPS = Clock Frequency / CPI
 - Improved Max Frequency
 - Higher Throughput
 - Reduced resource utilization
-- Slightly higher power thourgh higher frequency and BRAM
+- Slightly higher power through higher frequency and BRAM
 - Equivalent functionality
 
 #### Throughput
@@ -191,7 +191,7 @@ Throughput = Clock Frequency / CPI
 | Pipeline | 3-stage | 5-stage | 5-stage | 5-stage |
 | Register File | FF-based | FF-based | FF-based | **BRAM-based** |
 | Fmax (MHz) | 50.0 | 50.0 | 66.67 | **76.9** |
-| Have stall mechanism| No | No | Yes | Yes
+| Stall Mechanism| No | No | Yes | Yes
 | Avg CPI | ~1.0 | ~1.0 | 1.50 | 1.50 |
 | Throughput (MIPS) | 50.0 | 50.0 | 44.4 | **51.3** |
 | LUTs | 2948 | 1799 | 1882 | **1437** |

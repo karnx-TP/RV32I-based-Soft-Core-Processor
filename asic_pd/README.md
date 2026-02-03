@@ -2,6 +2,11 @@
 
 This repository documents the **ASIC physical implementation** of a **RV32I core-only design** using an open-source RTL-to-GDSII flow. The focus of this project is to explore **timing, slew, capacitance, area, and power trade-offs** through both **RTL-level** and **physical-design-level** optimizations.
 
+## Notes
+
+This directory focuses on **physical-design-driven** learning using a functionally complete RV32I core that has been validated on an FPGA prototype. The primary objective is PD trade-off exploration rather than aggressive microarchitectural performance-per-area optimization.
+
+
 
 
 ## Toolchain (Open-source)
@@ -13,7 +18,7 @@ This repository documents the **ASIC physical implementation** of a **RV32I core
 
 
 
-## Baseline Implementation
+## Baseline Implementation (RTL version 2)
 
 **Configuration**
 
@@ -51,9 +56,8 @@ This repository documents the **ASIC physical implementation** of a **RV32I core
 * Ports: **12**
 * Cells: **7,473**
 
----
 
-## Improvement 1 – Timing and Slew Optimization
+## Improvement 1 : RTL version 2 and Timing and Slew Optimization
 
 ### Goal
 
@@ -102,9 +106,9 @@ SYNTHESIS_STRATEGY = AREA 3
 * Ports: **90**
 * Cells: **14,561**
 
----
 
-## Improvement 2 – Frequency Scaling and Capacitance Cleanup
+
+## Improvement 2 - RTL Version 3 and Frequency Scaling and Capacitance Cleanup
 
 ### Goal
 
@@ -114,12 +118,10 @@ SYNTHESIS_STRATEGY = AREA 3
 
 ### Method
 
-#### RTL-Level Changes
+#### RTL-Level Changes 
+	RTL version 3 (More Complex RTL -> Need more area, padding, Util)
 
-* Branch execution split into **2 pipeline cycles**
-* Selected logic moved outside submodules for **more placement-friendly hierarchy**
-
-#### Physical Design Configuration
+#### Physical Design Configuration 
 
 ```tcl
 SYNTH_HIERARCHY_MODE = keep
@@ -162,31 +164,27 @@ PL_TARGET_DENSITY = 0.55
 * Cells: **15,476**
 
 
-## Current Design Layout View
-Post-placement and routing views captured from the OpenROAD GUI.
+### Design Layout View
+- Post-placement and routing views captured from the OpenROAD GUI.
 #### Full View
 ![Alt text](./pic/Full_Chip_View.png)
 
 #### Hierarchy View
 ![Alt text](./pic/HierarchyView.png)
 
-## CPI and MIPS Calculation for ASIC (Current Version)
+### Throughput Calculation for ASIC 
 
-### Assumptions
-- Base CPI (ideal pipeline): 0.75  
+#### Assumptions
+- Base CPI (ideal pipeline): 0.65  
 - 20% of instructions incur a 2-cycle stall  
-- 5% of instructions incur a 3-cycle stall (load-use hazard)  
+- 15% of instructions incur a 3-cycle stall (load-use hazard)  
 - Clock frequency: 40 MHz  
 
-### CPI Calculation
 ```
 CPI = 0.65 + (0.20 × 2) + (0.15 × 3)
     = 0.65 + 0.40 + 0.45
     = 1.50
-```
 
-### MIPS Calculation
-```
 MIPS = Clock Frequency / CPI
      = 40 MHz / 1.50
      ≈ 26.67 MIPS
@@ -202,12 +200,6 @@ MIPS = Clock Frequency / CPI
 | Baseline      | 33         | 192,824    | 4.00       | 165      | 2       |
 | Improvement 1 | 33         | 289,700    | 4.44       | 22       | 1       |
 | Improvement 2 | 40         | 353,021    | 5.96       | 76       | 0       |
-
-
-
-## Notes
-
-* This directory focuses on **physical-design-driven** learning using a functionally complete RV32I core that has been validated on an FPGA prototype. The primary objective is PD trade-off exploration rather than aggressive microarchitectural performance-per-area optimization.
 
 
 ## Next Steps

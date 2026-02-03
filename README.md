@@ -18,11 +18,11 @@ The goal of this project is to complete the **full digital IC design flow**, inc
 ``` 
 This project documents my design and implementation journey, focusing on the learning process rather than only final results.  
 It includes my work steps for those who want to learn or discuss RTL and physical design.  
-Each part of the work is organized into separate directories to make the flow easy to follow and study.
+Each part of the work is organized into separate directories to make the flow easy to follow and study.  
+Each major directory contains its own README.md describing
+design decisions, challenges, and lessons learned for that stage.
 
-If you use or reference this design, proper credit would be greatly appreciated.  
-For suggestions, feedback, or technical discussions, feel free to contact me.
-📧 **Email:** thitipong.pav@gmail.com
+For suggestions, feedback, or technical discussions 📧 **Email:** thitipong.pav@gmail.com
 ```
 
 ## Overview
@@ -52,7 +52,19 @@ The project emphasizes **ASIC-friendly RTL design**, modular **RISC-V SoC archit
   - Yosys  
   - OpenROAD  
   - Magic  
-  - KLayout  
+  - KLayout
+
+### My Design Flow
+1. RTL design and microarchitecture development
+
+2. Functional simulation using SystemVerilog testbenches (ModelSim)
+
+3. FPGA implementation using Vivado
+→ timing closure, resource utilization, and power (PPA) analysis on FPGA
+
+4. On-board validation on target FPGA platform (Optional) 
+
+5. ASIC implementation using the LibreLane flow → timing closure, resource utilization, and power (PPA) analysis on ASIC
 
 
 ## Completed Design
@@ -71,12 +83,12 @@ The project emphasizes **ASIC-friendly RTL design**, modular **RISC-V SoC archit
 ### 6. RX Echo Debug Module
 - Debug module for validating UART-based instruction upload
 
-#### For the Design Details See /rtl
+#### For the Design Details See 📁 /rtl
 
 ## FPGA Implementation
 - **Target Board:** AX7010 (Zynq-7000 series)
 - **Current Operating frequency**: 66.67 MHz
-#### For the Details See /vivado
+#### For the Details and Design Improvement See  📁 /vivado
 
 ## ASIC Implementation (RV32I Core Only)
 
@@ -86,7 +98,7 @@ The project emphasizes **ASIC-friendly RTL design**, modular **RISC-V SoC archit
 - OpenROAD
 - SKY130 PDK
 
-#### For the Details See /asic_pd
+#### For the Details See 📁 /asic_pd
 
 ## Future Work
 
