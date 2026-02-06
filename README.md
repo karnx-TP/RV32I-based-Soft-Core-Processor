@@ -19,8 +19,7 @@ The goal of this project is to complete the **full digital IC design flow**, inc
 This project documents my design and implementation journey, focusing on the learning process rather than only final results.  
 It includes my work steps for those who want to learn or discuss RTL and physical design.  
 Each part of the work is organized into separate directories to make the flow easy to follow and study.  
-Each major directory contains its own README.md describing
-design decisions, challenges, and lessons learned for that stage.
+Each major directory contains its own README.md describing design decisions, challenges, and lessons learned for that stage.
 
 For suggestions, feedback, or technical discussions 📧 **Email:** thitipong.pav@gmail.com
 ```
