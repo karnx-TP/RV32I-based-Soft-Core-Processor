@@ -13,7 +13,9 @@ This document include my design idea of the SoC. For the Improvement and Optimiz
   - Instruction Decoder
   - ALU
   - Branch Unit
-  - **SRAM-based** 32 General-Purpose Registers
+  - **RAM-based** 32 General-Purpose Registers
+	- Implemented in FPGA as BRAM (complete)
+	- Implemented in ASIC as SRAM (on-going)
 
 - Branching Handling
 	- Jump stall insertion
