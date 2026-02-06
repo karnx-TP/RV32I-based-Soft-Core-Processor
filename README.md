@@ -35,6 +35,10 @@ This project implements a custom **RISC-V based soft-core processor** integrated
 
 The project emphasizes **ASIC-friendly RTL design**, modular **RISC-V SoC architecture**, and a realistic path from **FPGA prototyping to ASIC implementation**.
 
+**Soc Design Overview**
+
+![Alt text](/pic/RV32I_SoC_Diagram.drawio.svg)
+
 ## Tools Used
 
 ### RTL & Verification
@@ -70,6 +74,8 @@ The project emphasizes **ASIC-friendly RTL design**, modular **RISC-V SoC archit
 
 ### 1. RV32I CPU Core
 - 5-stage pipeline Processor Core with RV32I Base Intruction 
+- Core Design Diagram
+![Alt text](/pic/RV32I_Core_diagram.svg)
 ### 2. RAM and Memory Controller
 - Design RTL of RAM and its controller focusing on BRAM-synthsized on FPGA and ASIC-friendly
 ### 3. UART Peripheral
